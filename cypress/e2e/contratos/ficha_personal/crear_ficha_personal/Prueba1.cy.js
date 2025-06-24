@@ -35,33 +35,43 @@ describe("Ficha Personal - Crear Ficha Personal del Empleado", () => {
     //Datos Basicos
     cy.xpath("(//div[contains(.,'Datos Básicos')])[11]").click();
     cy.wait(2000);
+
     cy.xpath(
       "(//div[@class='col q-input-target ellipsis justify-start'])[31]"
     ).click();
-    cy.xpath("//div[contains(text(),'Cédula')]").click();
-    cy.xpath("(//input[@type='text'])[4]").type("1104730229");
+    cy.xpath("//div[contains(text(),'Cédula')]").click(); //Tipo de Documento
+
+    cy.xpath("(//input[@type='text'])[4]").type("1104730229"); //Numero de Documento
     cy.xpath("(//div[contains(.,'verificar cedula')])[14]").click(); //Verificar Cédula
+
     cy.xpath("(//input[contains(@type,'text')])[5]")
       .type("Eempleado Uno")
-      .type("{enter}")
+      .type("{enter}") //Nombres
       .tab()
       .type("Test QA")
-      .type("{enter}");
-    cy.xpath("(//input[@type='email'])[2]").type("testqa@email.com");
+      .type("{enter}"); //Apellidos
+
+    cy.xpath("(//input[@type='email'])[2]").type("testqa@email.com"); //Email
 
     cy.xpath(
       "(//div[@class='col q-input-target ellipsis justify-start'])[32]"
     ).click();
-    cy.xpath("(//div[contains(.,'Masculino')])[5]").click();
+    cy.xpath("(//div[contains(.,'Masculino')])[5]").click(); //Sexo del Empleado
 
-    cy.xpath("(//div[@class='col q-input-target ellipsis justify-start'])[32]")
+    cy.xpath(
+      "(//div[@class='col q-input-target ellipsis justify-start'])[34]"
+    ).click();
+    cy.xpath("(//span[@tabindex='-1'])[3]").click();
+    cy.xpath("(//div[contains(.,'1996')])[6]").click();
+    cy.xpath("(//div[contains(.,'Agosto')])[6]").click();
+    cy.xpath("(//span[contains(.,'2')])[3]").click();
+
+    cy.xpath("(//div[@class='col q-input-target ellipsis justify-start'])[34]")
       .focused()
       .tab()
+      .type("{enter}{downarrow}{downarrow}{enter}") //Empleado Sustituto
       .tab()
-      .tab()
-      .type("{enter}{downarrow}{downarrow}{enter}")
-      .tab()
-      .type("{enter}{downarrow}{downarrow}{enter}");
+      .type("{enter}{downarrow}{downarrow}{enter}"); //Persona con Discapacidad
 
     //Datos de Ubicacion
     cy.xpath("(//div[contains(.,'Datos de ubicación')])[11]").click();
