@@ -26,52 +26,8 @@ describe("Ficha Personal - Crear Ficha Personal del Empleado", () => {
     // cy.wait(10000);
 
     //Seleccionar Ficha Personal
-    cy.xpath("//div[normalize-space()='Contratos']").click();
-    cy.xpath("//div[contains(text(),'Ficha personal')]").click();
-    cy.wait(1000);
-
-    //Crear Empleado
-    cy.xpath("(//div[contains(.,'Empleado')])[47]").click();
-    //Datos Basicos
-    cy.xpath("(//div[contains(.,'Datos Básicos')])[11]").click();
-    cy.wait(2000);
-    cy.xpath(
-      "(//div[@class='col q-input-target ellipsis justify-start'])[31]"
-    ).click();
-    cy.xpath("//div[contains(text(),'Cédula')]").click();
-    cy.xpath("(//input[@type='text'])[4]").type("1104730229");
-    cy.xpath("(//div[contains(.,'verificar cedula')])[14]").click(); //Verificar Cédula
-    cy.xpath("(//input[contains(@type,'text')])[5]")
-      .type("Eempleado Uno")
-      .type("{enter}")
-      .tab()
-      .type("Test QA")
-      .type("{enter}");
-    cy.xpath("(//input[@type='email'])[2]").type("testqa@email.com");
-
-    cy.xpath(
-      "(//div[@class='col q-input-target ellipsis justify-start'])[32]"
-    ).click();
-    cy.xpath("(//div[contains(.,'Masculino')])[5]").click();
-
-    cy.xpath("(//div[@class='col q-input-target ellipsis justify-start'])[32]")
-      .focused()
-      .tab()
-      .tab()
-      .tab()
-      .type("{enter}{downarrow}{downarrow}{enter}")
-      .tab()
-      .type("{enter}{downarrow}{downarrow}{enter}");
-
-    //Datos de Ubicacion
-    cy.xpath("(//div[contains(.,'Datos de ubicación')])[11]").click();
-    cy.wait(2000);
-    cy.xpath("(//i[@aria-hidden='true'])[124]").click();
-    cy.xpath("(//div[contains(.,'Sierra')])[5]").click();
-    cy.xpath("(//i[@aria-hidden='true'])[125]").click();
-    cy.xpath("(//div[contains(.,'Residencial')])[5]").click();
-
-    //Datos Familiares
+    cy.get(":nth-child(4) > .q-btn > .q-btn-inner > div").click();
+    cy.get(".q-popover > :nth-child(1) > .q-btn > .q-btn-inner > div").click();
   });
 
   it("2. ", () => {
