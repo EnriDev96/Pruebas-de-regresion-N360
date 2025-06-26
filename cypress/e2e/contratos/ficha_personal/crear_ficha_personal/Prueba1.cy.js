@@ -99,6 +99,10 @@ describe("Ficha Personal - Crear Ficha Personal del Empleado", () => {
     cy.xpath("//input[contains(@placeholder,'Buscar')]").type(
       "1104730229{enter}"
     );
+
+    //Eliminar Ficha personal de Empleado Sin Contrato
+    cy.xpath("//div[contains(@class,'q-item-label ellipsis')]").click();
+    cy.xpath("(//div[contains(.,'Eliminar ficha personal')])[16]").click();
   });
 
   it.only("2.Crear Ficha Personal de un Empleado ", () => {
@@ -124,7 +128,6 @@ describe("Ficha Personal - Crear Ficha Personal del Empleado", () => {
     cy.xpath("(//div[contains(.,'Empleado')])[47]").click();
     //Datos Basicos
     cy.xpath("(//div[contains(.,'Datos Básicos')])[11]").click();
-    cy.wait(2000);
 
     cy.xpath(
       "(//div[@class='col q-input-target ellipsis justify-start'])[31]"
@@ -165,7 +168,6 @@ describe("Ficha Personal - Crear Ficha Personal del Empleado", () => {
 
     //Datos de Ubicacion
     cy.xpath("(//div[contains(.,'Datos de ubicación')])[11]").click();
-    cy.wait(1000);
     cy.xpath("(//i[@aria-hidden='true'])[124]").click();
     cy.xpath("(//div[contains(.,'Sierra')])[5]").click();
     cy.xpath("(//i[@aria-hidden='true'])[125]").click();
@@ -173,7 +175,6 @@ describe("Ficha Personal - Crear Ficha Personal del Empleado", () => {
 
     //Datos Financieros
     cy.xpath("(//div[contains(.,'Datos financieros')])[9]").click();
-    cy.wait(1000);
     cy.xpath(
       "(//div[@class='col q-input-target ellipsis justify-start'])[30]"
     ).click();
@@ -186,7 +187,6 @@ describe("Ficha Personal - Crear Ficha Personal del Empleado", () => {
     cy.xpath("(//div[contains(.,'Empleado')])[47]").click();
     //Datos Basicos
     cy.xpath("(//div[contains(.,'Datos Básicos')])[11]").click();
-    cy.wait(2000);
 
     cy.xpath(
       "(//div[@class='col q-input-target ellipsis justify-start'])[31]"
@@ -227,7 +227,6 @@ describe("Ficha Personal - Crear Ficha Personal del Empleado", () => {
 
     //Datos de Ubicacion
     cy.xpath("(//div[contains(.,'Datos de ubicación')])[11]").click();
-    cy.wait(1000);
     cy.xpath("(//i[@aria-hidden='true'])[124]").click();
     cy.xpath("(//div[contains(.,'Sierra')])[5]").click();
     cy.xpath("(//i[@aria-hidden='true'])[125]").click();
@@ -235,7 +234,6 @@ describe("Ficha Personal - Crear Ficha Personal del Empleado", () => {
 
     //Datos Financieros
     cy.xpath("(//div[contains(.,'Datos financieros')])[9]").click();
-    cy.wait(1000);
     cy.xpath(
       "(//div[@class='col q-input-target ellipsis justify-start'])[30]"
     ).click();
@@ -244,12 +242,77 @@ describe("Ficha Personal - Crear Ficha Personal del Empleado", () => {
     //Guardar Datos
     cy.xpath("(//div[contains(.,'Guardar')])[39]").click();
 
-    //Visualizar Ficha Personal de Empleado sin Contrato
-    cy.xpath("(//div[contains(.,'Sin contratos')])[16]").click();
+    // //Visualizar Ficha Personal de Empleado UNO sin Contrato
+    // cy.xpath("(//div[contains(.,'Sin contratos')])[16]").click();
+    // cy.wait(500);
+    // cy.xpath("//i[@aria-hidden='true'][contains(.,'search')]").click();
+    // cy.xpath("//input[contains(@placeholder,'Buscar')]").type(
+    //   "1104730229{enter}"
+    // );
+
+    // //Eliminar Ficha personal de Empleado UNO Sin Contrato
+    // cy.xpath("//div[contains(@class,'q-item-label ellipsis')]").click();
+    // cy.xpath("(//div[contains(.,'Eliminar ficha personal')])[16]").click();
+    // cy.xpath("//i[@aria-hidden='true'][contains(.,'arrow_back')]").click();
+
+    // //Visualizar Ficha Personal de Empleado DOS sin Contrato
+    // cy.xpath("(//div[contains(.,'Sin contratos')])[16]").click();
+    // cy.wait(500);
+    // // cy.xpath("(//i[@aria-hidden='true'][contains(.,'close')])[16]").click();
+    // cy.xpath("//i[@aria-hidden='true'][contains(.,'search')]").click();
+    // cy.xpath("//input[contains(@placeholder,'Buscar')]").type(
+    //   "0102312758{enter}"
+    // );
+
+    // //Eliminar Ficha personal de Empleado DOS Sin Contrato
+    // cy.xpath("//div[contains(@class,'q-item-label ellipsis')]").click();
+    // cy.xpath("(//div[contains(.,'Eliminar ficha personal')])[16]").click();
+  });
+
+  it.only("3.ELiminar Ficha Personal de 2 Empleados", () => {
+    //Login del sistema de Nomina360
+    cy.visit("http://localhost:8080/#/login");
+    cy.xpath("//input[contains(@type,'email')]").type("admin@demo360.com");
+    cy.xpath("//input[contains(@type,'password')]").type("Nomina360");
+    cy.xpath("//div[contains(text(),'Iniciar')]").click();
+
+    //Saltar Advertencia sobre la falta de configuracion de la empresa
+    cy.wait(4000);
+    cy.xpath(
+      "//button[@class='q-btn inline relative-position q-btn-item non-selectable q-btn-rectangle q-btn-flat q-focusable q-hoverable text-primary']"
+    ).click();
     cy.wait(1000);
+
+    //Seleccionar Ficha Personal
+    cy.xpath("//div[normalize-space()='Contratos']").click();
+    cy.xpath("//div[contains(text(),'Ficha personal')]").click();
+    cy.wait(1000);
+
+    //Visualizar Ficha Personal de Empleado UNO sin Contrato
+    cy.xpath("(//div[contains(.,'Sin contratos')])[16]").click();
+    cy.wait(500);
+    // cy.xpath("(//i[@aria-hidden='true'][contains(.,'close')])[16]").click();
     cy.xpath("//i[@aria-hidden='true'][contains(.,'search')]").click();
     cy.xpath("//input[contains(@placeholder,'Buscar')]").type(
       "1104730229{enter}"
     );
+
+    //Eliminar Ficha personal de Empleado UNO Sin Contrato
+    cy.xpath("//div[contains(@class,'q-item-label ellipsis')]").click();
+    cy.xpath("(//div[contains(.,'Eliminar ficha personal')])[16]").click();
+    cy.xpath("//i[@aria-hidden='true'][contains(.,'arrow_back')]").click();
+
+    //Visualizar Ficha Personal de Empleado DOS sin Contrato
+    cy.xpath("(//div[contains(.,'Sin contratos')])[16]").click();
+    cy.wait(500);
+    // cy.xpath("(//i[@aria-hidden='true'][contains(.,'close')])[16]").click();
+    cy.xpath("//i[@aria-hidden='true'][contains(.,'search')]").click();
+    cy.xpath("//input[contains(@placeholder,'Buscar')]").type(
+      "0102312758{enter}"
+    );
+
+    //Eliminar Ficha personal de Empleado DOS Sin Contrato
+    cy.xpath("//div[contains(@class,'q-item-label ellipsis')]").click();
+    cy.xpath("(//div[contains(.,'Eliminar ficha personal')])[16]").click();
   });
 });
