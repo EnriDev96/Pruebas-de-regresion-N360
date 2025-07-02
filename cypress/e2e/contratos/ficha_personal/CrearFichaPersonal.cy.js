@@ -4,25 +4,25 @@ describe("Ficha Personal - Crear Ficha Personal del Empleado", () => {
   Cypress.on("uncaught:exception", (err, runnable) => {
     return false;
   });
-  it("1. Crear Ficha Personal de un Empleado", () => {
+  it.only("1. Crear Ficha Personal de un Empleado", () => {
     //Login del sistema de Nomina360
     cy.visit("http://localhost:8080/#/login");
     cy.xpath("//input[contains(@type,'email')]").type("admin@demo360.com");
     cy.xpath("//input[contains(@type,'password')]").type("Nomina360");
     cy.xpath("//div[contains(text(),'Iniciar')]").click();
 
-    //Saltar Advertencia sobre la falta de configuracion de la empresa
-    cy.wait(4000);
-    cy.xpath(
-      "//button[@class='q-btn inline relative-position q-btn-item non-selectable q-btn-rectangle q-btn-flat q-focusable q-hoverable text-primary']"
-    ).click();
-    cy.wait(1000);
-
-    //Seleccion de de instancia de la empresa
-    // cy.get(".q-list > :nth-child(1) > :nth-child(1) > .q-if > .q-icon").click();
-    // cy.wait(2000);
-    // cy.get(".q-select-highlight > .q-item-main > .q-item-label").click();
+    // //Seleccion de de instancia de la empresa
+    // cy.xpath("(//div[@tabindex='0'])[1]").click();
+    // cy.wait(1000);
+    // cy.xpath("(//div[contains(.,'Demo 3')])[17]").click();
     // cy.wait(10000);
+
+    // //Saltar Advertencia sobre la falta de configuracion de la empresa
+    // cy.wait(4000);
+    // cy.xpath(
+    //   "//button[@class='q-btn inline relative-position q-btn-item non-selectable q-btn-rectangle q-btn-flat q-focusable q-hoverable text-primary']"
+    // ).click();
+    // cy.wait(1000);
 
     //Seleccionar Ficha Personal
     cy.xpath("//div[normalize-space()='Contratos']").click();
@@ -31,6 +31,7 @@ describe("Ficha Personal - Crear Ficha Personal del Empleado", () => {
 
     //Crear Empleado
     cy.xpath("(//div[contains(.,'Empleado')])[47]").click();
+
     //Datos Basicos
     cy.xpath("(//div[contains(.,'Datos Básicos')])[11]").click();
     cy.wait(2000);
@@ -50,12 +51,21 @@ describe("Ficha Personal - Crear Ficha Personal del Empleado", () => {
       .type("Test QA")
       .type("{enter}"); //Apellidos
 
-    cy.xpath("(//input[@type='email'])[2]").type("testqa@email.com"); //Email
+    cy.xpath("(//input[@type='email'])[1]").type("insitucional@email.com"); //Correro Insitucional
+
+    cy.xpath("(//input[@type='email'])[2]").type("personal@email.com"); //Correo Personal
+
+    cy.xpath("(//input[@type='text'])[7]").type("123456"); //Código Empleado IESS
 
     cy.xpath(
       "(//div[@class='col q-input-target ellipsis justify-start'])[32]"
     ).click();
     cy.xpath("(//div[contains(.,'Masculino')])[5]").click(); //Sexo del Empleado
+
+    cy.xpath(
+      "(//div[@class='col q-input-target ellipsis justify-start'])[33]"
+    ).click();
+    cy.xpath("(//div[contains(.,'Soltero')])[5]").click();
 
     cy.xpath(
       "(//div[@class='col q-input-target ellipsis justify-start'])[34]"
@@ -72,38 +82,80 @@ describe("Ficha Personal - Crear Ficha Personal del Empleado", () => {
       .tab()
       .type("{enter}{downarrow}{downarrow}{enter}"); //Persona con Discapacidad
 
-    //Datos de Ubicacion
-    cy.xpath("(//div[contains(.,'Datos de ubicación')])[11]").click();
+    cy.get("#picture-input > input[type=file]").selectFile(
+      "C:\\Users\\hp\\Documents\\N360\\foto.jpg",
+      { force: true }
+    ); //Seleccionar Imagen o Foto
+
+    // //Datos de Ubicacion
+    // cy.xpath("(//div[contains(.,'Datos de ubicación')])[11]").click();
+    // cy.wait(1000);
+    // cy.xpath("(//i[@aria-hidden='true'])[124]").click();
+    // cy.xpath("(//div[contains(.,'Sierra')])[5]").click();
+    // cy.xpath("(//i[@aria-hidden='true'])[125]").click();
+    // cy.xpath("(//div[contains(.,'Residencial')])[5]").click();
+
+    // //Datos Financieros
+    // cy.xpath("(//div[contains(.,'Datos financieros')])[9]").click();
+    // cy.wait(1000);
+    // cy.xpath(
+    //   "(//div[@class='col q-input-target ellipsis justify-start'])[30]"
+    // ).click();
+    // cy.xpath("(//div[contains(.,'Efectivo')])[5]").click();
+
+    // //Guardar Datos
+    // cy.xpath("(//div[contains(.,'Guardar')])[39]").click();
+
+    // //Visualizar Ficha Personal de Empleado sin Contrato
+    // cy.xpath("(//div[contains(.,'Sin contratos')])[16]").click();
+    // cy.wait(1000);
+    // cy.xpath("//i[@aria-hidden='true'][contains(.,'search')]").click();
+    // cy.xpath("//input[contains(@placeholder,'Buscar')]").type(
+    //   "1104730229{enter}"
+    // );
+
+    // //Eliminar Ficha personal de Empleado Sin Contrato
+    // cy.xpath("//div[contains(@class,'q-item-label ellipsis')]").click();
+    // cy.xpath("(//div[contains(.,'Eliminar ficha personal')])[16]").click();
+  });
+  it("2. Limpieza de Datos de Prueba", () => {
+    //Login del sistema de Nomina360
+    cy.visit("http://localhost:8080/#/login");
+    cy.xpath("//input[contains(@type,'email')]").type("admin@demo360.com");
+    cy.xpath("//input[contains(@type,'password')]").type("Nomina360");
+    cy.xpath("//div[contains(text(),'Iniciar')]").click();
+
+    // //Seleccion de de instancia de la empresa
+    // cy.xpath("(//div[@tabindex='0'])[1]").click();
+    // cy.wait(1000);
+    // cy.xpath("(//div[contains(.,'Demo 3')])[17]").click();
+    // cy.wait(10000);
+
+    // //Saltar Advertencia sobre la falta de configuracion de la empresa
+    // cy.wait(4000);
+    // cy.xpath(
+    //   "//button[@class='q-btn inline relative-position q-btn-item non-selectable q-btn-rectangle q-btn-flat q-focusable q-hoverable text-primary']"
+    // ).click();
+    // cy.wait(1000);
+
+    //Seleccionar Ficha Personal
+    cy.xpath("//div[normalize-space()='Contratos']").click();
+    cy.xpath("//div[contains(text(),'Ficha personal')]").click();
     cy.wait(1000);
-    cy.xpath("(//i[@aria-hidden='true'])[124]").click();
-    cy.xpath("(//div[contains(.,'Sierra')])[5]").click();
-    cy.xpath("(//i[@aria-hidden='true'])[125]").click();
-    cy.xpath("(//div[contains(.,'Residencial')])[5]").click();
 
-    //Datos Financieros
-    cy.xpath("(//div[contains(.,'Datos financieros')])[9]").click();
-    cy.wait(1000);
-    cy.xpath(
-      "(//div[@class='col q-input-target ellipsis justify-start'])[30]"
-    ).click();
-    cy.xpath("(//div[contains(.,'Efectivo')])[5]").click();
-
-    //Guardar Datos
-    cy.xpath("(//div[contains(.,'Guardar')])[39]").click();
-
-    //Visualizar Ficha Personal de Empleado sin Contrato
+    //Visualizar Ficha Personal de Empleado UNO sin Contrato
     cy.xpath("(//div[contains(.,'Sin contratos')])[16]").click();
-    cy.wait(1000);
+    cy.wait(500);
+    // cy.xpath("(//i[@aria-hidden='true'][contains(.,'close')])[16]").click();
     cy.xpath("//i[@aria-hidden='true'][contains(.,'search')]").click();
     cy.xpath("//input[contains(@placeholder,'Buscar')]").type(
       "1104730229{enter}"
     );
 
-    //Eliminar Ficha personal de Empleado Sin Contrato
+    //Eliminar Ficha personal de Empleado UNO Sin Contrato
     cy.xpath("//div[contains(@class,'q-item-label ellipsis')]").click();
     cy.xpath("(//div[contains(.,'Eliminar ficha personal')])[16]").click();
-  });
-  it("4. Eliminacion de Datos de Prueba", () => {
-    ////
+    cy.xpath("//i[@aria-hidden='true'][contains(.,'arrow_back')]").click();
+    cy.wait(3000);
   });
 });
