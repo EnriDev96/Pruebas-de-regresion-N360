@@ -5,19 +5,25 @@ describe("Ficha Personal - Crear Ficha Personal del Empleado", () => {
   Cypress.on("uncaught:exception", (err, runnable) => {
     return false;
   });
-  it("1.Crear Ficha Personal de un Empleado", () => {
+  it.only("1.Crear Ficha Personal de un Empleado", () => {
     //Login del sistema de Nomina360
     cy.visit("http://localhost:8080/#/login");
     cy.xpath("//input[contains(@type,'email')]").type("admin@demo360.com");
     cy.xpath("//input[contains(@type,'password')]").type("Nomina360");
     cy.xpath("//div[contains(text(),'Iniciar')]").click();
 
-    //Saltar Advertencia sobre la falta de configuracion de la empresa
-    cy.wait(4000);
-    cy.xpath(
-      "//button[@class='q-btn inline relative-position q-btn-item non-selectable q-btn-rectangle q-btn-flat q-focusable q-hoverable text-primary']"
-    ).click();
-    cy.wait(1000);
+    // //Seleccion de de instancia de la empresa
+    // cy.xpath("(//div[@tabindex='0'])[1]").click();
+    // cy.wait(1000);
+    // cy.xpath("(//div[contains(.,'Demo 3')])[17]").click();
+    // cy.wait(10000);
+
+    // //Saltar Advertencia sobre la falta de configuracion de la empresa
+    // cy.wait(4000);
+    // cy.xpath(
+    //   "//button[@class='q-btn inline relative-position q-btn-item non-selectable q-btn-rectangle q-btn-flat q-focusable q-hoverable text-primary']"
+    // ).click();
+    // cy.wait(1000);
 
     //Seleccionar Ficha Personal
     cy.xpath("//div[normalize-space()='Contratos']").click();
@@ -95,12 +101,18 @@ describe("Ficha Personal - Crear Ficha Personal del Empleado", () => {
     cy.xpath("//input[contains(@type,'password')]").type("Nomina360");
     cy.xpath("//div[contains(text(),'Iniciar')]").click();
 
-    //Saltar Advertencia sobre la falta de configuracion de la empresa
-    cy.wait(4000);
-    cy.xpath(
-      "//button[@class='q-btn inline relative-position q-btn-item non-selectable q-btn-rectangle q-btn-flat q-focusable q-hoverable text-primary']"
-    ).click();
-    cy.wait(1000);
+    // //Seleccion de de instancia de la empresa
+    // cy.xpath("(//div[@tabindex='0'])[1]").click();
+    // cy.wait(1000);
+    // cy.xpath("(//div[contains(.,'Demo 3')])[17]").click();
+    // cy.wait(10000);
+
+    // //Saltar Advertencia sobre la falta de configuracion de la empresa
+    // cy.wait(4000);
+    // cy.xpath(
+    //   "//button[@class='q-btn inline relative-position q-btn-item non-selectable q-btn-rectangle q-btn-flat q-focusable q-hoverable text-primary']"
+    // ).click();
+    // cy.wait(1000);
 
     //Seleccionar Ficha Personal
     cy.xpath("//div[normalize-space()='Contratos']").click();
@@ -126,12 +138,18 @@ describe("Ficha Personal - Crear Ficha Personal del Empleado", () => {
     cy.xpath("//input[contains(@type,'password')]").type("Nomina360");
     cy.xpath("//div[contains(text(),'Iniciar')]").click();
 
-    //Saltar Advertencia sobre la falta de configuracion de la empresa
-    cy.wait(4000);
-    cy.xpath(
-      "//button[@class='q-btn inline relative-position q-btn-item non-selectable q-btn-rectangle q-btn-flat q-focusable q-hoverable text-primary']"
-    ).click();
-    cy.wait(1000);
+    // //Seleccion de de instancia de la empresa
+    // cy.xpath("(//div[@tabindex='0'])[1]").click();
+    // cy.wait(1000);
+    // cy.xpath("(//div[contains(.,'Demo 3')])[17]").click();
+    // cy.wait(10000);
+
+    // //Saltar Advertencia sobre la falta de configuracion de la empresa
+    // cy.wait(4000);
+    // cy.xpath(
+    //   "//button[@class='q-btn inline relative-position q-btn-item non-selectable q-btn-rectangle q-btn-flat q-focusable q-hoverable text-primary']"
+    // ).click();
+    // cy.wait(1000);
 
     //Seleccionar Ficha Personal
     cy.xpath("//div[normalize-space()='Contratos']").click();

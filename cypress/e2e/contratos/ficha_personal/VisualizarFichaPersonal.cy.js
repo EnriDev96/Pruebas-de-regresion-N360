@@ -11,12 +11,18 @@ describe("Ficha Personal - Visualizar Ficha Personal del Empleado", () => {
     cy.xpath("//input[contains(@type,'password')]").type("Nomina360");
     cy.xpath("//div[contains(text(),'Iniciar')]").click();
 
-    //Saltar Advertencia sobre la falta de configuracion de la empresa
-    cy.wait(4000);
-    cy.xpath(
-      "//button[@class='q-btn inline relative-position q-btn-item non-selectable q-btn-rectangle q-btn-flat q-focusable q-hoverable text-primary']"
-    ).click();
-    cy.wait(1000);
+    // //Seleccion de de instancia de la empresa
+    // cy.xpath("(//div[@tabindex='0'])[1]").click();
+    // cy.wait(1000);
+    // cy.xpath("(//div[contains(.,'Demo 3')])[17]").click();
+    // cy.wait(10000);
+
+    // //Saltar Advertencia sobre la falta de configuracion de la empresa
+    // cy.wait(4000);
+    // cy.xpath(
+    //   "//button[@class='q-btn inline relative-position q-btn-item non-selectable q-btn-rectangle q-btn-flat q-focusable q-hoverable text-primary']"
+    // ).click();
+    // cy.wait(1000);
 
     //Seleccionar Modulo Ficha Personal
     cy.xpath("//div[normalize-space()='Contratos']").click();
@@ -94,12 +100,18 @@ describe("Ficha Personal - Visualizar Ficha Personal del Empleado", () => {
     cy.xpath("//input[contains(@type,'password')]").type("Nomina360");
     cy.xpath("//div[contains(text(),'Iniciar')]").click();
 
-    //Saltar Advertencia sobre la falta de configuracion de la empresa
-    cy.wait(4000);
-    cy.xpath(
-      "//button[@class='q-btn inline relative-position q-btn-item non-selectable q-btn-rectangle q-btn-flat q-focusable q-hoverable text-primary']"
-    ).click();
-    cy.wait(1000);
+    // //Seleccion de de instancia de la empresa
+    // cy.xpath("(//div[@tabindex='0'])[1]").click();
+    // cy.wait(1000);
+    // cy.xpath("(//div[contains(.,'Demo 3')])[17]").click();
+    // cy.wait(10000);
+
+    // //Saltar Advertencia sobre la falta de configuracion de la empresa
+    // cy.wait(4000);
+    // cy.xpath(
+    //   "//button[@class='q-btn inline relative-position q-btn-item non-selectable q-btn-rectangle q-btn-flat q-focusable q-hoverable text-primary']"
+    // ).click();
+    // cy.wait(1000);
 
     //Seleccionar Modulo Contratos
     cy.xpath("//div[normalize-space()='Contratos']").click();
@@ -174,19 +186,25 @@ describe("Ficha Personal - Visualizar Ficha Personal del Empleado", () => {
     cy.wait(3000);
   });
 
-  it.only("3. Visualizar Ficha Personal de un Empleado", () => {
+  it("3. Visualizar Ficha Personal de un Empleado", () => {
     //Login del sistema de Nomina360
     cy.visit("http://localhost:8080/#/login");
     cy.xpath("//input[contains(@type,'email')]").type("admin@demo360.com");
     cy.xpath("//input[contains(@type,'password')]").type("Nomina360");
     cy.xpath("//div[contains(text(),'Iniciar')]").click();
 
-    //Saltar Advertencia sobre la falta de configuracion de la empresa
-    cy.wait(4000);
-    cy.xpath(
-      "//button[@class='q-btn inline relative-position q-btn-item non-selectable q-btn-rectangle q-btn-flat q-focusable q-hoverable text-primary']"
-    ).click();
-    cy.wait(1000);
+    // //Seleccion de de instancia de la empresa
+    // cy.xpath("(//div[@tabindex='0'])[1]").click();
+    // cy.wait(1000);
+    // cy.xpath("(//div[contains(.,'Demo 3')])[17]").click();
+    // cy.wait(10000);
+
+    // //Saltar Advertencia sobre la falta de configuracion de la empresa
+    // cy.wait(4000);
+    // cy.xpath(
+    //   "//button[@class='q-btn inline relative-position q-btn-item non-selectable q-btn-rectangle q-btn-flat q-focusable q-hoverable text-primary']"
+    // ).click();
+    // cy.wait(1000);
 
     //Seleccionar Ficha Personal
     cy.xpath("//div[normalize-space()='Contratos']").click();
@@ -205,18 +223,59 @@ describe("Ficha Personal - Visualizar Ficha Personal del Empleado", () => {
     cy.wait(5000);
   });
 
-  it("4. Eliminacion de Datos de Prueba", () => {
+  it("4. Limpiar Datos de Prueba", () => {
     //Login del sistema de Nomina360
     cy.visit("http://localhost:8080/#/login");
     cy.xpath("//input[contains(@type,'email')]").type("admin@demo360.com");
     cy.xpath("//input[contains(@type,'password')]").type("Nomina360");
     cy.xpath("//div[contains(text(),'Iniciar')]").click();
 
-    //Saltar Advertencia sobre la falta de configuracion de la empresa
-    cy.wait(4000);
-    cy.xpath(
-      "//button[@class='q-btn inline relative-position q-btn-item non-selectable q-btn-rectangle q-btn-flat q-focusable q-hoverable text-primary']"
-    ).click();
+    // //Seleccion de de instancia de la empresa
+    // cy.xpath("(//div[@tabindex='0'])[1]").click();
+    // cy.wait(1000);
+    // cy.xpath("(//div[contains(.,'Demo 3')])[17]").click();
+    // cy.wait(10000);
+
+    // //Saltar Advertencia sobre la falta de configuracion de la empresa
+    // cy.wait(4000);
+    // cy.xpath(
+    //   "//button[@class='q-btn inline relative-position q-btn-item non-selectable q-btn-rectangle q-btn-flat q-focusable q-hoverable text-primary']"
+    // ).click();
+    // cy.wait(1000);
+
+    //Seleccionar Modulo Contratos
+    cy.xpath("//div[normalize-space()='Contratos']").click();
+    cy.xpath("//a[@tabindex='0'][contains(.,'Contratos')]").click();
     cy.wait(1000);
+
+    //Seleccionar Empleado UNO
+    cy.xpath("(//i[@aria-hidden='true'][contains(.,'search')])[1]").click();
+    cy.xpath("(//input[contains(@placeholder,'Buscar')])[1]").type(
+      "1104730229{enter}"
+    );
+    cy.xpath("//div[contains(@class,'q-item-label ellipsis')]").click();
+
+    //Eliminar Contrato
+    cy.xpath("(//button[contains(@type,'button')])[77]").click();
+    cy.xpath("//button[@tabindex='0'][contains(.,'Si')]").click();
+    cy.wait(3000);
+
+    //Seleccionar Ficha Personal
+    cy.xpath("//div[normalize-space()='Contratos']").click();
+    cy.xpath("//div[contains(text(),'Ficha personal')]").click();
+    cy.wait(1000);
+
+    //Visualizar Ficha Personal de Empleado UNO sin Contrato
+    cy.xpath("(//div[contains(.,'Sin contratos')])[16]").click();
+    cy.wait(500);
+    cy.xpath("//i[@aria-hidden='true'][contains(.,'search')]").click();
+    cy.xpath("//input[contains(@placeholder,'Buscar')]").type(
+      "1104730229{enter}"
+    );
+
+    //Eliminar Ficha personal de Empleado UNO Sin Contrato
+    cy.xpath("//div[contains(@class,'q-item-label ellipsis')]").click();
+    cy.xpath("(//div[contains(.,'Eliminar ficha personal')])[16]").click();
+    cy.xpath("//i[@aria-hidden='true'][contains(.,'arrow_back')]").click();
   });
 });

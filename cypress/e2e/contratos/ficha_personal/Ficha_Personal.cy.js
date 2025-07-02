@@ -12,17 +12,17 @@ describe("Ficha Personal - Crear Ficha Personal del Empleado", () => {
     cy.xpath("//input[contains(@type,'password')]").type("Nomina360");
     cy.xpath("//div[contains(text(),'Iniciar')]").click();
 
-    //Saltar Advertencia sobre la falta de configuracion de la empresa
-    cy.wait(4000);
-    cy.xpath(
-      "//button[@class='q-btn inline relative-position q-btn-item non-selectable q-btn-rectangle q-btn-flat q-focusable q-hoverable text-primary']"
-    ).click();
-    cy.wait(1000);
+    // //Saltar Advertencia sobre la falta de configuracion de la empresa
+    // cy.wait(4000);
+    // cy.xpath(
+    //   "//button[@class='q-btn inline relative-position q-btn-item non-selectable q-btn-rectangle q-btn-flat q-focusable q-hoverable text-primary']"
+    // ).click();
+    // cy.wait(1000);
 
-    //Seleccion de de instancia de la empresa
-    // cy.get(".q-list > :nth-child(1) > :nth-child(1) > .q-if > .q-icon").click();
-    // cy.wait(2000);
-    // cy.get(".q-select-highlight > .q-item-main > .q-item-label").click();
+    // //Seleccion de de instancia de la empresa
+    // cy.xpath("(//div[@tabindex='0'])[1]").click();
+    // cy.wait(1000);
+    // cy.xpath("(//div[contains(.,'Demo 3')])[17]").click();
     // cy.wait(10000);
 
     //Seleccionar Ficha Personal
