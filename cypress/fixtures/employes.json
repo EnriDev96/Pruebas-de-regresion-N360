@@ -1,0 +1,19 @@
+{
+  "empleadoUno": {
+    "cedula": "1104730229",
+    "nombres": "Bryan Enrique",
+    "apellidos": "Orellana Cueva",
+    "emailInstitucional": "insitucional@email.com",
+    "emailPersonal": "personal@email.com",
+    "codigoIESS": "123456",
+    "sexo": "Masculino",
+    "estadoCivil": "Soltero",
+    "anioNacimiento": "1996",
+    "mesNacimiento": "Agosto",
+    "diaNacimiento": "2",
+    "foto": "cypress/fixtures/images/foto.jpg",
+    "region": "Sierra",
+    "tipoVivienda": "Residencial",
+    "formaPago": "Efectivo"
+  }
+}

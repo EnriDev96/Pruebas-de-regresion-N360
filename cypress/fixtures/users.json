@@ -1,0 +1,14 @@
+{
+  "adminDemo": {
+    "email": "admin@demo360.com",
+    "password": "Nomina360"
+  },
+  "adminLogos": {
+    "email": "admin@logos.com",
+    "password": "adminLogos123!"
+  },
+  "employeeLogos_ybustamante": {
+    "email": "ybustamante@logosacademy.edu.ec",
+    "password": "Nomina360***"
+  }
+}
