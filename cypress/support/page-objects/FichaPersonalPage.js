@@ -1,3 +1,5 @@
+require("cypress-xpath");
+require("cypress-plugin-tab");
 class FichaPersonalPage {
   goToFichaPersonal() {
     cy.xpath("//div[normalize-space()='Contratos']").click();
@@ -62,9 +64,13 @@ class FichaPersonalPage {
     // Datos de Ubicación
     cy.xpath("(//div[contains(.,'Datos de ubicación')])[11]").click();
     cy.wait(1000);
-    cy.xpath("(//i[@aria-hidden='true'])[124]").click();
+    cy.xpath(
+      "(//div[@class='col q-input-target ellipsis justify-start'])[30]"
+    ).click();
     cy.xpath(`(//div[contains(.,'${datos.region}')])[5]`).click();
-    cy.xpath("(//i[@aria-hidden='true'])[125]").click();
+    cy.xpath(
+      "(//div[@class='col q-input-target ellipsis justify-start'])[31]"
+    ).click();
     cy.xpath(`(//div[contains(.,'${datos.tipoVivienda}')])[5]`).click();
 
     // Datos Financieros
@@ -77,6 +83,7 @@ class FichaPersonalPage {
 
     // Guardar
     cy.xpath("(//div[contains(.,'Guardar')])[39]").click();
+    cy.wait(3000);
   }
 
   buscarFichaPorCedula(cedula) {

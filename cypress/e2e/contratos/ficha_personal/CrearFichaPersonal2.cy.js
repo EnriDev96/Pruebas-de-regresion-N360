@@ -4,7 +4,7 @@ describe("Ficha Personal - Crear y Eliminar Ficha Personal del Empleado", () => 
   const fichaPersonal = new FichaPersonalPage();
 
   beforeEach(() => {
-    cy.loginNomina360("adminDemo");
+    cy.loginNomina360("adminLogos");
   });
 
   it("1. Crear Ficha Personal de un Empleado", () => {
