@@ -11,9 +11,27 @@
     "anioNacimiento": "1996",
     "mesNacimiento": "Agosto",
     "diaNacimiento": "2",
-    "foto": "cypress/fixtures/images/foto.jpg",
+    "foto": "cypress/fixtures/images/Avatar Perfil Hombre 1.jpg",
     "region": "Sierra",
     "tipoVivienda": "Residencial",
+    "formaPago": "Efectivo"
+  },
+
+  "empleadoDos": {
+    "cedula": "1104730229",
+    "nombres": "Enrique Eduardo",
+    "apellidos": "Orellana Sarmiento",
+    "emailInstitucional": "insitucional@email.com",
+    "emailPersonal": "personal@email.com",
+    "codigoIESS": "654321",
+    "sexo": "Masculino",
+    "estadoCivil": "Soltero",
+    "anioNacimiento": "1965",
+    "mesNacimiento": "Enero",
+    "diaNacimiento": "15",
+    "foto": "cypress/fixtures/images/Avatar Perfil Hombre 3.jpg",
+    "region": "Costa",
+    "tipoVivienda": "Laboral",
     "formaPago": "Efectivo"
   }
 }
