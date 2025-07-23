@@ -1,6 +1,6 @@
 require("cypress-xpath");
 require("cypress-plugin-tab");
-class ConfiguracionPage {
+class ConfiguracionInicialPage {
   goToCargasMasivas() {
     cy.xpath("(//div[contains(.,'Configuración')])[10]").click();
     cy.xpath("(//div[contains(.,'Inicial')])[39]").click();
@@ -99,4 +99,4 @@ class ConfiguracionPage {
   }
 }
 
-export default ConfiguracionPage;
+export default ConfiguracionInicialPage;

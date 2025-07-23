@@ -1,0 +1,6 @@
+{
+  "demo3": {
+    "logo2": "cypress/fixtures/images/Test Logo 2 600x600.jpg",
+    "logo1": "cypress/fixtures/images/TestLogo200x200.jpg"
+  }
+}
