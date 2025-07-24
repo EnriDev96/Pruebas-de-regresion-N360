@@ -1,9 +1,11 @@
 import ConfiguracionInicialPage from "../../support/page-objects/ConfiguracionInicialPage";
 import ConfEmpresaPage from "../../support/page-objects/ConfiguracionEmpresaPage";
+import ConfRolesPage from "../../support/page-objects/ConfiguraciónRolesPage";
 
 describe("Configuracion Inicial", () => {
   const confInicial = new ConfiguracionInicialPage();
   const confEmpresa = new ConfEmpresaPage();
+  const confRoles = new ConfRolesPage();
 
   beforeEach(() => {
     cy.loginNomina360("adminDemo");
@@ -22,10 +24,14 @@ describe("Configuracion Inicial", () => {
     confInicial.cargaMasivaContratosHistoricos();
   });
 
-  it.only("2. Configuracion de la Empresa", () => {
+  it("2. Configuracion de la Empresa", () => {
     cy.fixture("empresas").then((datosEmpresa) => {
       confEmpresa.goToDatosEmpresa();
       confEmpresa.cambiarLogoEmpresa(datosEmpresa.demo3);
     });
+  });
+
+  it.only("4. Configurar Roles y Permisos", () => {
+    confRoles.goToRolesPermisos();
   });
 });
