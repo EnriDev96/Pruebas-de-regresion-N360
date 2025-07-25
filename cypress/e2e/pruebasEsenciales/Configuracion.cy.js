@@ -1,11 +1,11 @@
 import ConfiguracionInicialPage from "../../support/page-objects/ConfiguracionInicialPage";
 import ConfEmpresaPage from "../../support/page-objects/ConfiguracionEmpresaPage";
-import ConfRolesPage from "../../support/page-objects/ConfiguraciónRolesPage";
+import ConfSistemaPage from "../../support/page-objects/ConfiguracionSistemaPage";
 
 describe("Configuracion Inicial", () => {
   const confInicial = new ConfiguracionInicialPage();
   const confEmpresa = new ConfEmpresaPage();
-  const confRoles = new ConfRolesPage();
+  const confRoles = new ConfSistemaPage();
 
   beforeEach(() => {
     cy.loginNomina360("adminDemo");
@@ -33,5 +33,6 @@ describe("Configuracion Inicial", () => {
 
   it.only("4. Configurar Roles y Permisos", () => {
     confRoles.goToRolesPermisos();
+    confRoles.createRol();
   });
 });
