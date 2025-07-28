@@ -1,0 +1,23 @@
+{
+  "empleadosAlaFecha": {
+    "__comentario__": "Datos de ficha personal",
+    "numeroDocumento": true,
+    "apellidos": true,
+    "nombres": true,
+    "tipoDocumento": true,
+    "sexo": true,
+    "estadoCivil": false,
+    "fechaNacimiento": false,
+    "sustitutoPCD": false,
+    "personaDiscapacidad": false,
+    "regionTrabajo": false,
+    "ciudad": false,
+    "__comentario2__": "Datos del contrato",
+    "cargo": true,
+    "fechaIngreso": true,
+    "tipoContrato": true,
+    "sueldo": true,
+    "tipoSueldo": false,
+    "tipoCorbo": false
+  }
+}
