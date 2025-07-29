@@ -124,12 +124,18 @@ class ContratoPage {
     cy.xpath("(//div[contains(.,'Orellana Cueva Bryan Enrique')])[17]").click();
     cy.xpath("(//div[contains(.,'Ver contrato')])[12]").click();
     cy.wait(2000);
-    cy.xpath(
-      "(//div[contains(.,'Aporte Personal Asumido')])[18]"
-    ).scrollIntoView({
-      easing: "linear",
-      duration: 1000,
-    });
+    cy.scrollTo("bottom", { easing: "linear", duration: 1000 });
+  }
+
+  eliminarContrato() {
+    cy.xpath("(//i[@aria-hidden='true'][contains(.,'search')])[1]").click();
+    cy.xpath("(//input[contains(@placeholder,'Buscar')])[1]").type(
+      "1104730229"
+    );
+    cy.xpath("(//div[contains(.,'Orellana Cueva Bryan Enrique')])[17]").click();
+    cy.xpath("(//div[contains(.,'Eliminar contrato')])[13]").click();
+    cy.get(".modal-buttons > :nth-child(2)").click();
+    cy.scrollTo("top", { easing: "linear", duration: 1000 });
   }
 }
 

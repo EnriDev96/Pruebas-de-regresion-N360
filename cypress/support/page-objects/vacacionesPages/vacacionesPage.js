@@ -34,15 +34,22 @@ class vacacionesPage {
     cy.xpath("(//div[contains(.,'Generar')])[195]").click();
   }
 
-  registroVacacionNormal() {}
+  registroVacacionNormal() {
+    cy.get(".gutter-sm > :nth-child(1) > .q-btn").click();
+    cy.wait(1000);
+    cy.get(
+      ".q-table-top > :nth-child(3) > .q-if > .q-if-inner > .row > .col"
+    ).type(dataEmpleado.apellido, { force: true });
+    cy.get(".text-principal > .q-btn-inner > div").click();
+    cy.get(".modal-buttons > :nth-child(2)").click();
+  }
 
   rechazoVacacionNormal(dataEmpleado) {
-    cy.xpath("(//div[contains(.,'addPor registrar')])[14]").click();
+    cy.get(".gutter-sm > :nth-child(1) > .q-btn").click();
     cy.wait(1000);
-    cy.xpath("//input[contains(@placeholder,'Buscar')]").type(
-      dataEmpleado.apellido,
-      { force: true }
-    );
+    cy.get(
+      ".q-table-top > :nth-child(3) > .q-if > .q-if-inner > .row > .col"
+    ).type(dataEmpleado.apellido, { force: true });
     cy.xpath("(//div[contains(.,'rechazar')])[14]").click();
     cy.xpath("(//input[contains(@type,'text')])[15]").type(
       "Pruebas Automatizadas QA"

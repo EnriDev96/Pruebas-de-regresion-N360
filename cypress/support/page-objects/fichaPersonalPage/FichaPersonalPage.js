@@ -76,12 +76,12 @@ class FichaPersonalPage {
     cy.wait(3000);
   }
 
-  buscarFichaPorCedula(cedula) {
+  buscarFichaPorCedula(dataEmpleado) {
     cy.xpath("(//div[contains(.,'Sin contratos')])[16]").click();
     cy.wait(500);
     cy.xpath("//i[@aria-hidden='true'][contains(.,'search')]").click();
     cy.xpath("//input[contains(@placeholder,'Buscar')]").type(
-      `${cedula}{enter}`
+      `${dataEmpleado.cedula}{enter}`
     );
   }
 
@@ -89,7 +89,6 @@ class FichaPersonalPage {
     cy.xpath("//div[contains(@class,'q-item-label ellipsis')]").click();
     cy.xpath("(//div[contains(.,'Eliminar ficha personal')])[16]").click();
     cy.xpath("//i[@aria-hidden='true'][contains(.,'arrow_back')]").click();
-    cy.wait(3000);
   }
 }
 export default FichaPersonalPage;
