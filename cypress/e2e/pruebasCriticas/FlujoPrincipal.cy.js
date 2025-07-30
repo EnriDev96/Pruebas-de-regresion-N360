@@ -2,12 +2,14 @@ import FichaPersonalPage from "../../support/page-objects/fichaPersonalPage/Fich
 import ContratoPage from "../../support/page-objects/contratosPages/ContratoPage";
 import VacacionesPage from "../../support/page-objects/vacacionesPages/vacacionesPage";
 import PrestamosPage from "../../support/page-objects/PrestamosPages/PrestamosPage";
+import AnticiposPage from "../../support/page-objects/anticiposPages/anticiposPage";
 
 describe("Configuracion Inicial", () => {
   const fichaPersonal = new FichaPersonalPage();
   const contrato = new ContratoPage();
   const vacaciones = new VacacionesPage();
   const prestamos = new PrestamosPage();
+  const anticipo = new AnticiposPage();
 
   beforeEach(() => {
     cy.loginNomina360("adminLogos");
@@ -45,7 +47,7 @@ describe("Configuracion Inicial", () => {
     });
   });
 
-  it.only("4. Registrar Préstamos", () => {
+  it("4. Registrar Préstamos", () => {
     //Solicitar y Rechazar
     prestamos.goToPrestamos();
     cy.fixture("empleadosLogos").then((dataEmpleado) => {
@@ -64,6 +66,20 @@ describe("Configuracion Inicial", () => {
     prestamos.resgistrarPrestamoSolicitado();
     cy.fixture("empleadosLogos").then((dataEmpleado) => {
       prestamos.visualizarPrestamo(dataEmpleado.Araujo_Zambrano);
+    });
+  });
+
+  it.only("5. Registrar Anticipos", () => {
+    //Solicitar y Registrar Anticipo
+    anticipo.goToAnticipos();
+    cy.fixture("empleadosLogos").then((dataEmpleado) => {
+      // anticipo.solicitarAnticipo(dataEmpleado.Araujo_Zambrano);
+      // anticipo.registrarAnticipo();
+    });
+    //Visualizar Anticipo Generado
+    //anticipo.goToAnticipos();
+    cy.fixture("empleadosLogos").then((dataEmpleado) => {
+      anticipo.visualizarAnticipo(dataEmpleado.Araujo_Zambrano);
     });
   });
 });
