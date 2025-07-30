@@ -42,7 +42,16 @@ class prestamosPage {
     cy.scrollTo("top");
     cy.get(".gutter-sm > :nth-child(1) > .q-btn").click();
   }
-  resgistrarPrestamoSolicitado() {}
+  resgistrarPrestamoSolicitado() {
+    cy.xpath("//a[@tabindex='0'][contains(.,'dashboardDashboard')]").click();
+    cy.xpath("//button[contains(.,'supervised_user_circleEmpleados')]").click();
+    cy.xpath(
+      "//div[@class='q-btn-inner row col items-center q-popup--skip justify-center'][contains(.,'Prestamos')]"
+    ).click();
+    cy.get(".gutter-sm > :nth-child(2) > .q-btn").click();
+    cy.get(".q-btn-group > .text-principal").click();
+    cy.get(".modal-buttons > :nth-child(2)").click();
+  }
   rechazoPrestamoSolicitado(dataEmpleado) {
     cy.xpath("//a[@tabindex='0'][contains(.,'dashboardDashboard')]").click();
     cy.xpath("//button[contains(.,'supervised_user_circleEmpleados')]").click();
@@ -59,7 +68,59 @@ class prestamosPage {
     ).type("Pruebas QA");
     cy.get(".modal-buttons > .text-positive").click();
   }
-  eliminarPrestamoRegistrado() {}
+  eliminarPrestamoRegistrado(dataEmpleado) {
+    cy.xpath("//a[@tabindex='0'][contains(.,'dashboardDashboard')]").click();
+    cy.xpath("//button[contains(.,'supervised_user_circleEmpleados')]").click();
+    cy.xpath(
+      "//div[@class='q-btn-inner row col items-center q-popup--skip justify-center'][contains(.,'Prestamos')]"
+    ).click();
+    cy.get(".gutter-sm > :nth-child(1) > .q-btn").click();
+
+    cy.get(".full-height > .q-toolbar-normal > .q-btn > .q-btn-inner").click();
+    cy.get(".q-toolbar-title > .q-if > .q-if-inner > .row > .col").type(
+      dataEmpleado.cedula
+    );
+    cy.scrollTo("top");
+    cy.xpath(
+      `(//div[contains(.,'${dataEmpleado.nombreCompleto}')])[17]`
+    ).click();
+    cy.scrollTo("top");
+    cy.get(
+      ":nth-child(1) > :nth-child(3) > .q-if > .q-if-inner > .row > .col"
+    ).type("120");
+    cy.get(".q-btn-group > .text-primary").click();
+    cy.get(
+      ":nth-child(1) > .q-card > .q-card-main > :nth-child(1) > .row.col > .q-field-content > .q-if > .q-if-inner > .row > .col"
+    ).type("120");
+    cy.get(
+      ".q-card-main > :nth-child(2) > .row.col > .q-field-content > .q-if > .q-if-inner > .row > .col"
+    ).type("Prueba QA");
+    cy.get(".q-card-actions > .text-center > .q-btn").click();
+    cy.wait(1000);
+    cy.get(".text-principal").click();
+    cy.get(".modal-buttons > :nth-child(2)").click();
+  }
+  visualizarPrestamo(dataEmpleado) {
+    cy.xpath("//a[@tabindex='0'][contains(.,'dashboardDashboard')]").click();
+    cy.xpath("//button[contains(.,'supervised_user_circleEmpleados')]").click();
+    cy.xpath(
+      "//div[@class='q-btn-inner row col items-center q-popup--skip justify-center'][contains(.,'Prestamos')]"
+    ).click();
+    cy.get(".gutter-sm > :nth-child(1) > .q-btn").click();
+
+    cy.get(".full-height > .q-toolbar-normal > .q-btn > .q-btn-inner").click();
+    cy.get(".q-toolbar-title > .q-if > .q-if-inner > .row > .col").type(
+      dataEmpleado.cedula
+    );
+    cy.scrollTo("top");
+    cy.xpath(
+      `(//div[contains(.,'${dataEmpleado.nombreCompleto}')])[17]`
+    ).click();
+    cy.scrollTo("top");
+    cy.get(
+      ":nth-child(1) > :nth-child(3) > .q-if > .q-if-inner > .row > .col"
+    ).type("120");
+  }
 }
 
 export default prestamosPage;

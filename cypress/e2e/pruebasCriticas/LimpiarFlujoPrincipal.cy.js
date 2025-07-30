@@ -1,9 +1,12 @@
 import FichaPersonalPage from "../../support/page-objects/fichaPersonalPage/FichaPersonalPage";
 import ContratoPage from "../../support/page-objects/contratosPages/ContratoPage";
+import PrestamosPage from "../../support/page-objects/PrestamosPages/PrestamosPage";
 
 describe("Configuracion Inicial", () => {
   const fichaPersonal = new FichaPersonalPage();
   const contrato = new ContratoPage();
+  const prestamos = new PrestamosPage();
+
   beforeEach(() => {
     cy.loginNomina360("adminLogos");
   });
@@ -21,5 +24,9 @@ describe("Configuracion Inicial", () => {
     });
   });
 
-  it("3. ELiminar Prestamo", () => {});
+  it.only("4. ELiminar Prestamo", () => {
+    cy.fixture("empleadosLogos").then((dataEmpleado) => {
+      prestamos.eliminarPrestamoRegistrado(dataEmpleado.Araujo_Zambrano);
+    });
+  });
 });

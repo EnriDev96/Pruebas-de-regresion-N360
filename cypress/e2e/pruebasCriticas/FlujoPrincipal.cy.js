@@ -28,13 +28,15 @@ describe("Configuracion Inicial", () => {
     });
   });
 
-  it.only("3. Regsitrar Vacaciones - Normales", () => {
+  it("3. Regsitrar Vacaciones - Normales", () => {
+    //Solicitar y Rechazar
     vacaciones.goToVacaciones();
     cy.fixture("empleadosLogos").then((dataEmpleado) => {
       vacaciones.seleccionarEmpleado(dataEmpleado.Araujo_Zambrano);
       vacaciones.vacacionNormalAraujo();
       vacaciones.rechazoVacacionNormal(dataEmpleado.Araujo_Zambrano);
     });
+    //Generar y Registrar
     vacaciones.goToVacaciones();
     cy.fixture("empleadosLogos").then((dataEmpleado) => {
       vacaciones.seleccionarEmpleado(dataEmpleado.Araujo_Zambrano);
@@ -43,7 +45,8 @@ describe("Configuracion Inicial", () => {
     });
   });
 
-  it("4. Registrar Préstamos", () => {
+  it.only("4. Registrar Préstamos", () => {
+    //Solicitar y Rechazar
     prestamos.goToPrestamos();
     cy.fixture("empleadosLogos").then((dataEmpleado) => {
       prestamos.seleccionarEmpleado(dataEmpleado.Araujo_Zambrano);
@@ -51,6 +54,16 @@ describe("Configuracion Inicial", () => {
     prestamos.solicitarPrestamo();
     cy.fixture("empleadosLogos").then((dataEmpleado) => {
       prestamos.rechazoPrestamoSolicitado(dataEmpleado.Araujo_Zambrano);
+    });
+    //Solicitar y Registrar
+    prestamos.goToPrestamos();
+    cy.fixture("empleadosLogos").then((dataEmpleado) => {
+      prestamos.seleccionarEmpleado(dataEmpleado.Araujo_Zambrano);
+    });
+    prestamos.solicitarPrestamo();
+    prestamos.resgistrarPrestamoSolicitado();
+    cy.fixture("empleadosLogos").then((dataEmpleado) => {
+      prestamos.visualizarPrestamo(dataEmpleado.Araujo_Zambrano);
     });
   });
 });
