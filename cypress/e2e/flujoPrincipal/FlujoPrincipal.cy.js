@@ -3,6 +3,7 @@ import ContratoPage from "../../support/page-objects/contratosPages/ContratoPage
 import VacacionesPage from "../../support/page-objects/vacacionesPages/vacacionesPage";
 import PrestamosPage from "../../support/page-objects/PrestamosPages/PrestamosPage";
 import AnticiposPage from "../../support/page-objects/anticiposPages/anticiposPage";
+import PermisosPage from "../../support/page-objects/permisosPages/permisosPage";
 
 describe("Configuracion Inicial", () => {
   const fichaPersonal = new FichaPersonalPage();
@@ -10,6 +11,7 @@ describe("Configuracion Inicial", () => {
   const vacaciones = new VacacionesPage();
   const prestamos = new PrestamosPage();
   const anticipo = new AnticiposPage();
+  const permisos = new PermisosPage();
 
   beforeEach(() => {
     cy.loginNomina360("adminLogos");
@@ -69,17 +71,31 @@ describe("Configuracion Inicial", () => {
     });
   });
 
-  it.only("5. Registrar Anticipos", () => {
+  it("5. Registrar Anticipos", () => {
     //Solicitar y Registrar Anticipo
     anticipo.goToAnticipos();
     cy.fixture("empleadosLogos").then((dataEmpleado) => {
-      // anticipo.solicitarAnticipo(dataEmpleado.Araujo_Zambrano);
-      // anticipo.registrarAnticipo();
+      anticipo.solicitarAnticipo(dataEmpleado.Araujo_Zambrano);
+      anticipo.registrarAnticipo();
     });
     //Visualizar Anticipo Generado
-    //anticipo.goToAnticipos();
+    anticipo.goToAnticipos();
     cy.fixture("empleadosLogos").then((dataEmpleado) => {
       anticipo.visualizarAnticipo(dataEmpleado.Araujo_Zambrano);
     });
+  });
+
+  it.only("6. Registrar Permisos", () => {
+    //Licencia Medica
+    //Permisos de Maternidad
+    permisos.goToPermisos();
+    cy.fixture("empleadosLogos").then((dataEmpleado) => {
+      permisos.solicitarPermisoMaterno(dataEmpleado.Andrade_Britney);
+      permisos.goToPermisos();
+      permisos.registrarPermisoMaterno(dataEmpleado.Andrade_Britney);
+      permisos.goToPermisos();
+      permisos.visualizarPermisos(dataEmpleado.Andrade_Britney);
+    });
+    //Permisos de Paternidad
   });
 });
