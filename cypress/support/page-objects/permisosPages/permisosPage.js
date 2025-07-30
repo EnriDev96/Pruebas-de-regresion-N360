@@ -42,7 +42,7 @@ class permisosPage {
     //❌Fin del Warning❌
     cy.xpath("(//span[@tabindex='-1'])[3]").click();
     cy.xpath(`(//div[contains(.,'2025')])[55]`).click();
-    cy.xpath(`(//div[contains(.,'Mayo')])[6]`).click();
+    cy.xpath(`(//div[contains(.,'Junio')])[6]`).click();
     cy.xpath(
       `//div[@class='row items-center content-center justify-center cursor-pointer'][contains(.,'19')]`
     ).click();
@@ -59,13 +59,18 @@ class permisosPage {
     cy.get(
       ".q-table-top > :nth-child(3) > .q-if > .q-if-inner > .row > .col"
     ).type(dataEmpleado.apellido);
-    cy.xpath("//button[@tabindex='0'][contains(.,'registrar')]").click();
     cy.wait(1000);
-    cy.xpath("//button[@tabindex='0'][contains(.,'Si')]").click();
+    cy.xpath("(//div[contains(.,'registrar')])[19]").click();
+    cy.get(".modal-buttons > :nth-child(2)").click();
   }
   visualizarPermisos(dataEmpleado) {
     //Buscar al Empleado
-    cy.xpath("(//i[@aria-hidden='true'][contains(.,'search')])[1]").click();
+    cy.xpath(
+      "//div[@class='col-xs-4 col-md-3'][contains(.,'visibilityPermiso')]"
+    ).click();
+    cy.get(
+      "#q-app > div > div.q-layout-page-container.q-layout-transition > div > main > div > div.col-3.shadow-1 > div > div > div.q-toolbar.row.no-wrap.items-center.relative-position.q-toolbar-normal.bg-primary.text-white > button"
+    ).click();
     cy.xpath("(//input[contains(@placeholder,'Buscar')])[1]").type(
       dataEmpleado.cedula
     );
@@ -75,6 +80,15 @@ class permisosPage {
     ).click();
     cy.scrollTo("top");
     cy.wait(500);
+    cy.get(
+      ".q-table-top > :nth-child(3) > .q-if > .q-if-inner > .row > .col"
+    ).type("Maternidad");
+    cy.wait(1000);
+    cy.xpath("(//div[contains(.,'Eliminar')])[16]").scrollIntoView({
+      easing: "linear",
+      duration: 2000,
+    });
+    cy.xpath("(//div[contains(.,'ver')])[16]").click();
   }
 }
 
