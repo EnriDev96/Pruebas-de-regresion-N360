@@ -85,19 +85,37 @@ describe("Configuracion Inicial", () => {
     });
   });
 
-  it("6. Registrar Permisos", () => {
+  it.only("6. Registrar Permisos", () => {
+    //Permisos con Licencia Medica
+    cy.fixture("empleadosLogos").then((dataEmpleado) => {
+      permisos.goToPermisos();
+      permisos.solicitarPermisoMedico(dataEmpleado.Araujo_Zambrano);
+      permisos.goToPermisos();
+      permisos.registrarPermiso(dataEmpleado.Araujo_Zambrano);
+      permisos.goToPermisos();
+      permisos.visualizarPermisos(dataEmpleado.Araujo_Zambrano, "Médico");
+    });
     //Permisos de Maternidad
     cy.fixture("empleadosLogos").then((dataEmpleado) => {
       permisos.goToPermisos();
       permisos.solicitarPermisoMaterno(dataEmpleado.Armijo_Maria);
       permisos.goToPermisos();
-      permisos.registrarPermisoMaterno(dataEmpleado.Armijo_Maria);
+      permisos.registrarPermiso(dataEmpleado.Armijo_Maria);
       permisos.goToPermisos();
-      permisos.visualizarPermisos(dataEmpleado.Armijo_Maria);
+      permisos.visualizarPermisos(dataEmpleado.Armijo_Maria, "Maternidad");
+    });
+    //Permisos de Paternidad
+    cy.fixture("empleadosLogos").then((dataEmpleado) => {
+      permisos.goToPermisos();
+      permisos.solicitarPermisoPaterno(dataEmpleado.Araujo_Zambrano);
+      permisos.goToPermisos();
+      permisos.registrarPermiso(dataEmpleado.Araujo_Zambrano);
+      permisos.goToPermisos();
+      permisos.visualizarPermisos(dataEmpleado.Araujo_Zambrano, "Paternidad");
     });
   });
 
-  it.only("7. Preparar Rol de Pagos", () => {
+  it("7. Preparar Rol de Pagos", () => {
     //Rol de Pago Mensual
     prepRol.goToPreparacionDelRol();
     cy.fixture("empleadosLogos").then((dataEmpleado) => {

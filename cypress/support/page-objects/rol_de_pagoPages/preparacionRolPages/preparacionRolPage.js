@@ -31,14 +31,26 @@ class preparacionRolPage {
     cy.scrollTo("top");
   }
   descargarBorradorRol() {
+    this.goToPreparacionDelRol();
     cy.xpath(
       "//button[@tabindex='0'][contains(.,'cloud_downloadReportes')]"
     ).click();
     cy.xpath(
       "//button[@tabindex='0'][contains(.,'cloud_downloadborrador de nomina')]"
     ).click();
+
+    // Interceptar la petición de descarga
+    cy.intercept("POST", "**/api/obtener-archivo-blob**").as("downloadFile");
+
+    // Hacer click en generar
     cy.xpath("(//div[contains(.,'Generar')])[179]").click();
-    this.tiempoGeneraciónDocumento("(//div[contains(.,'Generar')])[179]");
+
+    // Esperar a que la petición se complete
+    cy.wait("@downloadFile").then((interception) => {
+      expect(interception.response.statusCode).to.eq(60000);
+    });
+
+    //this.tiempoGeneraciónDocumento("(//div[contains(.,'Generar')])[179]");
   }
 
   tiempoGeneraciónDocumento(xpath) {
@@ -51,7 +63,6 @@ class preparacionRolPage {
         cy.readFile(latestFilePath, { timeout: 120000 })
           .should("exist")
           .then(() => {
-            // Aquí puedes medir el tiempo, leer el archivo, etc.
             cy.log(`El archivo más reciente es: ${latestFilePath}`);
           });
       }
