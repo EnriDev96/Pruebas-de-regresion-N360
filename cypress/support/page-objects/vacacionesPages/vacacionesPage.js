@@ -18,9 +18,10 @@ class vacacionesPage {
       `(//div[contains(.,'${dataEmpleado.nombreCompleto}')])[17]`
     ).click();
     cy.scrollTo("top");
+    cy.wait(500);
   }
 
-  vacacionNormalAraujo() {
+  solicitarVacacionNormal() {
     cy.xpath("(//div[contains(.,'Generar')])[179]").click();
     cy.xpath("(//div[contains(.,'Normal')])[18]").click();
     cy.xpath("(//div[contains(.,'Periodo')])[61]").click();
@@ -34,7 +35,7 @@ class vacacionesPage {
     cy.xpath("(//div[contains(.,'Generar')])[195]").click();
   }
 
-  registroVacacionNormal() {
+  registroVacacionNormal(dataEmpleado) {
     cy.get(".gutter-sm > :nth-child(1) > .q-btn").click();
     cy.wait(1000);
     cy.get(
@@ -55,6 +56,12 @@ class vacacionesPage {
       "Pruebas Automatizadas QA"
     );
     cy.xpath("//button[contains(.,'Si')]").click();
+  }
+
+  eliminarVacacionRegistrada() {
+    cy.xpath("//button[@tabindex='0'][contains(.,'Historico')]").click();
+    cy.xpath("(//i[@aria-hidden='true'][contains(.,'delete')])[2]").click();
+    cy.xpath("//button[@tabindex='0'][contains(.,'Si')]").click();
   }
 }
 

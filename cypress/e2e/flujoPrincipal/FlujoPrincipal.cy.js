@@ -32,24 +32,24 @@ describe("Configuracion Inicial", () => {
     });
   });
 
-  it.only("3. Regsitrar Vacaciones - Normales", () => {
+  it("3. Regsitrar Vacaciones - Normales", () => {
     // //Solicitar y Rechazar
     // vacaciones.goToVacaciones();
     // cy.fixture("empleadosLogos").then((dataEmpleado) => {
     //   vacaciones.seleccionarEmpleado(dataEmpleado.Araujo_Zambrano);
-    //   vacaciones.vacacionNormalAraujo();
+    //   vacaciones.solicitarVacacionNormal();
     //   vacaciones.rechazoVacacionNormal(dataEmpleado.Araujo_Zambrano);
     // });
-    //Generar y Registrar
+    //Solicitar y Registrar
     vacaciones.goToVacaciones();
     cy.fixture("empleadosLogos").then((dataEmpleado) => {
       vacaciones.seleccionarEmpleado(dataEmpleado.Araujo_Zambrano);
-      vacaciones.vacacionNormalAraujo();
-      vacaciones.registroVacacionNormal();
+      vacaciones.solicitarVacacionNormal();
+      vacaciones.registroVacacionNormal(dataEmpleado.Araujo_Zambrano);
     });
   });
 
-  it.only("4. Registrar Préstamos", () => {
+  it("4. Registrar Préstamos", () => {
     // // Solicitar y Rechazar
     // prestamos.goToPrestamos();
     // cy.fixture("empleadosLogos").then((dataEmpleado) => {
@@ -58,38 +58,44 @@ describe("Configuracion Inicial", () => {
     //   prestamos.rechazoPrestamoSolicitado(dataEmpleado.Araujo_Zambrano);
     // });
     //Solicitar y Registrar
-    prestamos.goToPrestamos();
     cy.fixture("empleadosLogos").then((dataEmpleado) => {
-      prestamos.seleccionarEmpleado(dataEmpleado.Araujo_Zambrano);
-      prestamos.solicitarPrestamo();
-      prestamos.resgistrarPrestamoSolicitado();
+      prestamos.goToPrestamos();
+      prestamos.solicitarPrestamo(dataEmpleado.Araujo_Zambrano);
+      prestamos.goToPrestamos();
+      prestamos.resgistrarPrestamoSolicitado(dataEmpleado.Araujo_Zambrano);
+      prestamos.goToPrestamos();
       prestamos.visualizarPrestamo(dataEmpleado.Araujo_Zambrano);
     });
   });
 
   it("5. Registrar Anticipos", () => {
     //Solicitar y Registrar Anticipo
-    anticipo.goToAnticipos();
     cy.fixture("empleadosLogos").then((dataEmpleado) => {
+      anticipo.goToAnticipos();
       anticipo.solicitarAnticipo(dataEmpleado.Araujo_Zambrano);
+      anticipo.goToAnticipos();
       anticipo.registrarAnticipo();
     });
     //Visualizar Anticipo Generado
-    anticipo.goToAnticipos();
     cy.fixture("empleadosLogos").then((dataEmpleado) => {
+      anticipo.goToAnticipos();
       anticipo.visualizarAnticipo(dataEmpleado.Araujo_Zambrano);
     });
   });
 
   it("6. Registrar Permisos", () => {
     //Permisos de Maternidad
-    permisos.goToPermisos();
     cy.fixture("empleadosLogos").then((dataEmpleado) => {
+      permisos.goToPermisos();
       permisos.solicitarPermisoMaterno(dataEmpleado.Armijo_Maria);
       permisos.goToPermisos();
       permisos.registrarPermisoMaterno(dataEmpleado.Armijo_Maria);
       permisos.goToPermisos();
       permisos.visualizarPermisos(dataEmpleado.Armijo_Maria);
     });
+  });
+
+  it.only("7. Preparar Rol de Pagos", () => {
+    //Rol de Pago Mensual
   });
 });

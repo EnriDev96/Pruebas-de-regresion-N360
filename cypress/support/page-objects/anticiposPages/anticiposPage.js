@@ -8,9 +8,7 @@ class anticiposPage {
     cy.get(".q-popover > :nth-child(7) > .q-btn").click();
     cy.wait(1000);
   }
-  solicitarAnticipo(dataEmpleado) {
-    cy.xpath("(//div[contains(.,'addRegistrar')])[14]").click();
-    cy.wait(500);
+  seleccionarEmpleado(dataEmpleado) {
     cy.xpath("(//i[@aria-hidden='true'][contains(.,'search')])[1]").click();
     cy.xpath("(//input[contains(@placeholder,'Buscar')])[1]").type(
       dataEmpleado.cedula
@@ -20,7 +18,12 @@ class anticiposPage {
       `(//div[contains(.,'${dataEmpleado.nombreCompleto}')])[17]`
     ).click();
     cy.scrollTo("top");
+  }
+  solicitarAnticipo(dataEmpleado) {
+    cy.xpath("(//div[contains(.,'addRegistrar')])[14]").click();
     cy.wait(500);
+    this.seleccionarEmpleado(dataEmpleado);
+
     cy.xpath(
       "(//div[contains(.,'Motivo de anticipo|arrow_drop_down')])[12]"
     ).click();
@@ -38,31 +41,25 @@ class anticiposPage {
       "(//i[@aria-hidden='true'][contains(.,'check_box_outline_blank')])[3]"
     ).click();
     cy.xpath("(//div[contains(.,'Guardar')])[46]").click();
+    cy.wait(1000);
   }
-  registrarAnticipo(dataEmpleado) {
+  registrarAnticipo() {
     cy.get(".gutter-sm > :nth-child(2) > .q-btn").click();
     cy.get(
       ".q-table-top > :nth-child(3) > .q-if > .q-if-inner > .row > .col"
     ).type("250");
+    cy.wait(500);
     cy.get(".text-principal").click();
     cy.get(".modal-buttons > :nth-child(2)").click();
   }
   visualizarAnticipo(dataEmpleado) {
-    cy.xpath("(//i[@aria-hidden='true'][contains(.,'search')])[1]").click();
-    cy.xpath("(//input[contains(@placeholder,'Buscar')])[1]").type(
-      dataEmpleado.cedula
-    );
-    cy.scrollTo("top");
-    cy.xpath(
-      `(//div[contains(.,'${dataEmpleado.nombreCompleto}')])[17]`
-    ).click();
-    cy.scrollTo("top");
     cy.wait(500);
+    this.seleccionarEmpleado(dataEmpleado);
     cy.get(
       ":nth-child(1) > :nth-child(3) > .q-if > .q-if-inner > .row > .col"
     ).type("250");
     cy.wait(500);
-    cy.xpath("(//div[contains(.,'Ver')])[16]").scrollIntoView({
+    cy.xpath("(//div[contains(.,'Eliminar')])[16]").scrollIntoView({
       easing: "linear",
       duration: 1000,
     });

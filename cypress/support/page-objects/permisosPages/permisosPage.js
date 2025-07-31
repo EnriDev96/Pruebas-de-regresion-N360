@@ -10,6 +10,18 @@ class permisosPage {
     ).click();
     cy.wait(1000);
   }
+  seleccionarEmpleado(dataEmpleado) {
+    cy.xpath("(//i[@aria-hidden='true'][contains(.,'search')])[1]").click();
+    cy.xpath("(//input[contains(@placeholder,'Buscar')])[1]").type(
+      dataEmpleado.cedula
+    );
+    cy.scrollTo("top");
+    cy.xpath(
+      `(//div[contains(.,'${dataEmpleado.nombreCompleto}')])[17]`
+    ).click();
+    cy.scrollTo("top");
+    cy.wait(500);
+  }
   solicitarPermisoMaterno(dataEmpleado) {
     //Buscar al Empleado
     cy.xpath("(//i[@aria-hidden='true'][contains(.,'search')])[1]").click();
@@ -35,7 +47,9 @@ class permisosPage {
     ).click();
     //❌Pendiente de Corregir❌
     // Por algun motivo no permite escoger la fecha deseada sin antes ecocger la fecha actual
-    cy.xpath("(//span[contains(.,'30')])[3]").click();
+    cy.xpath(
+      "//div[@class='row items-center content-center justify-center cursor-pointer text-primary q-datetime-day-today']"
+    ).click();
     cy.get(
       ":nth-child(1) > :nth-child(1) > :nth-child(2) > .row.col > .q-field-content > .q-if > .q-icon"
     ).click();
@@ -53,6 +67,7 @@ class permisosPage {
 
     //Guardar Informacion
     cy.get(".gutter-sm > :nth-child(1) > .q-btn").click();
+    cy.wait(1000);
   }
   registrarPermisoMaterno(dataEmpleado) {
     cy.get(".gutter-sm > :nth-child(2) > .q-btn").click();
@@ -62,7 +77,9 @@ class permisosPage {
     cy.wait(1000);
     cy.xpath("(//div[contains(.,'registrar')])[19]").click();
     cy.get(".modal-buttons > :nth-child(2)").click();
+    cy.wait(1000);
   }
+
   visualizarPermisos(dataEmpleado) {
     //Buscar al Empleado
     cy.xpath(
@@ -89,6 +106,24 @@ class permisosPage {
       duration: 2000,
     });
     cy.xpath("(//div[contains(.,'ver')])[16]").click();
+  }
+
+  eliminarPermisos(dataEmpleado) {
+    cy.xpath(
+      "//div[@class='col-xs-4 col-md-3'][contains(.,'visibilityPermiso')]"
+    ).click();
+    cy.wait(1000);
+    this.seleccionarEmpleado(dataEmpleado);
+    cy.get(
+      ".q-table-top > :nth-child(3) > .q-if > .q-if-inner > .row > .col"
+    ).type("Maternidad");
+    cy.wait(1000);
+    cy.xpath("(//div[contains(.,'Eliminar')])[16]").scrollIntoView({
+      easing: "linear",
+      duration: 2000,
+    });
+    cy.xpath("(//div[contains(.,'Eliminar')])[16]").click();
+    cy.xpath("//button[@tabindex='0'][contains(.,'Si')]").click();
   }
 }
 

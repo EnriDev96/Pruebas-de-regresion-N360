@@ -20,7 +20,8 @@ class prestamosPage {
     ).click();
     cy.scrollTo("top");
   }
-  solicitarPrestamo() {
+  solicitarPrestamo(dataEmpleado) {
+    this.seleccionarEmpleado(dataEmpleado);
     cy.get(
       ".gutter-md > :nth-child(1) > .q-if > .q-if-inner > .row > .col"
     ).type("Prestamo QA");
@@ -42,16 +43,19 @@ class prestamosPage {
     cy.scrollTo("top");
     cy.get(".gutter-sm > :nth-child(1) > .q-btn").click();
   }
-  resgistrarPrestamoSolicitado() {
-    cy.xpath("//a[@tabindex='0'][contains(.,'dashboardDashboard')]").click();
-    cy.xpath("//button[contains(.,'supervised_user_circleEmpleados')]").click();
-    cy.xpath(
-      "//div[@class='q-btn-inner row col items-center q-popup--skip justify-center'][contains(.,'Prestamos')]"
-    ).click();
-    cy.get(".gutter-sm > :nth-child(2) > .q-btn").click();
-    cy.get(".q-btn-group > .text-principal").click();
-    cy.get(".modal-buttons > :nth-child(2)").click();
+
+  resgistrarPrestamoSolicitado(dataEmpleado) {
+    cy.xpath("//a[@tabindex='0'][contains(.,'addPor registrar')]").click();
+    cy.wait(500);
+    cy.get(
+      ".q-table-top > :nth-child(3) > .q-if > .q-if-inner > .row > .col"
+    ).type("120");
+    cy.wait(500);
+    cy.xpath("//button[@tabindex='0'][contains(.,'registrar')]").click();
+    cy.xpath("//button[@tabindex='0'][contains(.,'Si')]").click();
+    cy.wait(1000);
   }
+
   rechazoPrestamoSolicitado(dataEmpleado) {
     cy.xpath("//a[@tabindex='0'][contains(.,'dashboardDashboard')]").click();
     cy.xpath("//button[contains(.,'supervised_user_circleEmpleados')]").click();
@@ -68,23 +72,12 @@ class prestamosPage {
     ).type("Pruebas QA");
     cy.get(".modal-buttons > .text-positive").click();
   }
-  eliminarPrestamoRegistrado(dataEmpleado) {
-    cy.xpath("//a[@tabindex='0'][contains(.,'dashboardDashboard')]").click();
-    cy.xpath("//button[contains(.,'supervised_user_circleEmpleados')]").click();
-    cy.xpath(
-      "//div[@class='q-btn-inner row col items-center q-popup--skip justify-center'][contains(.,'Prestamos')]"
-    ).click();
-    cy.get(".gutter-sm > :nth-child(1) > .q-btn").click();
 
-    cy.get(".full-height > .q-toolbar-normal > .q-btn > .q-btn-inner").click();
-    cy.get(".q-toolbar-title > .q-if > .q-if-inner > .row > .col").type(
-      dataEmpleado.cedula
-    );
-    cy.scrollTo("top");
-    cy.xpath(
-      `(//div[contains(.,'${dataEmpleado.nombreCompleto}')])[17]`
-    ).click();
-    cy.scrollTo("top");
+  eliminarPrestamoRegistrado(dataEmpleado) {
+    cy.get(".gutter-sm > :nth-child(1) > .q-btn").click();
+    cy.wait(500);
+    this.seleccionarEmpleado(dataEmpleado);
+
     cy.get(
       ":nth-child(1) > :nth-child(3) > .q-if > .q-if-inner > .row > .col"
     ).type("120");
@@ -97,26 +90,15 @@ class prestamosPage {
     ).type("Prueba QA");
     cy.get(".q-card-actions > .text-center > .q-btn").click();
     cy.wait(1000);
-    cy.get(".text-principal").click();
-    cy.get(".modal-buttons > :nth-child(2)").click();
+    cy.xpath("//button[@tabindex='0'][contains(.,'Eliminar')]").click();
+    cy.xpath("//button[@tabindex='0'][contains(.,'Si')]").click();
   }
-  visualizarPrestamo(dataEmpleado) {
-    cy.xpath("//a[@tabindex='0'][contains(.,'dashboardDashboard')]").click();
-    cy.xpath("//button[contains(.,'supervised_user_circleEmpleados')]").click();
-    cy.xpath(
-      "//div[@class='q-btn-inner row col items-center q-popup--skip justify-center'][contains(.,'Prestamos')]"
-    ).click();
-    cy.get(".gutter-sm > :nth-child(1) > .q-btn").click();
 
-    cy.get(".full-height > .q-toolbar-normal > .q-btn > .q-btn-inner").click();
-    cy.get(".q-toolbar-title > .q-if > .q-if-inner > .row > .col").type(
-      dataEmpleado.cedula
-    );
-    cy.scrollTo("top");
-    cy.xpath(
-      `(//div[contains(.,'${dataEmpleado.nombreCompleto}')])[17]`
-    ).click();
-    cy.scrollTo("top");
+  visualizarPrestamo(dataEmpleado) {
+    cy.xpath("//a[@tabindex='0'][contains(.,'visibilitypréstamos')]").click();
+    cy.wait(500);
+    this.seleccionarEmpleado(dataEmpleado);
+
     cy.get(
       ":nth-child(1) > :nth-child(3) > .q-if > .q-if-inner > .row > .col"
     ).type("120");
