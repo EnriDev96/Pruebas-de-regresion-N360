@@ -4,6 +4,7 @@ import VacacionesPage from "../../support/page-objects/vacacionesPages/vacacione
 import PrestamosPage from "../../support/page-objects/PrestamosPages/PrestamosPage";
 import AnticiposPage from "../../support/page-objects/anticiposPages/anticiposPage";
 import PermisosPage from "../../support/page-objects/permisosPages/permisosPage";
+import preparacionRolPage from "../../support/page-objects/rol_de_pagoPages/preparacionRolPages/preparacionRolPage";
 
 describe("Configuracion Inicial", () => {
   const fichaPersonal = new FichaPersonalPage();
@@ -12,6 +13,7 @@ describe("Configuracion Inicial", () => {
   const prestamos = new PrestamosPage();
   const anticipo = new AnticiposPage();
   const permisos = new PermisosPage();
+  const prepRol = new preparacionRolPage();
 
   beforeEach(() => {
     cy.loginNomina360("adminLogos");
@@ -97,5 +99,13 @@ describe("Configuracion Inicial", () => {
 
   it.only("7. Preparar Rol de Pagos", () => {
     //Rol de Pago Mensual
+    prepRol.goToPreparacionDelRol();
+    cy.fixture("empleadosLogos").then((dataEmpleado) => {
+      prepRol.seleccionarEmpleado(dataEmpleado.Armijo_Maria);
+    });
+    cy.fixture("rol").then((dataRol) => {
+      prepRol.modificarValores(dataRol.rolLogos);
+    });
+    prepRol.descargarBorradorRol();
   });
 });
