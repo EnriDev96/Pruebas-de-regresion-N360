@@ -18,6 +18,7 @@ class permisosPage {
       dataEmpleado.cedula
     );
     cy.scrollTo("top");
+    cy.wait(1000);
     cy.xpath(
       `(//div[contains(.,'${dataEmpleado.nombreCompleto}')])[17]`
     ).click();
@@ -59,7 +60,7 @@ class permisosPage {
     cy.scrollTo("top", { easing: "linear", duration: 1000 });
     //Guardar Informacion
     cy.get(".gutter-sm > :nth-child(1) > .q-btn").click();
-    cy.wait(500);
+    cy.wait(1000);
   }
 
   solicitarPermisoPaterno(dataEmpleado) {
@@ -100,7 +101,7 @@ class permisosPage {
     cy.scrollTo("top", { easing: "linear", duration: 1000 });
     //Guardar Informacion
     cy.get(".gutter-sm > :nth-child(1) > .q-btn").click();
-    cy.wait(500);
+    cy.wait(1000);
   }
 
   solicitarPermisoMedico(dataEmpleado) {
@@ -121,7 +122,7 @@ class permisosPage {
     cy.xpath(`(//div[contains(.,'2025')])[33]`).click();
     cy.xpath(`(//div[contains(.,'Julio')])[20]`).click();
     cy.xpath(
-      `//div[@class='row items-center content-center justify-center cursor-pointer'][contains(.,'16')]`
+      `//div[@class='row items-center content-center justify-center cursor-pointer'][contains(.,'23')]`
     ).click();
     //Ingresar Fecha de Finalizacion
     cy.xpath(
@@ -131,7 +132,7 @@ class permisosPage {
     cy.xpath(`(//div[contains(.,'2025')])[48]`).click();
     cy.xpath(`(//div[contains(.,'Julio')])[20]`).click();
     cy.xpath(
-      `//div[@class='row items-center content-center justify-center cursor-pointer'][contains(.,'18')]`
+      `//div[@class='row items-center content-center justify-center cursor-pointer'][contains(.,'25')]`
     ).click();
     //Ingresar Motivo de Solicitud
     cy.xpath(
@@ -147,7 +148,7 @@ class permisosPage {
     cy.scrollTo("top", { easing: "linear", duration: 1000 });
     //Guardar Informacion
     cy.get(".gutter-sm > :nth-child(1) > .q-btn").click();
-    cy.wait(500);
+    cy.wait(1000);
   }
 
   registrarPermiso(dataEmpleado) {
@@ -177,7 +178,7 @@ class permisosPage {
       `(//div[contains(.,'${dataEmpleado.nombreCompleto}')])[17]`
     ).click();
     cy.scrollTo("top");
-    cy.wait(500);
+    cy.wait(1000);
     cy.get(
       ".q-table-top > :nth-child(3) > .q-if > .q-if-inner > .row > .col"
     ).type(tipoSolicitud);

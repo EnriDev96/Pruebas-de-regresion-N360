@@ -18,6 +18,7 @@ class anticiposPage {
       `(//div[contains(.,'${dataEmpleado.nombreCompleto}')])[17]`
     ).click();
     cy.scrollTo("top");
+    cy.wait(500);
   }
   solicitarAnticipo(dataEmpleado) {
     cy.xpath("(//div[contains(.,'addRegistrar')])[14]").click();
@@ -51,6 +52,7 @@ class anticiposPage {
     cy.wait(500);
     cy.get(".text-principal").click();
     cy.get(".modal-buttons > :nth-child(2)").click();
+    cy.wait(1000);
   }
   visualizarAnticipo(dataEmpleado) {
     cy.wait(500);
@@ -82,6 +84,7 @@ class anticiposPage {
     cy.wait(500);
     cy.xpath("(//div[contains(.,'Eliminar')])[16]").click();
     cy.xpath("//button[@tabindex='0'][contains(.,'Si')]").click();
+    cy.wait(1000);
   }
 }
 

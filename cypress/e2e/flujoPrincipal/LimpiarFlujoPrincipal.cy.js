@@ -29,21 +29,21 @@ describe("Limpieza de Datos", () => {
     });
   });
 
-  it("3. ELiminar Vacacion", () => {
+  it.only("3. ELiminar Vacacion", () => {
     cy.fixture("empleadosLogos").then((dataEmpleado) => {
       vacacion.goToVacaciones();
       vacacion.seleccionarEmpleado(dataEmpleado.Araujo_Zambrano);
       vacacion.eliminarVacacionRegistrada(dataEmpleado.Araujo_Zambrano);
     });
   });
-  it("4. ELiminar Prestamo", () => {
+  it.only("4. ELiminar Prestamo", () => {
     cy.fixture("empleadosLogos").then((dataEmpleado) => {
       prestamos.goToPrestamos();
       prestamos.eliminarPrestamoRegistrado(dataEmpleado.Araujo_Zambrano);
     });
   });
 
-  it("5. ELiminar Anticipo", () => {
+  it.only("5. ELiminar Anticipo", () => {
     anticipo.goToAnticipos();
     cy.fixture("empleadosLogos").then((dataEmpleado) => {
       anticipo.eliminarAnticipoRegistrado(dataEmpleado.Araujo_Zambrano);

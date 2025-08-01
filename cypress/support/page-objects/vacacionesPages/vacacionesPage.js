@@ -33,6 +33,7 @@ class vacacionesPage {
     cy.xpath("(//div[contains(.,'Días normales disponibles')])[16]").click();
     cy.xpath("//div[@class='q-item-label'and text()='5']").click();
     cy.xpath("(//div[contains(.,'Generar')])[195]").click();
+    cy.wait(1000);
   }
 
   registroVacacionNormal(dataEmpleado) {
@@ -43,6 +44,7 @@ class vacacionesPage {
     ).type(dataEmpleado.apellido, { force: true });
     cy.get(".text-principal > .q-btn-inner > div").click();
     cy.get(".modal-buttons > :nth-child(2)").click();
+    cy.wait(1000);
   }
 
   rechazoVacacionNormal(dataEmpleado) {
@@ -56,12 +58,14 @@ class vacacionesPage {
       "Pruebas Automatizadas QA"
     );
     cy.xpath("//button[contains(.,'Si')]").click();
+    cy.wait(1000);
   }
 
   eliminarVacacionRegistrada() {
     cy.xpath("//button[@tabindex='0'][contains(.,'Historico')]").click();
     cy.xpath("(//i[@aria-hidden='true'][contains(.,'delete')])[2]").click();
     cy.xpath("//button[@tabindex='0'][contains(.,'Si')]").click();
+    cy.wait(1000);
   }
 }
 

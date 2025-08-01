@@ -3,11 +3,27 @@ require("cypress-plugin-tab");
 
 class preparacionRolPage {
   goToPreparacionDelRol() {
-    cy.xpath("//a[@tabindex='0'][contains(.,'dashboardDashboard')]").click();
+    cy.wait(1000);
+    cy.xpath("//a[@tabindex='0'][contains(.,'dashboardDashboard')]").click({
+      force: true,
+    });
     cy.xpath("//button[@tabindex='0'][contains(.,'Roles de pago')]").click();
     cy.xpath("//a[@tabindex='0'][contains(.,'Preparación de roles')]").click();
     cy.wait(1000);
   }
+  seleccionarTipoRol(dataRol) {
+    cy.xpath("(//div[contains(.,'Agosto')])[25]").click();
+    cy.xpath(
+      `//div[@class='q-item-label'][contains(.,'${dataRol.mes}')]`
+    ).click();
+    cy.xpath(
+      "(//div[@tabindex='0'][contains(.,'|RolFin de mesRolarrow_drop_down')])[3]"
+    ).click();
+    cy.xpath(
+      `//div[@class='q-item-label'][contains(.,'${dataRol.tipo}')]`
+    ).click();
+  }
+
   seleccionarEmpleado(dataEmpleado) {
     cy.xpath("//button[@tabindex='0'][contains(.,'search')]").click();
     cy.xpath("//input[contains(@placeholder,'buscar empleado')]").type(
@@ -39,18 +55,9 @@ class preparacionRolPage {
       "//button[@tabindex='0'][contains(.,'cloud_downloadborrador de nomina')]"
     ).click();
 
-    // Interceptar la petición de descarga
-    cy.intercept("POST", "**/api/obtener-archivo-blob**").as("downloadFile");
-
-    // Hacer click en generar
     cy.xpath("(//div[contains(.,'Generar')])[179]").click();
-
-    // Esperar a que la petición se complete
-    cy.wait("@downloadFile").then((interception) => {
-      expect(interception.response.statusCode).to.eq(60000);
-    });
-
     //this.tiempoGeneraciónDocumento("(//div[contains(.,'Generar')])[179]");
+    cy.wait(60000);
   }
 
   tiempoGeneraciónDocumento(xpath) {

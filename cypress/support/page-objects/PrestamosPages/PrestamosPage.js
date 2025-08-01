@@ -19,6 +19,7 @@ class prestamosPage {
       `(//div[contains(.,'${dataEmpleado.nombreCompleto}')])[17]`
     ).click();
     cy.scrollTo("top");
+    cy.wait(500);
   }
   solicitarPrestamo(dataEmpleado) {
     this.seleccionarEmpleado(dataEmpleado);
@@ -42,6 +43,7 @@ class prestamosPage {
     ).click();
     cy.scrollTo("top");
     cy.get(".gutter-sm > :nth-child(1) > .q-btn").click();
+    cy.wait(1000);
   }
 
   resgistrarPrestamoSolicitado(dataEmpleado) {
@@ -71,6 +73,7 @@ class prestamosPage {
       ".modal-content > :nth-child(3) > .q-if > .q-if-inner > .row > .col"
     ).type("Pruebas QA");
     cy.get(".modal-buttons > .text-positive").click();
+    cy.wait(1000);
   }
 
   eliminarPrestamoRegistrado(dataEmpleado) {
@@ -92,6 +95,7 @@ class prestamosPage {
     cy.wait(1000);
     cy.xpath("//button[@tabindex='0'][contains(.,'Eliminar')]").click();
     cy.xpath("//button[@tabindex='0'][contains(.,'Si')]").click();
+    cy.wait(1000);
   }
 
   visualizarPrestamo(dataEmpleado) {
@@ -102,6 +106,7 @@ class prestamosPage {
     cy.get(
       ":nth-child(1) > :nth-child(3) > .q-if > .q-if-inner > .row > .col"
     ).type("120");
+    cy.wait(2000);
   }
 }
 

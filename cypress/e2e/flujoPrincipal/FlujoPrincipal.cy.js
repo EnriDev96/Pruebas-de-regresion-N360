@@ -4,7 +4,8 @@ import VacacionesPage from "../../support/page-objects/vacacionesPages/vacacione
 import PrestamosPage from "../../support/page-objects/PrestamosPages/PrestamosPage";
 import AnticiposPage from "../../support/page-objects/anticiposPages/anticiposPage";
 import PermisosPage from "../../support/page-objects/permisosPages/permisosPage";
-import preparacionRolPage from "../../support/page-objects/rol_de_pagoPages/preparacionRolPages/preparacionRolPage";
+import PreparacionRolPage from "../../support/page-objects/rol_de_pagoPages/preparacionRolPages/preparacionRolPage";
+import GeneracionRolPage from "../../support/page-objects/rol_de_pagoPages/generacionRolPages/generacionRolPage";
 
 describe("Configuracion Inicial", () => {
   const fichaPersonal = new FichaPersonalPage();
@@ -13,7 +14,8 @@ describe("Configuracion Inicial", () => {
   const prestamos = new PrestamosPage();
   const anticipo = new AnticiposPage();
   const permisos = new PermisosPage();
-  const prepRol = new preparacionRolPage();
+  const prepRol = new PreparacionRolPage();
+  const genRol = new GeneracionRolPage();
 
   beforeEach(() => {
     cy.loginNomina360("adminLogos");
@@ -85,7 +87,7 @@ describe("Configuracion Inicial", () => {
     });
   });
 
-  it.only("6. Registrar Permisos", () => {
+  it("6. Registrar Permisos", () => {
     //Permisos con Licencia Medica
     cy.fixture("empleadosLogos").then((dataEmpleado) => {
       permisos.goToPermisos();
@@ -115,15 +117,35 @@ describe("Configuracion Inicial", () => {
     });
   });
 
-  it("7. Preparar Rol de Pagos", () => {
+  it.only("7. Preparar Rol de Pagos", () => {
+    //Rol de Pago Quincenal
+    cy.fixture("genRol").then((dataGenRol) => {
+      prepRol.goToPreparacionDelRol();
+      prepRol.seleccionarTipoRol(dataGenRol.rolQincenalAgosto);
+      prepRol.descargarBorradorRol();
+    });
+
     //Rol de Pago Mensual
-    prepRol.goToPreparacionDelRol();
-    cy.fixture("empleadosLogos").then((dataEmpleado) => {
-      prepRol.seleccionarEmpleado(dataEmpleado.Armijo_Maria);
+    cy.fixture("genRol").then((dataGenRol) => {
+      prepRol.goToPreparacionDelRol();
+      prepRol.seleccionarTipoRol(dataGenRol.rolMensualJulio);
+      prepRol.descargarBorradorRol();
     });
-    cy.fixture("rol").then((dataRol) => {
-      prepRol.modificarValores(dataRol.rolLogos);
+  });
+
+  it.only("8. Generar Rol de Pagos", () => {
+    //Rol de Pago Mensual
+    cy.fixture("genRol").then((dataGenRol) => {
+      genRol.goToGeneracionDelRol();
+      genRol.generarTipoRol(dataGenRol.rolMensualJulio);
+      genRol.descargarRolGeneral();
     });
-    prepRol.descargarBorradorRol();
+
+    //Rol de Pago Quincenal
+    cy.fixture("genRol").then((dataGenRol) => {
+      genRol.goToGeneracionDelRol();
+      genRol.generarTipoRol(dataGenRol.rolQincenalAgosto);
+      genRol.descargarRolGeneral();
+    });
   });
 });
