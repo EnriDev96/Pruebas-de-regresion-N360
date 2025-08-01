@@ -17,29 +17,31 @@ class generacionAsientoContable {
     cy.wait(1000);
   }
 
-  generarAsiento(dataRol) {
-    cy.xpath("//button[@tabindex='0'][contains(.,'addGenerar')]").click();
+  generarAsientoContable(dataRol) {
+    cy.xpath("//button[@tabindex='0'][contains(.,'Generar asiento')]").click();
     //Seleccionar Fecha del Rol
-    cy.xpath("(//div[contains(.,'2025')])[49]").click();
-    cy.xpath(
-      `//div[@class='q-item-label'][contains(.,'${dataRol.anio}')]`
-    ).click();
-    cy.xpath("(//div[contains(.,'Agosto')])[21]").click();
-    cy.xpath(
-      `//div[@class='q-item-label'][contains(.,'${dataRol.mes}')]`
-    ).click();
-    //Seleccionar Tipo de Rol
-    cy.xpath(
-      "(//div[@tabindex='0'][contains(.,'|RolFin de mesRolarrow_drop_down')])[3]"
-    ).click();
+    cy.xpath("(//input[contains(@type,'text')])[5]").type(dataRol.nombre);
+    cy.xpath("(//div[contains(.,'Rol')])[67]").click();
     cy.xpath(
       `//div[@class='q-item-label'][contains(.,'${dataRol.tipo}')]`
     ).click();
-    //Generar Rol
-    cy.xpath("(//div[contains(.,'doneGenerar')])[3]").click();
+    cy.xpath("(//div[contains(.,'2025')])[47]").click();
+    cy.xpath(
+      `//div[@class='q-item-label'][contains(.,'${dataRol.anio}')]`
+    ).click();
+    cy.xpath("(//div[contains(.,'Mes')])[89]").click();
+    cy.xpath(
+      `//div[@class='q-item-label'][contains(.,'${dataRol.mes}')]`
+    ).click();
+
+    //Generar Asiento
+    cy.xpath("(//div[contains(.,'Generar')])[178]").click();
+    cy.wait(15000);
+  }
+  descargarAsientoContable(dataRol) {
+    cy.xpath("//input[contains(@placeholder,'Buscar')]").type(dataRol.nombre);
     cy.wait(1000);
-    cy.xpath("(//div[contains(.,'Generar Rol')])[7]").click({ force: true });
-    cy.wait(60000);
+    cy.xpath("(//i[@class='q-icon fas fa-file-excel'])[1]").click();
   }
 }
 

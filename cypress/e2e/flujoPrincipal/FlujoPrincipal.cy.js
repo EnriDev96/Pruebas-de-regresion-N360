@@ -119,7 +119,7 @@ describe("Configuracion Inicial", () => {
     });
   });
 
-  it.only("7. Preparar Rol de Pagos", () => {
+  it("7. Preparar Rol de Pagos", () => {
     //Rol de Pago Quincenal
     cy.fixture("genRol").then((dataGenRol) => {
       prepRol.goToPreparacionDelRol();
@@ -158,6 +158,10 @@ describe("Configuracion Inicial", () => {
   });
 
   it.only("9. Generar Asiento Contable", () => {
-    asiento.goToAsientoContable();
+    cy.fixture("genRol").then((dataGenRol) => {
+      asiento.goToAsientoContable();
+      asiento.generarAsientoContable(dataGenRol.rolMensualJulio);
+      asiento.descargarAsientoContable(dataGenRol.rolMensualJulio);
+    });
   });
 });
