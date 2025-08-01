@@ -40,7 +40,7 @@ class FichaPersonalPage {
     ).click();
     cy.xpath("(//span[@tabindex='-1'])[3]").click();
     cy.xpath(`(//div[contains(.,'${datos.anioNacimiento}')])[6]`).click();
-    cy.xpath(`(//div[contains(.,'${datos.mesNacimiento}')])[6]`).click();
+    cy.xpath(`(//div[contains(.,'${datos.mesNacimiento}')])[20]`).click();
     cy.xpath(`(//span[contains(.,'${datos.diaNacimiento}')])[3]`).click();
     // Empleado Sustituto y Discapacidad
     cy.xpath("(//div[@class='col q-input-target ellipsis justify-start'])[34]")

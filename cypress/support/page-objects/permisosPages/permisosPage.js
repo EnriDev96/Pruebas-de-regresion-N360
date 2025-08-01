@@ -120,7 +120,7 @@ class permisosPage {
     ).click();
     cy.xpath("(//span[@tabindex='-1'])[3]").click();
     cy.xpath(`(//div[contains(.,'2025')])[33]`).click();
-    cy.xpath(`(//div[contains(.,'Julio')])[20]`).click();
+    cy.xpath(`(//div[contains(.,'Julio')])[6]`).click();
     cy.xpath(
       `//div[@class='row items-center content-center justify-center cursor-pointer'][contains(.,'23')]`
     ).click();
@@ -130,7 +130,7 @@ class permisosPage {
     ).click();
     cy.xpath("(//span[@tabindex='-1'])[3]").click();
     cy.xpath(`(//div[contains(.,'2025')])[48]`).click();
-    cy.xpath(`(//div[contains(.,'Julio')])[20]`).click();
+    cy.xpath(`(//div[contains(.,'Julio')])[6]`).click();
     cy.xpath(
       `//div[@class='row items-center content-center justify-center cursor-pointer'][contains(.,'25')]`
     ).click();
