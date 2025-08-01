@@ -3,9 +3,10 @@ require("cypress-plugin-tab");
 
 class permisosPage {
   goToPermisos() {
-    cy.xpath("//a[@tabindex='0'][contains(.,'dashboardDashboard')]").click({
+    cy.xpath("//a[@tabindex='0'][contains(.,'settingsConfiguración')]").click({
       force: true,
     });
+    cy.wait(1000);
     cy.xpath("//button[contains(.,'supervised_user_circleEmpleados')]").click();
     cy.xpath(
       "//div[@class='q-btn-inner row col items-center q-popup--skip justify-center'][contains(.,'Permisos')]"

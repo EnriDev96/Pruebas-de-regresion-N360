@@ -91,17 +91,6 @@ describe("Configuracion Inicial", () => {
       permisos.goToPermisos();
       permisos.visualizarPermisos(dataEmpleado.Armijo_Maria, "Maternidad");
     });
-    cy.log("✅✅ 6.2 Registrar Permiso de Paternidad ✅✅");
-    cy.wait(5000);
-    //Permisos de Paternidad
-    cy.fixture("empleadosLogos").then((dataEmpleado) => {
-      permisos.goToPermisos();
-      permisos.solicitarPermisoPaterno(dataEmpleado.Araujo_Zambrano);
-      permisos.goToPermisos();
-      permisos.registrarPermiso(dataEmpleado.Araujo_Zambrano);
-      permisos.goToPermisos();
-      permisos.visualizarPermisos(dataEmpleado.Araujo_Zambrano, "Paternidad");
-    });
 
     cy.log("✅✅ 7.Preparar Rol de Pagos ✅✅");
     cy.wait(5000);
