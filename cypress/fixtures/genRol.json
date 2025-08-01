@@ -2,21 +2,25 @@
   "rolQincenalJulio": {
     "anio": "2025",
     "mes": "Julio",
-    "tipo": "Quincena"
+    "tipo": "Quincena",
+    "fecha": "2025-07-15"
   },
   "rolMensualJulio": {
     "anio": "2025",
     "mes": "Julio",
-    "tipo": "Fin de mes"
+    "tipo": "Fin de mes",
+    "fecha": "2025-07-31"
   },
   "rolQincenalAgosto": {
     "anio": "2025",
     "mes": "Agosto",
-    "tipo": "Quincena"
+    "tipo": "Quincena",
+    "fecha": "2025-08-15"
   },
   "rolMensualAgosto": {
     "anio": "2025",
     "mes": "Agosto",
-    "tipo": "Fin de mes"
+    "tipo": "Fin de mes",
+    "fecha": "2025-08-31"
   }
 }

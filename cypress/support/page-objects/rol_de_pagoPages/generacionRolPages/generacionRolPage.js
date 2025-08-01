@@ -32,13 +32,20 @@ class generacionRolPage {
     //Generar Rol
     cy.xpath("(//div[contains(.,'doneGenerar')])[3]").click();
     cy.wait(1000);
-    cy.xpath("(//div[contains(.,'Generar Rol')])[7]").click();
+    cy.xpath("(//div[contains(.,'Generar Rol')])[7]").click({ force: true });
     cy.wait(60000);
   }
-  descargarRolGeneral() {
+  buscarRol(dataRol) {
     cy.xpath("(//input[contains(@placeholder,'Buscar')])[2]").type(
-      "2025-08-01"
+      dataRol.fecha
     );
+    cy.wait(2000);
+  }
+  aprobarRol() {
+    cy.xpath("(//div[contains(.,'Aprobar')])[12]").click();
+    cy.wait(1000);
+  }
+  descargarRolGeneral(dataRol) {
     cy.xpath("(//div[contains(.,'Reportes')])[20]").click();
     cy.xpath("(//div[contains(.,'Reporte general')])[4]").click();
     cy.xpath("(//div[contains(.,'Generar Reporte General')])[22]").click();

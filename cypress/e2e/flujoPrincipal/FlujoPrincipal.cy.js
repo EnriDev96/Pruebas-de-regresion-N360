@@ -133,11 +133,15 @@ describe("Configuracion Inicial", () => {
     });
   });
 
-  it.only("8. Generar Rol de Pagos", () => {
+  it("8. Generar Rol de Pagos", () => {
     //Rol de Pago Mensual
     cy.fixture("genRol").then((dataGenRol) => {
       genRol.goToGeneracionDelRol();
       genRol.generarTipoRol(dataGenRol.rolMensualJulio);
+      genRol.buscarRol(dataGenRol.rolMensualJulio);
+      genRol.aprobarRol();
+      cy.xpath("//button[@tabindex='0'][contains(.,'Si')]").click();
+      cy.wait(1000);
       genRol.descargarRolGeneral();
     });
 
@@ -145,7 +149,11 @@ describe("Configuracion Inicial", () => {
     cy.fixture("genRol").then((dataGenRol) => {
       genRol.goToGeneracionDelRol();
       genRol.generarTipoRol(dataGenRol.rolQincenalAgosto);
+      genRol.buscarRol(dataGenRol.rolQincenalAgosto);
+      genRol.aprobarRol();
       genRol.descargarRolGeneral();
     });
   });
+
+  it.only("9. Generar Asiento Contable", () => {});
 });
