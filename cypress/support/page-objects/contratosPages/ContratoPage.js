@@ -27,7 +27,7 @@ class ContratoPage {
     cy.xpath(
       `//div[@class='q-btn-inner row col items-center q-popup--skip justify-center'][contains(.,'${dataContrato.mesIngreso}')]`
     ).click();
-    cy.xpath(`(//div[contains(.,'${dataContrato.diaIngreso}')])[15]`).click();
+    cy.xpath(`(//div[contains(.,'${dataContrato.diaIngreso}')])[7]`).click();
     //Tipo de contrato
     cy.xpath(
       "(//div[contains(.,'Tipo de contrato:|arrow_drop_down')])[9]"
@@ -54,7 +54,7 @@ class ContratoPage {
     cy.xpath(`(//div[contains(.,'${dataContrato.cargo}')])[5]`).click();
     //Departamento
     cy.xpath("(//div[contains(.,'Departamento:|arrow_drop_down')])[9]").click();
-    cy.xpath(`(//div[contains(.,'${dataContrato.departamento}')])[5]`).click();
+    cy.xpath(`(//div[contains(.,'${dataContrato.departamento}')])[21]`).click();
     //Centro de Costo
     cy.xpath(
       "(//div[contains(.,'Centro de costo:|arrow_drop_down')])[9]"

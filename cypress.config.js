@@ -7,7 +7,7 @@ module.exports = defineConfig({
   e2e: {
     setupNodeEvents(on, config) {
       // implement node event listeners here
-      allureWriter(on, config);
+      //allureWriter(on, config);
       on("task", {
         getLatestFile({ dirPath }) {
           const files = fs

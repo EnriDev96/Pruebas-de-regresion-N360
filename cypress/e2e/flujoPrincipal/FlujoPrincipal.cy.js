@@ -39,13 +39,6 @@ describe("Configuracion Inicial", () => {
   });
 
   it("3. Regsitrar Vacaciones - Normales", () => {
-    // //Solicitar y Rechazar
-    // vacaciones.goToVacaciones();
-    // cy.fixture("empleadosLogos").then((dataEmpleado) => {
-    //   vacaciones.seleccionarEmpleado(dataEmpleado.Araujo_Zambrano);
-    //   vacaciones.solicitarVacacionNormal();
-    //   vacaciones.rechazoVacacionNormal(dataEmpleado.Araujo_Zambrano);
-    // });
     //Solicitar y Registrar
     vacaciones.goToVacaciones();
     cy.fixture("empleadosLogos").then((dataEmpleado) => {
@@ -56,13 +49,6 @@ describe("Configuracion Inicial", () => {
   });
 
   it("4. Registrar Préstamos", () => {
-    // // Solicitar y Rechazar
-    // prestamos.goToPrestamos();
-    // cy.fixture("empleadosLogos").then((dataEmpleado) => {
-    //   prestamos.seleccionarEmpleado(dataEmpleado.Araujo_Zambrano);
-    //   prestamos.solicitarPrestamo();
-    //   prestamos.rechazoPrestamoSolicitado(dataEmpleado.Araujo_Zambrano);
-    // });
     //Solicitar y Registrar
     cy.fixture("empleadosLogos").then((dataEmpleado) => {
       prestamos.goToPrestamos();
@@ -81,9 +67,6 @@ describe("Configuracion Inicial", () => {
       anticipo.solicitarAnticipo(dataEmpleado.Araujo_Zambrano);
       anticipo.goToAnticipos();
       anticipo.registrarAnticipo();
-    });
-    //Visualizar Anticipo Generado
-    cy.fixture("empleadosLogos").then((dataEmpleado) => {
       anticipo.goToAnticipos();
       anticipo.visualizarAnticipo(dataEmpleado.Araujo_Zambrano);
     });
@@ -96,8 +79,8 @@ describe("Configuracion Inicial", () => {
       permisos.solicitarPermisoMedico(dataEmpleado.Araujo_Zambrano);
       permisos.goToPermisos();
       permisos.registrarPermiso(dataEmpleado.Araujo_Zambrano);
-      permisos.goToPermisos();
-      permisos.visualizarPermisos(dataEmpleado.Araujo_Zambrano, "Médico");
+      // permisos.goToPermisos();
+      // permisos.visualizarPermisos(dataEmpleado.Araujo_Zambrano, "Médico");
     });
     //Permisos de Maternidad
     cy.fixture("empleadosLogos").then((dataEmpleado) => {
@@ -105,17 +88,8 @@ describe("Configuracion Inicial", () => {
       permisos.solicitarPermisoMaterno(dataEmpleado.Armijo_Maria);
       permisos.goToPermisos();
       permisos.registrarPermiso(dataEmpleado.Armijo_Maria);
-      permisos.goToPermisos();
-      permisos.visualizarPermisos(dataEmpleado.Armijo_Maria, "Maternidad");
-    });
-    //Permisos de Paternidad
-    cy.fixture("empleadosLogos").then((dataEmpleado) => {
-      permisos.goToPermisos();
-      permisos.solicitarPermisoPaterno(dataEmpleado.Araujo_Zambrano);
-      permisos.goToPermisos();
-      permisos.registrarPermiso(dataEmpleado.Araujo_Zambrano);
-      permisos.goToPermisos();
-      permisos.visualizarPermisos(dataEmpleado.Araujo_Zambrano, "Paternidad");
+      // permisos.goToPermisos();
+      // permisos.visualizarPermisos(dataEmpleado.Armijo_Maria, "Maternidad");
     });
   });
 
@@ -126,7 +100,6 @@ describe("Configuracion Inicial", () => {
       prepRol.seleccionarTipoRol(dataGenRol.rolQincenalAgosto);
       prepRol.descargarBorradorRol();
     });
-
     //Rol de Pago Mensual
     cy.fixture("genRol").then((dataGenRol) => {
       prepRol.goToPreparacionDelRol();
@@ -146,7 +119,6 @@ describe("Configuracion Inicial", () => {
       cy.wait(1000);
       genRol.descargarRolGeneral();
     });
-
     //Rol de Pago Quincenal
     cy.fixture("genRol").then((dataGenRol) => {
       genRol.goToGeneracionDelRol();
@@ -158,10 +130,12 @@ describe("Configuracion Inicial", () => {
   });
 
   it.only("9. Generar Asiento Contable", () => {
+    //Mensual de Julio
     cy.fixture("genRol").then((dataGenRol) => {
       asiento.goToAsientoContable();
       asiento.generarAsientoContable(dataGenRol.rolMensualJulio);
       asiento.descargarAsientoContable(dataGenRol.rolMensualJulio);
     });
+    //Quincenal de Agosto
   });
 });

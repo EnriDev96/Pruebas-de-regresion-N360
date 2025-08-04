@@ -3,6 +3,10 @@
     "email": "admin@demo360.com",
     "password": "Nomina360"
   },
+  "adminEcuagesa": {
+    "email": "admin@ecuagesa.com",
+    "password": "adminEcua123!"
+  },
   "adminLogos": {
     "email": "admin@logos.com",
     "password": "adminLogos123!"

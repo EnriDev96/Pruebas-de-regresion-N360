@@ -1,13 +1,20 @@
-import FichaPersonalPage from "../../../support/page-objects/FichaPersonalPage";
+import FichaPersonalPage from "../../../support/page-objects/fichaPersonalPage/FichaPersonalPage";
 
 describe("Ficha Personal - Crear y Eliminar Ficha Personal del Empleado", () => {
   const fichaPersonal = new FichaPersonalPage();
 
   beforeEach(() => {
-    cy.loginNomina360("adminLogos");
+    cy.loginNomina360();
   });
 
   it("1. Crear Ficha Personal de un Empleado", () => {
+    cy.fixture("fichaPersonal").then((data) => {
+      fichaPersonal.goToFichaPersonal();
+      fichaPersonal.crearFichaPersonal(data.empleadoUno);
+    });
+  });
+
+  it.only("1.5 Crear Ficha Personal con Validacion de Campos", () => {
     cy.fixture("fichaPersonal").then((data) => {
       fichaPersonal.goToFichaPersonal();
       fichaPersonal.crearFichaPersonal(data.empleadoUno);

@@ -8,21 +8,19 @@ class FichaPersonalPage {
   }
 
   crearFichaPersonal(datos) {
-    cy.xpath("(//div[contains(.,'Empleado')])[47]").click();
+    cy.xpath("//a[@tabindex='0'][contains(.,'addEmpleado')]").click();
     cy.xpath("(//div[contains(.,'Datos Básicos')])[11]").click();
     cy.wait(2000);
-    cy.xpath(
-      "(//div[@class='col q-input-target ellipsis justify-start'])[31]"
-    ).click();
-    cy.xpath("//div[contains(text(),'Cédula')]").click();
-    cy.xpath("(//input[@type='text'])[4]").type(datos.cedula);
-    cy.xpath("(//div[contains(.,'verificar cedula')])[14]").click();
+
+    this.ingresarValidarCédula(datos.cedula);
+
     cy.xpath("(//input[contains(@type,'text')])[5]")
       .type(datos.nombres)
       .type("{enter}")
       .tab()
       .type(datos.apellidos)
       .type("{enter}");
+
     cy.xpath("(//input[@type='email'])[1]").type(datos.emailInstitucional);
     cy.xpath("(//input[@type='email'])[2]").type(datos.emailPersonal);
     cy.xpath("(//input[@type='text'])[7]").type(datos.codigoIESS);
@@ -53,9 +51,9 @@ class FichaPersonalPage {
     cy.get("#picture-input > input[type=file]").selectFile(datos.foto, {
       force: true,
     });
+    cy.wait(1500);
     // Datos de Ubicación
     cy.xpath("(//div[contains(.,'Datos de ubicación')])[11]").click();
-    cy.wait(1000);
     cy.xpath(
       "(//div[@class='col q-input-target ellipsis justify-start'])[30]"
     ).click();
@@ -66,7 +64,6 @@ class FichaPersonalPage {
     cy.xpath(`(//div[contains(.,'${datos.tipoVivienda}')])[5]`).click();
     // Datos Financieros
     cy.xpath("(//div[contains(.,'Datos financieros')])[9]").click();
-    cy.wait(1000);
     cy.xpath(
       "(//div[@class='col q-input-target ellipsis justify-start'])[30]"
     ).click();
@@ -74,6 +71,15 @@ class FichaPersonalPage {
     // Guardar
     cy.xpath("(//div[contains(.,'Guardar')])[39]").click();
     cy.wait(3000);
+  }
+
+  ingresarValidarCédula(numeroCedula) {
+    cy.xpath(
+      "(//div[@class='col q-input-target ellipsis justify-start'])[31]"
+    ).click();
+    cy.xpath("//div[contains(text(),'Cédula')]").click();
+    cy.xpath("(//input[@type='text'])[4]").type(numeroCedula);
+    cy.xpath("(//div[contains(.,'verificar cedula')])[14]").click();
   }
 
   buscarFichaPorCedula(dataEmpleado) {

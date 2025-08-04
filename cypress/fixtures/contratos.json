@@ -18,5 +18,25 @@
     "horasLaborables": "240",
     "tipoEgreso": "ADM",
     "codigoIESS": "0001"
+  },
+  "contratoUnoEcuagesa": {
+    "anioIngreso": "2025",
+    "mesIngreso": "Julio",
+    "diaIngreso": "26",
+    "tipoContrato": "Indefinido",
+    "provinciaContrato": "Azuay",
+    "codigoEstablecimiento": "001",
+    "sueldo": "600",
+    "tipoSueldo": "Mensual",
+    "cargo": "PROGRAMADOR",
+    "departamento": "SEGURIDAD INTERNA - ADMINISTRACION",
+    "centroCosto": "ADMINISTRATIVO",
+    "fondoReserva": "IESS",
+    "decimoTercero": "Mensual",
+    "decimoCuarto": "Acumulado",
+    "vacaciones": "Acumulado",
+    "horasLaborables": "240",
+    "tipoEgreso": "ADM",
+    "codigoIESS": "0001"
   }
 }
