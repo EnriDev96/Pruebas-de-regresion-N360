@@ -1,7 +1,15 @@
 {
   "devDependencies": {
-    "cypress": "^14.5.2",
+    "@shelex/cypress-allure-plugin": "^2.41.2",
+    "cypress": "^14.5.3",
     "cypress-plugin-tab": "^1.0.5",
     "cypress-xpath": "^2.0.1"
+  },
+  "dependencies": {
+    "soft-assert": "^0.2.7"
+  },
+  "scripts": {
+    "ui-regresion-allure": "cypress run --browser chrome --spec 'cypress/e2e/**/*.cy.{js,jsx,ts,tsx}' --env allure=true",
+    "allure:report": "allure generate allure-results --clean -o allure-report"
   }
 }

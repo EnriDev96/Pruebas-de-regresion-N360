@@ -6,6 +6,8 @@ module.exports = defineConfig({
   projectId: "9xmcf9",
   e2e: {
     setupNodeEvents(on, config) {
+      // implement node event listeners here
+      allureWriter(on, config);
       on("task", {
         getLatestFile({ dirPath }) {
           const files = fs
@@ -19,11 +21,10 @@ module.exports = defineConfig({
                 !fs.statSync(path.join(dirPath, file.name)).isDirectory()
             )
             .sort((a, b) => b.time - a.time);
-
           return files.length ? path.join(dirPath, files[0].name) : null;
         },
       });
-      // implement node event listeners here
+      return config;
     },
     chromeWebSecurity: false,
     defaultCommandTimeout: 10000,
