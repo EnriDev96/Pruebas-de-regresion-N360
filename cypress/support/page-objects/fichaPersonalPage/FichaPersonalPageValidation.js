@@ -14,21 +14,30 @@ class FichaPersonalValidation {
     cy.xpath("(//div[contains(.,'Datos Básicos')])[11]").click();
     cy.wait(2000);
 
-    this.ingresarValidarCédula(datos.cedula);
+    this.seleccionarTipoDeDocumento(datos.tipoDocumento);
+    this.ingresarNumeroDeCedula(datos.cedula);
     this.ingresarNombre(datos.nombres);
     this.ingresarApellido(datos.apellidos);
     this.ingresarCorreoIntitucional(datos.emailInstitucional);
     this.ingresarCorreoPersonal(datos.emailPersonal);
+    this.seleccionarSexo(datos.sexo);
+    this.seleccionarFechaDeNacimiento(datos.fechaNacimiento);
+    this.seleccionarEmpleadoSustituto(datos.sustitutoPCD);
 
     cy.wait(1000);
   }
 
-  ingresarValidarCédula(numeroCedula) {
+  seleccionarTipoDeDocumento(documento) {
     cy.xpath(
       "(//div[@class='col q-input-target ellipsis justify-start'])[31]"
     ).click();
-    cy.xpath("//div[contains(text(),'Cédula')]").click();
+    cy.xpath(`//div[contains(text(),'${documento}')]`).click();
+  }
 
+  ingresarNumeroDeCedula(numeroCedula) {
+    cy.xpath(
+      "//div[@class='text-grey q-mb-xs'][contains(.,'Número de Documento:')]"
+    ).click();
     cy.xpath("(//input[@type='text'])[4]").clear().type(numeroCedula);
 
     validationReporter.clearErrors();
@@ -160,6 +169,56 @@ class FichaPersonalValidation {
         cy.log(`✅ Correo electronico válido: ${valorIngresado}`);
       }
     });
+  }
+
+  seleccionarSexo(sexo) {
+    cy.xpath(
+      "//div[@class='col-md-4 col-xs-12'][contains(.,'Sexo:|arrow_drop_downEl sexo es requerido.')]"
+    ).click();
+    cy.xpath(`(//div[contains(.,'${sexo}')])[5]`).click();
+  }
+
+  seleccionarFechaDeNacimiento(fechaNacimiento) {
+    const [anio, mes, dia] = fechaNacimiento.split("-");
+    const meses = [
+      "",
+      "Enero",
+      "Febrero",
+      "Marzo",
+      "Abril",
+      "Mayo",
+      "Junio",
+      "Julio",
+      "Agosto",
+      "Septiembre",
+      "Octubre",
+      "Noviembre",
+      "Diciembre",
+    ];
+    const mesNombre = meses[parseInt(mes, 10)];
+    cy.xpath(
+      "(//div[@class='col q-input-target ellipsis justify-start'])[34]"
+    ).click();
+    cy.xpath("(//span[@tabindex='-1'])[3]").click();
+    cy.xpath(`(//div[contains(.,'${anio}')])[6]`).click();
+    cy.xpath(`(//div[contains(.,'${mesNombre}')])[20]`).click();
+    //cy.xpath(`(//span[contains(.,'${parseInt(dia, 10)}')])[3]`).click();
+    cy.xpath(
+      `//div[@class='row items-center content-center justify-center cursor-pointer'][contains(.,'${parseInt(
+        dia,
+        10
+      )}')]`
+    ).click();
+  }
+
+  seleccionarEmpleadoSustituto(sustituto) {
+    cy.xpath(
+      "//div[@class='col-md-4 col-xs-12'][contains(.,'Empleado sustituto de PCD:|arrow_drop_down')]"
+    ).click();
+    cy.wait(500);
+    cy.xpath(
+      `//div[@class='q-item-label'][contains(.,'${sustituto}')]`
+    ).click();
   }
 }
 export default FichaPersonalValidation;

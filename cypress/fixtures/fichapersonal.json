@@ -1,5 +1,7 @@
 {
   "empleadoUno": {
+    "__DatosBasicos__": "__Comentario__",
+    "tipoDocumento": "Cédula",
     "cedula": "1104730229",
     "nombres": "Bryan Enrique",
     "apellidos": "Orellana Cueva",
@@ -8,15 +10,27 @@
     "codigoIESS": "123456",
     "sexo": "Masculino",
     "estadoCivil": "Soltero",
+    "fechaNacimiento": "1996-08-15",
     "anioNacimiento": "1996",
     "mesNacimiento": "Agosto",
-    "diaNacimiento": "2",
+    "diaNacimiento": "15",
+    "sustitutoPCD": "No",
+    "discapacidad": "No",
+    "estudios": "Superior",
+    "profesion": "Programador",
+    "nacionalidad": "Ecuatoriana",
+    "tipoCobroQuincena": "Por Porcentaje",
+    "porcentajeAnticipoQuincena": "30",
+    "extrangero": "No",
     "foto": "cypress/fixtures/images/Avatar Perfil Hombre 1.jpg",
+    "__DatosdeUbicacion__": "__Comentario__",
     "region": "Sierra",
     "tipoVivienda": "Residencial",
+    "__DatosFinancieros__": "__Comentario__",
     "formaPago": "Efectivo"
   },
   "empleadoInvalido": {
+    "tipoDocumento": "Cédula",
     "cedula": "1104730229wer",
     "nombres": "Bryan2 Enrique",
     "apellidos": "Orellana2 Cueva",
@@ -25,6 +39,7 @@
     "codigoIESS": "QWE456",
     "sexo": "Masculino",
     "estadoCivil": "Soltero",
+    "fechaNacimiento": "1996-08-02",
     "anioNacimiento": "1996",
     "mesNacimiento": "Agosto",
     "diaNacimiento": "2",
@@ -34,6 +49,7 @@
     "formaPago": "Efectivo"
   },
   "empleadoDos": {
+    "tipoDocumento": "Cédula",
     "cedula": "1104730229",
     "nombres": "Enrique Eduardo",
     "apellidos": "Orellana Sarmiento",
