@@ -14,13 +14,6 @@ describe("Ficha Personal - Crear y Eliminar Ficha Personal del Empleado", () => 
     });
   });
 
-  it.only("1.5 Crear Ficha Personal con Validacion de Campos", () => {
-    cy.fixture("fichaPersonal").then((data) => {
-      fichaPersonal.goToFichaPersonal();
-      fichaPersonal.crearFichaPersonal(data.empleadoUno);
-    });
-  });
-
   it("2. Eliminar Ficha Personal de un Empleado", () => {
     cy.fixture("fichaPersonal").then((data) => {
       fichaPersonal.goToFichaPersonal();

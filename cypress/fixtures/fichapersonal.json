@@ -16,7 +16,23 @@
     "tipoVivienda": "Residencial",
     "formaPago": "Efectivo"
   },
-
+  "empleadoInvalido": {
+    "cedula": "1104730229wer",
+    "nombres": "Bryan2 Enrique",
+    "apellidos": "Orellana2 Cueva",
+    "emailInstitucional": "correo@invalido",
+    "emailPersonal": "personal@email",
+    "codigoIESS": "QWE456",
+    "sexo": "Masculino",
+    "estadoCivil": "Soltero",
+    "anioNacimiento": "1996",
+    "mesNacimiento": "Agosto",
+    "diaNacimiento": "2",
+    "foto": "cypress/fixtures/images/Avatar Perfil Hombre 1.jpg",
+    "region": "Sierra",
+    "tipoVivienda": "Residencial",
+    "formaPago": "Efectivo"
+  },
   "empleadoDos": {
     "cedula": "1104730229",
     "nombres": "Enrique Eduardo",
