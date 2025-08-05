@@ -54,7 +54,9 @@ class ContratoPage {
     cy.xpath(`(//div[contains(.,'${dataContrato.cargo}')])[5]`).click();
     //Departamento
     cy.xpath("(//div[contains(.,'Departamento:|arrow_drop_down')])[9]").click();
-    cy.xpath(`(//div[contains(.,'${dataContrato.departamento}')])[21]`).click();
+    cy.xpath(
+      `//div[@class='q-item-label'][contains(.,'${dataContrato.departamento}')]`
+    ).click();
     //Centro de Costo
     cy.xpath(
       "(//div[contains(.,'Centro de costo:|arrow_drop_down')])[9]"

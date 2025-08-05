@@ -31,70 +31,65 @@ describe("Configuracion Inicial", () => {
     //   fichaPersonal.crearFichaPersonal(data.empleadoUno);
     // });
 
-    cy.log("✅✅ 2. Crear Contrato ✅✅");
-    cy.wait(3000);
-    cy.fixture("contratos").then((dataContrato) => {
-      contrato.goToContratos();
-      contrato.contratoUnoLogos(dataContrato.contratoUnoEcuagesa);
-      contrato.verContratoUno();
-    });
+    // cy.log("✅✅ 2. Crear Contrato ✅✅");
+    // cy.wait(3000);
+    // cy.fixture("contratos").then((dataContrato) => {
+    //   contrato.goToContratos();
+    //   contrato.contratoUnoLogos(dataContrato.contratoUnoEcuagesa);
+    // });
 
     // cy.log("✅✅ 3. Registrar Vacaciones ✅✅");
     // cy.wait(3000);
-    // cy.fixture("empleadosLogos").then((dataEmpleado) => {
+    // cy.fixture("empleadosEcuagesa").then((dataEmpleado) => {
     //   vacaciones.goToVacaciones();
-    //   vacaciones.seleccionarEmpleado(dataEmpleado.Araujo_Zambrano);
+    //   vacaciones.seleccionarEmpleado(dataEmpleado.Bayas_Israel);
     //   vacaciones.solicitarVacacionNormal();
-    //   vacaciones.registroVacacionNormal(dataEmpleado.Araujo_Zambrano);
+    //   vacaciones.registroVacacionNormal(dataEmpleado.Bayas_Israel);
     // });
 
     // cy.log("✅✅ 4. Registrar Prestamos ✅✅");
     // cy.wait(3000);
-    // cy.fixture("empleadosLogos").then((dataEmpleado) => {
+    // cy.fixture("empleadosEcuagesa").then((dataEmpleado) => {
     //   prestamos.goToPrestamos();
-    //   prestamos.solicitarPrestamo(dataEmpleado.Araujo_Zambrano);
+    //   prestamos.solicitarPrestamo(dataEmpleado.Bayas_Israel);
     //   prestamos.goToPrestamos();
-    //   prestamos.resgistrarPrestamoSolicitado(dataEmpleado.Araujo_Zambrano);
-    //   prestamos.goToPrestamos();
-    //   prestamos.visualizarPrestamo(dataEmpleado.Araujo_Zambrano);
+    //   prestamos.resgistrarPrestamoSolicitado(dataEmpleado.Bayas_Israel);
     // });
 
     // cy.log("✅✅ 5. Registrar Anticipos ✅✅");
     // cy.wait(3000);
-    // cy.fixture("empleadosLogos").then((dataEmpleado) => {
+    // cy.fixture("empleadosEcuagesa").then((dataEmpleado) => {
     //   anticipo.goToAnticipos();
-    //   anticipo.solicitarAnticipo(dataEmpleado.Araujo_Zambrano);
+    //   anticipo.solicitarAnticipo(dataEmpleado.Bayas_Israel);
     //   anticipo.goToAnticipos();
     //   anticipo.registrarAnticipo();
-    //   anticipo.goToAnticipos();
-    //   anticipo.visualizarAnticipo(dataEmpleado.Araujo_Zambrano);
     // });
 
     // cy.log("✅✅ 6.1 Registrar Permiso Médico ✅✅");
     // cy.wait(3000);
-    // cy.fixture("empleadosLogos").then((dataEmpleado) => {
+    // cy.fixture("empleadosEcuagesa").then((dataEmpleado) => {
     //   permisos.goToPermisos();
-    //   permisos.solicitarPermisoMedico(dataEmpleado.Araujo_Zambrano);
+    //   permisos.solicitarPermisoMedico(dataEmpleado.Bayas_Israel);
     //   permisos.goToPermisos();
-    //   permisos.registrarPermiso(dataEmpleado.Araujo_Zambrano);
+    //   permisos.registrarPermiso(dataEmpleado.Bayas_Israel);
     // });
 
     // cy.log("✅✅ 6.2 Registrar Permiso de Maternidad ✅✅");
     // cy.wait(3000);
-    // cy.fixture("empleadosLogos").then((dataEmpleado) => {
+    // cy.fixture("empleadosEcuagesa").then((dataEmpleado) => {
     //   permisos.goToPermisos();
-    //   permisos.solicitarPermisoMaterno(dataEmpleado.Armijo_Maria);
+    //   permisos.solicitarPermisoMaterno(dataEmpleado.Cevallos_Monica);
     //   permisos.goToPermisos();
-    //   permisos.registrarPermiso(dataEmpleado.Armijo_Maria);
+    //   permisos.registrarPermiso(dataEmpleado.Cevallos_Monica);
     // });
 
-    // cy.log("✅✅ 7.1 Preparar Rol de Pagos Mensual ✅✅");
-    // cy.wait(3000);
-    // cy.fixture("genRol").then((dataGenRol) => {
-    //   prepRol.goToPreparacionDelRol();
-    //   prepRol.seleccionarTipoRol(dataGenRol.rolMensualJulio);
-    //   prepRol.descargarBorradorRol();
-    // });
+    cy.log("✅✅ 7.1 Preparar Rol de Pagos Mensual ✅✅");
+    cy.wait(3000);
+    cy.fixture("genRol").then((dataGenRol) => {
+      prepRol.goToPreparacionDelRol();
+      prepRol.seleccionarTipoRol(dataGenRol.rolMensualJulio);
+      prepRol.descargarBorradorRol();
+    });
 
     // cy.log("✅✅ 7.2 Preparar Rol de Pagos Quincenal ✅✅");
     // cy.wait(3000);
@@ -136,5 +131,10 @@ describe("Configuracion Inicial", () => {
 
     // cy.log("✅✅ 9.2 Generar Asiento Contable Quincenal");
     // cy.wait(3000);
+    // cy.fixture("genRol").then((dataGenRol) => {
+    //   asiento.goToAsientoContable();
+    //   asiento.generarAsientoContable(dataGenRol.rolQincenalAgosto);
+    //   asiento.descargarAsientoContable(dataGenRol.rolQincenalAgosto);
+    // });
   });
 });

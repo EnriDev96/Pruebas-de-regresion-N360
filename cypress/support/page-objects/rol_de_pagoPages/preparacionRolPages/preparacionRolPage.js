@@ -3,8 +3,8 @@ require("cypress-plugin-tab");
 
 class preparacionRolPage {
   goToPreparacionDelRol() {
-    cy.wait(1000);
-    cy.xpath("//a[@tabindex='0'][contains(.,'dashboardDashboard')]").click({
+    cy.wait(500);
+    cy.xpath("//a[@tabindex='0'][contains(.,'settingsConfiguración')]").click({
       force: true,
     });
     cy.xpath("//button[@tabindex='0'][contains(.,'Roles de pago')]").click();
@@ -17,7 +17,7 @@ class preparacionRolPage {
       `//div[@class='q-item-label'][contains(.,'${dataRol.mes}')]`
     ).click();
     cy.xpath(
-      "(//div[@tabindex='0'][contains(.,'|RolFin de mesRolarrow_drop_down')])[3]"
+      "(//div[contains(.,'|RolFin de mesRolarrow_drop_down')])[19]"
     ).click();
     cy.xpath(
       `//div[@class='q-item-label'][contains(.,'${dataRol.tipo}')]`

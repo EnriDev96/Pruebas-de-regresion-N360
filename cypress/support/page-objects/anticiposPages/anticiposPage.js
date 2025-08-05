@@ -29,7 +29,7 @@ class anticiposPage {
       "(//div[contains(.,'Motivo de anticipo|arrow_drop_down')])[12]"
     ).click();
     cy.xpath(
-      "//div[@class='q-item-label'][contains(.,'ANTICIPO DE SUELDO')]"
+      "//div[@class='q-item-label'][contains(.,'Calamidad Doméstica - Salud')]"
     ).click();
     cy.xpath(
       "//div[@class='col-md-4 col-xs-12'][contains(.,'Día del anticipo|arrow_drop_down')]"
@@ -37,7 +37,7 @@ class anticiposPage {
     cy.xpath(
       "(//div[@class='row items-center content-center justify-center cursor-pointer'][contains(.,'5')])[1]"
     ).click();
-    cy.xpath("(//input[@type='number'])[7]").type("250");
+    cy.xpath("//input[contains(@step,'0.01')]").type("250");
     cy.xpath(
       "(//i[@aria-hidden='true'][contains(.,'check_box_outline_blank')])[3]"
     ).click();

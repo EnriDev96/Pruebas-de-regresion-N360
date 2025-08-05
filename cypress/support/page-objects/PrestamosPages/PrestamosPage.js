@@ -48,11 +48,11 @@ class prestamosPage {
 
   resgistrarPrestamoSolicitado(dataEmpleado) {
     cy.xpath("//a[@tabindex='0'][contains(.,'addPor registrar')]").click();
-    cy.wait(500);
+    cy.wait(1000);
     cy.get(
       ".q-table-top > :nth-child(3) > .q-if > .q-if-inner > .row > .col"
-    ).type("120");
-    cy.wait(500);
+    ).type(dataEmpleado.apellido);
+    cy.wait(1000);
     cy.xpath("//button[@tabindex='0'][contains(.,'registrar')]").click();
     cy.xpath("//button[@tabindex='0'][contains(.,'Si')]").click();
     cy.wait(1000);

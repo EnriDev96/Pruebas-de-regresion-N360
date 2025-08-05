@@ -51,7 +51,7 @@ class permisosPage {
     //❌Fin del Warning❌
     cy.xpath("(//span[@tabindex='-1'])[3]").click();
     cy.xpath(`(//div[contains(.,'2025')])[55]`).click();
-    cy.xpath(`(//div[contains(.,'Junio')])[6]`).click();
+    cy.xpath(`(//div[contains(.,'Julio')])[6]`).click();
     cy.xpath(
       `//div[@class='row items-center content-center justify-center cursor-pointer'][contains(.,'19')]`
     ).click();
@@ -140,7 +140,7 @@ class permisosPage {
       "//div[@tabindex='0'][contains(.,'|MotivoMotivoarrow_drop_down')]"
     ).click();
     cy.xpath(
-      "//div[@class='q-item-label'][contains(.,'Permiso Médico  (1- 3 días)')]"
+      "//div[@class='q-item-label'][contains(.,'Subsidio Iess')]"
     ).click();
     //Seleccionar Comprobante
     cy.get(".q-uploader-input").selectFile(
