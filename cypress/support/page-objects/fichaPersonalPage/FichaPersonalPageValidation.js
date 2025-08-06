@@ -213,7 +213,7 @@ class FichaPersonalValidation {
 
   seleccionarEmpleadoSustituto(sustituto) {
     cy.xpath(
-      "//div[@class='col-md-4 col-xs-12'][contains(.,'Empleado sustituto de PCD:|arrow_drop_down')]"
+      "(//div[@class='col q-input-target ellipsis justify-start'])[35]"
     ).click();
     cy.wait(500);
     cy.xpath(

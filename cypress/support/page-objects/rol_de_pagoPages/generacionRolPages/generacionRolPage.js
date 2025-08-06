@@ -24,7 +24,7 @@ class generacionRolPage {
     ).click();
     //Seleccionar Tipo de Rol
     cy.xpath(
-      "(//div[@tabindex='0'][contains(.,'|RolFin de mesRolarrow_drop_down')])[3]"
+      "(//div[contains(.,'|RolQuincenaRolarrow_drop_down')])[21]"
     ).click();
     cy.xpath(
       `//div[@class='q-item-label'][contains(.,'${dataRol.tipo}')]`
@@ -33,13 +33,12 @@ class generacionRolPage {
     cy.xpath("(//div[contains(.,'doneGenerar')])[3]").click();
     cy.wait(1000);
     cy.xpath("(//div[contains(.,'Generar Rol')])[7]").click({ force: true });
-    cy.wait(60000);
   }
   buscarRol(dataRol) {
     cy.xpath("(//input[contains(@placeholder,'Buscar')])[2]").type(
       dataRol.fecha
     );
-    cy.wait(2000);
+    cy.wait(1000);
   }
   aprobarRol() {
     cy.xpath("(//div[contains(.,'Aprobar')])[12]").click();
@@ -49,7 +48,6 @@ class generacionRolPage {
     cy.xpath("(//div[contains(.,'Reportes')])[20]").click();
     cy.xpath("(//div[contains(.,'Reporte general')])[4]").click();
     cy.xpath("(//div[contains(.,'Generar Reporte General')])[22]").click();
-    cy.wait(10000);
   }
 
   tiempoGeneraciónDocumento(xpath) {

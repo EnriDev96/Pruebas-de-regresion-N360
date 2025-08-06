@@ -47,17 +47,14 @@ class preparacionRolPage {
     cy.scrollTo("top");
   }
   descargarBorradorRol() {
-    this.goToPreparacionDelRol();
     cy.xpath(
       "//button[@tabindex='0'][contains(.,'cloud_downloadReportes')]"
     ).click();
     cy.xpath(
       "//button[@tabindex='0'][contains(.,'cloud_downloadborrador de nomina')]"
     ).click();
-
     cy.xpath("(//div[contains(.,'Generar')])[179]").click();
     //this.tiempoGeneraciónDocumento("(//div[contains(.,'Generar')])[179]");
-    cy.wait(60000);
   }
 
   tiempoGeneraciónDocumento(xpath) {

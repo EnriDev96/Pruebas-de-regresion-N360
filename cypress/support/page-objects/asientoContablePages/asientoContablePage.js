@@ -33,10 +33,8 @@ class generacionAsientoContable {
     cy.xpath(
       `//div[@class='q-item-label'][contains(.,'${dataRol.mes}')]`
     ).click();
-
     //Generar Asiento
     cy.xpath("(//div[contains(.,'Generar')])[178]").click();
-    cy.wait(15000);
   }
   descargarAsientoContable(dataRol) {
     cy.xpath("//input[contains(@placeholder,'Buscar')]").type(dataRol.nombre);
