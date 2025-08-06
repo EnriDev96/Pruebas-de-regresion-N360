@@ -13,13 +13,13 @@ describe("Ficha Personal - Crear y Eliminar Ficha Personal del Empleado", () => 
     validationReporter.reportAndAssertAll();
   });
 
-  it("1 Validar Campos Ficha Personal Ivalido", () => {
+  it.only("1 Validar Campos Ficha Personal Ivalido", () => {
     cy.fixture("fichaPersonal").then((data) => {
       fpValidation.goToFichaPersonal();
       fpValidation.crearFichaPersonal(data.empleadoInvalido);
     });
   });
-  it.only("2 Validar Campos Ficha Personal", () => {
+  it("2 Validar Campos Ficha Personal", () => {
     cy.fixture("fichaPersonal").then((data) => {
       fpValidation.goToFichaPersonal();
       fpValidation.crearFichaPersonal(data.empleadoUno);

@@ -23,6 +23,7 @@ class FichaPersonalValidation {
     this.seleccionarSexo(datos.sexo);
     this.seleccionarFechaDeNacimiento(datos.fechaNacimiento);
     this.seleccionarEmpleadoSustituto(datos.sustitutoPCD);
+    this.seleccionarDiscapacidad(datos.discapacidad);
 
     cy.wait(1000);
   }
@@ -46,7 +47,7 @@ class FichaPersonalValidation {
       // Validación 1: Formato de cédula (10 dígitos)
       if (!/^\d{10}$/.test(valorIngresado)) {
         validationReporter.addError(
-          `La cédula ${valorIngresado} no tiene el formato correcto (10 dígitos).`
+          `La cédula "${valorIngresado}" no tiene el formato correcto (10 dígitos) |`
         );
       } else {
         cy.log(
@@ -70,13 +71,13 @@ class FichaPersonalValidation {
       //Validación 1: Máximo 64 caracteres
       if (valorIngresado.length > 100) {
         validationReporter.addError(
-          `Los nombres exceden el límite de 100 caracteres. Actual: ${valorIngresado.length} caracteres`
+          `Los nombres exceden el límite de 100 caracteres. Actual: ${valorIngresado.length} caracteres |`
         );
       }
       // Validación 2: Solo letras y espacios
       if (!/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/.test(valorIngresado)) {
         validationReporter.addError(
-          "Los nombres solo pueden contener letras y espacios"
+          "Los nombres solo pueden contener letras y espacios |"
         );
       }
       // Log de éxito si todas las validaciones pasan
@@ -104,13 +105,13 @@ class FichaPersonalValidation {
       //Validación 1: Máximo 64 caracteres
       if (valorIngresado.length > 100) {
         validationReporter.addError(
-          `Los apellidos exceden el límite de 100 caracteres. Actual: ${valorIngresado.length} caracteres`
+          `Los apellidos exceden el límite de 100 caracteres. Actual: ${valorIngresado.length} caracteres |`
         );
       }
       // Validación 2: Solo letras y espacios
       if (!/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/.test(valorIngresado)) {
         validationReporter.addError(
-          "Los apellidos solo pueden contener letras y espacios"
+          "Los apellidos solo pueden contener letras y espacios |"
         );
       }
       // Log de éxito si todas las validaciones pasan
@@ -141,7 +142,7 @@ class FichaPersonalValidation {
         !/^[a-zA-Z0-9.-]+@[a-zA-Z0-9.-]+\.[a-zA-Z0-9]{2,}$/.test(valorIngresado)
       ) {
         validationReporter.addError(
-          "El correo Institucional no tiene un formato válido: debe ser (algo)@(algo).(algo) (mínimo 2 caracteres después del punto)"
+          `El Correo Institucional "${valorIngresado}", no tiene un formato válido: debe ser (algo)@(algo).(algo) (mínimo 2 caracteres después del punto) |`
         );
       } else {
         cy.log(`✅ Correo electronico válido: ${valorIngresado}`);
@@ -163,7 +164,7 @@ class FichaPersonalValidation {
         !/^[a-zA-Z0-9.-]+@[a-zA-Z0-9.-]+\.[a-zA-Z0-9]{2,}$/.test(valorIngresado)
       ) {
         validationReporter.addError(
-          "El correo Personal no tiene un formato válido: debe ser (algo)@(algo).(algo) (mínimo 2 caracteres después del punto)"
+          `El Correo Personal "${valorIngresado}",no tiene un formato válido: debe ser (algo)@(algo).(algo) (mínimo 2 caracteres después del punto) |`
         );
       } else {
         cy.log(`✅ Correo electronico válido: ${valorIngresado}`);
@@ -216,8 +217,41 @@ class FichaPersonalValidation {
       "(//div[@class='col q-input-target ellipsis justify-start'])[35]"
     ).click();
     cy.wait(500);
+
+    validationReporter.clearErrors();
+
+    // Validar si el valor está vacío
+    if (!sustituto || sustituto.trim() === "") {
+      validationReporter.addError(
+        "El campo 'Empleado Sustitutode PCD' es requerido y no puede estar vacío |"
+      );
+      cy.log("⚠️ Campo Empleado Sustituto vacío");
+      cy.get("body").click(0, 0); // Cerrar dropdown
+      return this;
+    }
+
+    // Buscar el elemento en la lista
+    cy.xpath(`//div[@class='q-item-label'][contains(.,'${sustituto}')]`, {
+      timeout: 1000,
+    }).then(($imput) => {
+      if ($imput.length) {
+        cy.wrap($imput).click();
+        cy.log(
+          `✅ Empleado sustituto seleccionado correctamente: ${sustituto}`
+        );
+      }
+    });
+
+    return this;
+  }
+
+  seleccionarDiscapacidad(discapacidad) {
     cy.xpath(
-      `//div[@class='q-item-label'][contains(.,'${sustituto}')]`
+      "(//div[@class='col q-input-target ellipsis justify-start'])[36]"
+    ).click();
+    cy.wait(500);
+    cy.xpath(
+      `//div[@class='q-item-label'][contains(.,'${discapacidad}')]`
     ).click();
   }
 }
