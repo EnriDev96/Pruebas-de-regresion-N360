@@ -22,6 +22,10 @@ module.exports = defineConfig({
             .sort((a, b) => b.time - a.time);
           return files.length ? path.join(dirPath, files[0].name) : null;
         },
+        failTest(message) {
+          console.error(message);
+          return null;
+        },
       });
       return config;
     },

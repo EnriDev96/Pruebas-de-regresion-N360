@@ -1,10 +1,15 @@
 class ValidationReporter {
   constructor() {
     this.errors = [];
+    this.isReporting = false; // Flag to indicate if we are in the process of reporting errors
   }
 
   addError(message) {
     this.errors.push(message);
+  }
+
+  addErrorFromCypress(err) {
+    this.errors.push(err.message);
   }
 
   getErrors() {
@@ -17,18 +22,23 @@ class ValidationReporter {
 
   clearErrors() {
     this.errors = [];
+    this.isReporting = false; // Reset the flag
   }
 
-  // Método para reportar todos los errores al final del test
+  // Method to report all errors at the end of the test
   reportAndAssertAll() {
     if (this.hasErrors()) {
-      const errorMessage = `Errores de validación encontrados:\n${this.errors.join(
+      const errorMessage = `Validation errors found:\n${this.errors.join(
         "\n"
       )}`;
-      cy.log(`🚨 ${errorMessage}`); // Loguea los errores en el Cypress Test Runner
-      //throw new Error(errorMessage); // Falla el test con todos los errores
+      cy.log(`🚨 ${errorMessage}`); // Log errors to Cypress Test Runner
+
+      // Set the flag to true before making an assertion that is expected to fail
+      this.isReporting = true;
+      // This assertion will fail, and the 'fail' event will be triggered
+      cy.wrap(this.getErrors(), { log: false }).should("be.empty");
     } else {
-      cy.log("✅ Todas las validaciones pasaron correctamente.");
+      cy.log("✅ All validations passed successfully.");
     }
   }
 }
