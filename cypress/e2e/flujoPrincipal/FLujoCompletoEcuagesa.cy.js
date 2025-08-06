@@ -89,7 +89,7 @@ describe("Configuracion Inicial", () => {
       prepRol.goToPreparacionDelRol();
       prepRol.seleccionarTipoRol(dataGenRol.rolMensualJulio);
       prepRol.descargarBorradorRol();
-      cy.wait(20000);
+      cy.wait(25000);
     });
 
     cy.log("✅✅ 7.2 Preparar Rol de Pagos Quincenal ✅✅");
@@ -106,7 +106,7 @@ describe("Configuracion Inicial", () => {
     cy.fixture("genRol").then((dataGenRol) => {
       genRol.goToGeneracionDelRol();
       genRol.generarTipoRol(dataGenRol.rolMensualJulio);
-      cy.wait(20000);
+      cy.wait(25000);
       genRol.buscarRol(dataGenRol.rolMensualJulio);
       genRol.aprobarRol();
       genRol.descargarRolGeneral();
@@ -118,7 +118,7 @@ describe("Configuracion Inicial", () => {
     cy.fixture("genRol").then((dataGenRol) => {
       genRol.goToGeneracionDelRol();
       genRol.generarTipoRol(dataGenRol.rolQincenalAgosto);
-      cy.wait(10000);
+      cy.wait(15000);
       genRol.buscarRol(dataGenRol.rolQincenalAgosto);
       genRol.aprobarRol();
       genRol.descargarRolGeneral();
@@ -130,7 +130,7 @@ describe("Configuracion Inicial", () => {
     cy.fixture("genRol").then((dataGenRol) => {
       asiento.goToAsientoContable();
       asiento.generarAsientoContable(dataGenRol.rolMensualJulio);
-      cy.wait(7000);
+      cy.wait(1000);
       asiento.descargarAsientoContable(dataGenRol.rolMensualJulio);
       cy.wait(2000);
     });
