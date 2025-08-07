@@ -61,13 +61,13 @@ class FichaPersonalPage {
     cy.xpath(
       "(//div[@class='col q-input-target ellipsis justify-start'])[31]"
     ).click();
-    cy.xpath(`(//div[contains(.,'${datos.tipoVivienda}')])[5]`).click();
+    cy.xpath(`(//div[contains(.,'${datos.tipoRecidencia}')])[5]`).click();
     // Datos Financieros
     cy.xpath("(//div[contains(.,'Datos financieros')])[9]").click();
     cy.xpath(
       "(//div[@class='col q-input-target ellipsis justify-start'])[30]"
     ).click();
-    cy.xpath(`(//div[contains(.,'${datos.formaPago}')])[5]`).click();
+    cy.xpath(`(//div[contains(.,'${datos.tipoCobro}')])[5]`).click();
     // Guardar
     cy.xpath("(//div[contains(.,'Guardar')])[39]").click();
     cy.wait(3000);

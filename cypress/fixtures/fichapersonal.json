@@ -25,16 +25,17 @@
     "foto": "cypress/fixtures/images/Avatar Perfil Hombre 1.jpg",
     "__DatosdeUbicacion__": "__Comentario__",
     "region": "Sierra",
-    "tipoVivienda": "Residencial",
+    "tipoRecidencia": "Residencial",
     "__DatosFinancieros__": "__Comentario__",
-    "formaPago": "Efectivo"
+    "tipoCobro": "Efectivo"
   },
   "empleadoInvalido": {
+    "__DatosBasicos__": "__Comentario__",
     "tipoDocumento": "Cédula",
-    "cedula": "1104730229wer",
-    "nombres": "Bryan2 Enrique",
+    "cedula": "dghfd331",
+    "nombres": "Bryan Enrique2",
     "apellidos": "Orellana2 Cueva",
-    "emailInstitucional": "correo@invalido",
+    "emailInstitucional": "",
     "emailPersonal": "personal@email",
     "codigoIESS": "QWE456",
     "sexo": "Masculino",
@@ -43,8 +44,8 @@
     "anioNacimiento": "1996",
     "mesNacimiento": "Agosto",
     "diaNacimiento": "2",
-    "sustitutoPCD": "",
-    "discapacidad": "No",
+    "sustitutoPCD": "No",
+    "discapacidad": "",
     "estudios": "Superior",
     "profesion": "Programador",
     "nacionalidad": "Ecuatoriana",
@@ -52,9 +53,11 @@
     "porcentajeAnticipoQuincena": "30",
     "extrangero": "No",
     "foto": "cypress/fixtures/images/Avatar Perfil Hombre 1.jpg",
+    "__DatosdeUbicacion__": "__Comentario__",
     "region": "Sierra",
-    "tipoVivienda": "Residencial",
-    "formaPago": "Efectivo"
+    "tipoRecidencia": "Residencial",
+    "__DatosFinancieros__": "__Comentario__",
+    "tipoCobro": "Efectivo"
   },
   "empleadoDos": {
     "tipoDocumento": "Cédula",
@@ -71,7 +74,7 @@
     "diaNacimiento": "15",
     "foto": "cypress/fixtures/images/Avatar Perfil Hombre 3.jpg",
     "region": "Costa",
-    "tipoVivienda": "Laboral",
-    "formaPago": "Efectivo"
+    "tipoRecidencia": "Laboral",
+    "tipoCobro": "Efectivo"
   }
 }
