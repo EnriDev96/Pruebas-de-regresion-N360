@@ -256,6 +256,14 @@ class FichaPersonalValidation {
       );
       return this;
     }
+    // Validar edad mínima - si falla, no continuar
+    const edadValida = this.validarEdadMinima(fechaNacimiento, 16);
+    if (!edadValida) {
+      cy.log(
+        `🚨 Fecha de nacimiento Invalida - no se procederá con la selección`
+      );
+      return this;
+    }
     const [anio, mes, dia] = fechaNacimiento.split("-");
     const meses = [
       "",
@@ -285,6 +293,8 @@ class FichaPersonalValidation {
         10
       )}')]`
     ).click();
+    cy.log(`✅ Fecha de Nacimiento seleccionada correctamente`);
+    return this;
   }
 
   seleccionarEmpleadoSustituto(sustituto) {
@@ -417,6 +427,42 @@ class FichaPersonalValidation {
       }
     });
     return this;
+  }
+
+  ////// HELPERS ////////
+  validarEdadMinima(fechaNacimiento, edadMinima = 16) {
+    // fechaNacimiento debe estar en formato 'YYYY-MM-DD'
+    if (!fechaNacimiento) {
+      validationReporter.addError("La fecha de nacimiento es requerida |");
+      cy.log("🚨 La fecha de nacimiento es requerida");
+      return false;
+    }
+
+    const hoy = new Date();
+    const [anio, mes, dia] = fechaNacimiento.split("-").map(Number);
+    const fechaNac = new Date(anio, mes - 1, dia);
+
+    let edad = hoy.getFullYear() - fechaNac.getFullYear();
+    const mesActual = hoy.getMonth();
+    const diaActual = hoy.getDate();
+
+    // Si aún no ha cumplido años este año, restar 1
+    if (mesActual < mes - 1 || (mesActual === mes - 1 && diaActual < dia)) {
+      edad--;
+    }
+
+    if (edad < edadMinima) {
+      validationReporter.addError(
+        `⚠️Edad insuficiente: ${edad} años (mínimo ${edadMinima})`
+      );
+      cy.log(
+        `⚠️ La persona debe tener al menos ${edadMinima} años cumplidos. Edad actual: ${edad} años |`
+      );
+      return false;
+    } else {
+      cy.log(`✅ Edad válida: ${edad} años`);
+      return true;
+    }
   }
 }
 export default FichaPersonalValidation;
