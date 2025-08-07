@@ -30,13 +30,8 @@ class ContratoPageValidation {
     this.seleccionarCodigoIESS(data.codigoIESS);
 
     //Gestion de Turnos
-    cy.xpath("(//div[contains(.,'Gestión de turnos')])[9]")
-      .scrollIntoView()
-      .click();
+    this.moduloGestionTurnos(data.moduloGestionTurnos);
 
-    cy.xpath(
-      "(//div[contains(.,'radio_button_uncheckedradio_button_checkedNo')])[31]"
-    ).click();
     //Guardar Contrato
     cy.xpath("(//div[contains(.,'Guardar')])[37]").click();
     cy.log(`✅ Contrato seleccionado Correctamente ✅`);
@@ -375,6 +370,14 @@ class ContratoPageValidation {
   }
 
   ingresarHorasLaborables(horasLaborables) {
+    // Validar que el campo reciba un valor
+    if (!horasLaborables || horasLaborables.trim() === "") {
+      validationReporter.addError(`❌Campo "Horas laborables por mes" vacio |`);
+      cy.log(
+        `❌ El campo "Horas laborables por mes" es requerido y no puede estar vacío`
+      );
+      return this;
+    }
     cy.xpath("(//div[contains(.,'Horas laborables por mes:|')])[9]").type(
       horasLaborables
     );
@@ -430,6 +433,19 @@ class ContratoPageValidation {
       }
     });
     return this;
+  }
+
+  moduloGestionTurnos(modGestionTurnos) {
+    if (!modGestionTurnos || modGestionTurnos.trim() === "No") {
+      cy.log(`ℹ️ No tiene Módulo de gestion de Turnos`);
+      return this;
+    }
+    cy.xpath("(//div[contains(.,'Gestión de turnos')])[9]")
+      .scrollIntoView()
+      .click();
+    cy.xpath(
+      "(//div[contains(.,'radio_button_uncheckedradio_button_checkedNo')])[31]"
+    ).click();
   }
 }
 

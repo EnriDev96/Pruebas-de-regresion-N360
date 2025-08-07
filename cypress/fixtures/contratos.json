@@ -18,7 +18,8 @@
     "vacaciones": "Acumulado",
     "horasLaborables": "240",
     "tipoEgreso": "ADM",
-    "codigoIESS": "0001"
+    "codigoIESS": "0001",
+    "moduloGestionTurnos": "Si"
   },
   "contratoUnoEcuagesa": {
     "fechaIngreso": "2025-07-26",
@@ -38,7 +39,8 @@
     "vacaciones": "Acumulado",
     "horasLaborables": "240",
     "tipoEgreso": "ADM",
-    "codigoIESS": "0001"
+    "codigoIESS": "0001",
+    "moduloGestionTurnos": "Si"
   },
   "contratoDemo": {
     "fechaIngreso": "2025-07-26",
@@ -58,7 +60,8 @@
     "vacaciones": "Acumulado",
     "horasLaborables": "240",
     "tipoEgreso": "ADM",
-    "codigoIESS": "0001"
+    "codigoIESS": "0001",
+    "moduloGestionTurnos": "No"
   },
   "contratoDemoInvalido": {
     "fechaIngreso": "2025-07-26",
@@ -78,6 +81,7 @@
     "vacaciones": "Acumulado",
     "horasLaborables": "240",
     "tipoEgreso": "ADM",
-    "codigoIESS": "0001"
+    "codigoIESS": "0001",
+    "moduloGestionTurnos": "No"
   }
 }
