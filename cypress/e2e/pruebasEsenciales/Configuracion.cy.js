@@ -31,7 +31,7 @@ describe("Configuracion Inicial", () => {
     });
   });
 
-  it.only("4. Configurar Roles y Permisos", () => {
+  it("4. Configurar Roles y Permisos", () => {
     confRoles.goToRolesPermisos();
     confRoles.createRol();
   });

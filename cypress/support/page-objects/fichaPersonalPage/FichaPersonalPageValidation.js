@@ -36,6 +36,7 @@ class FichaPersonalValidation {
     this.seleccionarTipoCobro(datos.tipoCobro);
 
     //Guardar FichaPersonal
+    cy.xpath("(//div[contains(.,'Guardar')])[39]").click();
     cy.wait(1000);
   }
 

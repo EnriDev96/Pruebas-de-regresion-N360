@@ -1,8 +1,10 @@
 import FichaPersonalValidation from "../../../support/page-objects/fichaPersonalPage/FichaPersonalPageValidation";
+import ContratoPageValidation from "../../../support/page-objects/contratosPages/ContratoPageValidation";
 import { validationReporter } from "../../../support/utils/validationReporter";
 
 describe("Ficha Personal - Crear y Eliminar Ficha Personal del Empleado", () => {
   const fpValidation = new FichaPersonalValidation();
+  const conValidation = new ContratoPageValidation();
 
   beforeEach(() => {
     cy.loginNomina360();
@@ -26,10 +28,17 @@ describe("Ficha Personal - Crear y Eliminar Ficha Personal del Empleado", () => 
       fpValidation.crearFichaPersonal(data.empleadoUno);
     });
   });
-  it("3 Otra prueba", () => {
-    cy.fixture("fichaPersonal").then((data) => {
-      fpValidation.goToFichaPersonal();
-      cy.log("Paso a la siguiente Prueba");
+  it("3 Validar Campos Contrato Invalido", () => {
+    cy.fixture("contratos").then((dataContrato) => {
+      conValidation.goToContratos();
+      conValidation.crearContrato(dataContrato.contratoDemoInvalido);
+    });
+  });
+
+  it.only("4 Validar Campos Contrato", () => {
+    cy.fixture("contratos").then((dataContrato) => {
+      conValidation.goToContratos();
+      conValidation.crearContrato(dataContrato.contratoDemo);
     });
   });
 });
