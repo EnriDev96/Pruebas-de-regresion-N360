@@ -35,7 +35,7 @@ describe("Ficha Personal - Crear y Eliminar Ficha Personal del Empleado", () => 
     });
   });
 
-  it.only("4 Validar Campos Contrato", () => {
+  it("4 Validar Campos Contrato", () => {
     cy.fixture("contratos").then((dataContrato) => {
       conValidation.goToContratos();
       conValidation.crearContrato(dataContrato.contratoDemo);
