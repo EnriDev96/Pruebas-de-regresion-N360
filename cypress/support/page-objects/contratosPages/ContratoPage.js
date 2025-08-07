@@ -74,7 +74,6 @@ class ContratoPage {
     cy.xpath(
       `//div[@class='q-item-label'][contains(.,'${dataContrato.decimoTercero}')]`
     ).click();
-    //cy.xpath(`(//div[contains(.,'${dataContrato.decimoTercero}')])[5]`).click();
     //Pago del Decimo Cuarto
     cy.xpath(
       "(//div[contains(.,'Pago XIV Sueldo:|arrow_drop_down')])[9]"

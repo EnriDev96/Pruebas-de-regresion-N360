@@ -69,11 +69,9 @@ class FichaPersonalValidation {
       // Validación 1: Formato de cédula (10 dígitos)
       if (!/^\d{10}$/.test(valorIngresado)) {
         validationReporter.addError(`⚠️Cédula con formato Invalido |`);
-        cy.log(`⚠️ La cedula solo puede contener 10 Digitos`);
+        cy.log(`⚠️ La cédula solo puede contener 10 Digitos`);
       } else {
-        cy.log(
-          `✅ Validación OK: Formato de cédula correcto (${valorIngresado}).`
-        );
+        cy.log(`✅ Cédula con formato válido: ${valorIngresado}.`);
       }
     });
     cy.xpath("(//div[contains(.,'verificar cedula')])[14]").click();
