@@ -45,27 +45,33 @@ class FichaPersonalPage {
     //Datos Basicos
     cy.xpath("(//div[contains(.,'Datos Básicos')])[11]").click();
     cy.wait(1000);
-    this.seleccionarTipoDeDocumento(datos.basicos.tipoDocumento);
-    this.ingresarNumeroDeCedula(datos.basicos.cedula);
-    this.ingresarNombre(datos.basicos.nombres);
-    this.ingresarApellido(datos.basicos.apellidos);
-    this.ingresarCorreoIntitucional(datos.basicos.emailInstitucional);
-    this.ingresarCorreoPersonal(datos.basicos.emailPersonal);
-    this.ingresarCodigoIESS(datos.basicos.codigoIESS);
-    this.seleccionarSexo(datos.basicos.sexo);
-    this.seleccionarEstadoCivil(datos.basicos.estadoCivil);
-    this.seleccionarFechaDeNacimiento(datos.basicos.fechaNacimiento);
-    this.seleccionarEmpleadoSustituto(datos.basicos.sustitutoPCD);
-    this.seleccionarDiscapacidad(datos.basicos.discapacidad);
-    this.seleccionarEstudios(datos.basicos.estudios);
-    this.ingresarProfecion(datos.basicos.profesion);
-    this.ingresarPorcentajeAnticipo(datos.basicos.porcentajeAnticipoQuincena);
-    this.seleccionarFoto(datos.basicos.foto);
+    // this.seleccionarTipoDeDocumento(datos.basicos.tipoDocumento);
+    // this.ingresarNumeroDeCedula(datos.basicos.cedula);
+    // this.ingresarNombre(datos.basicos.nombres);
+    // this.ingresarApellido(datos.basicos.apellidos);
+    // this.ingresarCorreoIntitucional(datos.basicos.emailInstitucional);
+    // this.ingresarCorreoPersonal(datos.basicos.emailPersonal);
+    // this.ingresarCodigoIESS(datos.basicos.codigoIESS);
+    // this.seleccionarSexo(datos.basicos.sexo);
+    // this.seleccionarEstadoCivil(datos.basicos.estadoCivil);
+    // this.seleccionarFechaDeNacimiento(datos.basicos.fechaNacimiento);
+    // this.seleccionarEmpleadoSustituto(datos.basicos.sustitutoPCD);
+    // this.seleccionarDiscapacidad(datos.basicos.discapacidad);
+    // this.seleccionarEstudios(datos.basicos.estudios);
+    // this.ingresarProfecion(datos.basicos.profesion);
+    // this.ingresarPorcentajeAnticipo(datos.basicos.porcentajeAnticipoQuincena);
+    // this.seleccionarFoto(datos.basicos.foto);
 
     // //Datos de Ubicacion
-    // cy.xpath("(//div[contains(.,'Datos de ubicación')])[11]").click();
-    // this.seleccinoarRegion(datos.ubicacion.ubi_1.region);
-    // this.seleccionarRecidencia(datos.ubicacion.ubi_1.tipoRecidencia);
+    cy.xpath("(//div[contains(.,'Datos de ubicación')])[11]").click();
+    this.seleccinoarRegion(datos.ubicacion.ubi_1.region);
+    this.seleccionarRecidencia(datos.ubicacion.ubi_1.tipoRecidencia);
+    this.seleccionarProvincia(datos.ubicacion.ubi_1.provincia);
+    this.seleccinoarCiudad(datos.ubicacion.ubi_1.ciudad);
+    this.ingresarTelfFijo(datos.ubicacion.ubi_1.telefonoConvencional);
+    this.ingresarTelfMovil(datos.ubicacion.ubi_1.telefonoMovil);
+    this.ingresarDireccion(datos.ubicacion.ubi_1.direccion);
+    this.ingresarReferenciaDir(datos.ubicacion.ubi_1.referenciaDireccion);
 
     // //Datos Financieros
     // cy.xpath("(//div[contains(.,'Datos financieros')])[9]").click();
@@ -465,12 +471,6 @@ class FichaPersonalPage {
   ////////////////////////////////////////////////////////////////////////////////////////
   //                             DATOS DE UBICACIÓN                                     //
   ////////////////////////////////////////////////////////////////////////////////////////
-
-  gotoPersonalizaciones() {}
-
-  ////////////////////////////////////////////////////////////////////////////////////////
-  //                             DATOS DE UBICACIÓN                                     //
-  ////////////////////////////////////////////////////////////////////////////////////////
   seleccinoarRegion(region) {
     cy.xpath(
       "(//div[@class='col q-input-target ellipsis justify-start'])[30]"
@@ -523,15 +523,79 @@ class FichaPersonalPage {
     return this;
   }
 
-  seleccionarPais(data) {}
+  seleccionarProvincia(data) {
+    cy.xpath(
+      "//div[@class='col-md-4 col-xs-12'][contains(.,'Provincia:|arrow_drop_down')]"
+    ).click("bottom");
 
-  seleccionarProvincia(data) {}
+    // Validar Seleccion dentro de la lista
+    cy.xpath(`//div[@class='q-item-label'][contains(.,'${data}')]`, {
+      timeout: 1000,
+    }).then(($imput) => {
+      if ($imput.length) {
+        cy.wrap($imput).click();
+        cy.log(`✅ Provincia seleccionada correctamente: ${data}`);
+      }
+    });
+    return this;
+  }
 
-  seleccinoarCiudad(data) {}
+  seleccinoarCiudad(data) {
+    cy.xpath(
+      "//div[@class='col-md-4 col-xs-12'][contains(.,'Ciudad:|arrow_drop_down')]"
+    ).click("bottom");
 
-  ingresarTelfFijo(data) {}
+    // Validar Seleccion dentro de la lista
+    cy.xpath(`//div[@class='q-item-label'][contains(.,'${data}')]`, {
+      timeout: 1000,
+    }).then(($imput) => {
+      if ($imput.length) {
+        cy.wrap($imput).click();
+        cy.log(`✅ Ciudad seleccionada correctamente: ${data}`);
+      }
+    });
+    return this;
+  }
 
-  ingresarTelfMovil(data) {}
+  ingresarTelfFijo(data) {
+    cy.xpath(
+      "//div[@class='col-md-4 col-xs-12'][contains(.,'Teléfono convencional:|')]"
+    ).click("bottom");
+    cy.focused().type(data);
+    cy.focused().then(($input) => {
+      const valorIngresado = $input.val();
+      // Solo digitos
+      if (!/^\d{8,10}$/.test(valorIngresado)) {
+        validationReporter.addError(
+          `⚠️Telefono Convencional con formato Invalido |`
+        );
+        cy.log(`⚠️ El Telefono Convencional solo puede contener Digitos`);
+      } else {
+        cy.log(
+          `✅ Telefono Convencional con formato válido: ${valorIngresado}.`
+        );
+      }
+    });
+    return this;
+  }
+
+  ingresarTelfMovil(data) {
+    cy.xpath(
+      "//div[@class='col-md-4 col-xs-12'][contains(.,'Teléfono móvil:|')]"
+    ).click("bottom");
+    cy.focused().type(data);
+    cy.focused().then(($input) => {
+      const valorIngresado = $input.val();
+      // Solo digitos
+      if (!/^\d{8,10}$/.test(valorIngresado)) {
+        validationReporter.addError(`⚠️Telefono móvil con formato Invalido |`);
+        cy.log(`⚠️ El Telefono móvil solo puede contener Digitos`);
+      } else {
+        cy.log(`✅ Telefono móvil con formato válido: ${valorIngresado}.`);
+      }
+    });
+    return this;
+  }
 
   ingresarDireccion(data) {}
 
