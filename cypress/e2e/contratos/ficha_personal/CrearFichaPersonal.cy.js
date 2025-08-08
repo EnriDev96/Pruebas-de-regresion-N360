@@ -7,7 +7,7 @@ describe("Ficha Personal - Crear y Eliminar Ficha Personal del Empleado", () => 
     cy.loginNomina360();
   });
 
-  it("1. Crear Ficha Personal de un Empleado", () => {
+  it.only("1. Crear Ficha Personal de un Empleado", () => {
     cy.fixture("fichaPersonal").then((data) => {
       fichaPersonal.goToFichaPersonal();
       fichaPersonal.crearFichaPersonal(data.empleadoUno);

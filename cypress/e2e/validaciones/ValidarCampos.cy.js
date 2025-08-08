@@ -1,8 +1,8 @@
-import FichaPersonalValidation from "../../../support/page-objects/fichaPersonalPage/FichaPersonalPageValidation";
-import ContratoPageValidation from "../../../support/page-objects/contratosPages/ContratoPageValidation";
-import { validationReporter } from "../../../support/utils/validationReporter";
+import FichaPersonalValidation from "../../support/page-objects/fichaPersonalPage/FichaPersonalPageValidation";
+import ContratoPageValidation from "../../support/page-objects/contratosPages/ContratoPageValidation";
+import { validationReporter } from "../../support/utils/validationReporter";
 
-describe("Ficha Personal - Crear y Eliminar Ficha Personal del Empleado", () => {
+describe("Validaciones de Campos de Formularios", () => {
   const fpValidation = new FichaPersonalValidation();
   const conValidation = new ContratoPageValidation();
 
