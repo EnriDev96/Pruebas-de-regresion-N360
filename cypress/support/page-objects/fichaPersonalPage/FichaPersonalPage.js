@@ -41,10 +41,10 @@ class FichaPersonalPage {
 
   crearFichaPersonalCompleta(datos) {
     cy.xpath("//a[@tabindex='0'][contains(.,'addEmpleado')]").click();
-
-    //Datos Basicos
-    cy.xpath("(//div[contains(.,'Datos Básicos')])[11]").click();
     cy.wait(1000);
+
+    // //Datos Basicos
+    // cy.xpath("(//div[contains(.,'Datos Básicos')])[11]").click();
     // this.seleccionarTipoDeDocumento(datos.basicos.tipoDocumento);
     // this.ingresarNumeroDeCedula(datos.basicos.cedula);
     // this.ingresarNombre(datos.basicos.nombres);
@@ -63,19 +63,28 @@ class FichaPersonalPage {
     // this.seleccionarFoto(datos.basicos.foto);
 
     // //Datos de Ubicacion
-    cy.xpath("(//div[contains(.,'Datos de ubicación')])[11]").click();
-    this.seleccinoarRegion(datos.ubicacion.ubi_1.region);
-    this.seleccionarRecidencia(datos.ubicacion.ubi_1.tipoRecidencia);
-    this.seleccionarProvincia(datos.ubicacion.ubi_1.provincia);
-    this.seleccinoarCiudad(datos.ubicacion.ubi_1.ciudad);
-    this.ingresarTelfFijo(datos.ubicacion.ubi_1.telefonoConvencional);
-    this.ingresarTelfMovil(datos.ubicacion.ubi_1.telefonoMovil);
-    this.ingresarDireccion(datos.ubicacion.ubi_1.direccion);
-    this.ingresarReferenciaDir(datos.ubicacion.ubi_1.referenciaDireccion);
+    // cy.xpath("(//div[contains(.,'Datos de ubicación')])[11]").click();
+    // this.seleccinoarRegion(datos.ubicacion.ubi_1.region);
+    // this.seleccionarRecidencia(datos.ubicacion.ubi_1.tipoRecidencia);
+    // this.seleccionarProvincia(datos.ubicacion.ubi_1.provincia);
+    // this.seleccinoarCiudad(datos.ubicacion.ubi_1.ciudad);
+    // this.ingresarTelfFijo(datos.ubicacion.ubi_1.telefonoConvencional);
+    // this.ingresarTelfMovil(datos.ubicacion.ubi_1.telefonoMovil);
+    // this.ingresarDireccion(datos.ubicacion.ubi_1.direccion);
+    // this.ingresarReferenciaDir(datos.ubicacion.ubi_1.referenciaDireccion);
 
     // //Datos Financieros
     // cy.xpath("(//div[contains(.,'Datos financieros')])[9]").click();
     // this.seleccionarTipoCobro(datos.financieros.cuenta_1.tipoCobro);
+    // this.selectBncOrigen(datos.financieros.cuenta_1.bancoOrigen);
+    // this.selectBncDestino(datos.financieros.cuenta_1.bancoDestino);
+    // this.inputCuenta(datos.financieros.cuenta_1.cuentaBancaria);
+    // this.selectTipoCuenta(datos.financieros.cuenta_1.tipoCuenta);
+
+    //Datos Familiares
+    cy.xpath(
+      "//div[@class='q-tab-label'][contains(.,'Datos familiares')]"
+    ).click();
 
     // //Guardar FichaPersonal
     // cy.xpath("(//div[contains(.,'Guardar')])[39]").click();
@@ -597,42 +606,146 @@ class FichaPersonalPage {
     return this;
   }
 
-  ingresarDireccion(data) {}
+  ingresarDireccion(data) {
+    cy.xpath(
+      "//div[@class='col-md-4 col-xs-12'][contains(.,'Dirección:|')]"
+    ).click("bottom");
+    cy.focused().type(data);
+    cy.log(`✅ Dirección ingresada correctamente: ${data}`);
+  }
 
-  ingresarReferenciaDir(data) {}
+  ingresarReferenciaDir(data) {
+    cy.xpath(
+      "//div[@class='col-md-4 col-xs-12'][contains(.,'Referencia de direccion:|')]"
+    ).click("bottom");
+    cy.focused().type(data);
+    cy.log(`✅ Referencia de direccion ingresada correctamente: ${data}`);
+  }
 
   ////////////////////////////////////////////////////////////////////////////////////////
   //                             DATOS FINANCIEROS                                      //
   ////////////////////////////////////////////////////////////////////////////////////////
-  seleccionarTipoCobro(cobro) {
+  seleccionarTipoCobro(data) {
     cy.xpath(
       "(//div[@class='col q-input-target ellipsis justify-start'])[30]"
     ).click();
     // Validar que el campo reciba un valor
-    if (!cobro || cobro.trim() === "") {
+    if (!data || data.trim() === "") {
       validationReporter.addError(`❌Campo "Tipo de cobro" vacío |`);
       cy.log(`❌ El campo "Tipo de cobro" es requerido y no puede estar vacío`);
       return this;
     }
     // Validar Seleccion dentro de la lista
-    cy.xpath(`(//div[contains(.,'${cobro}')])[5]`, {
+    cy.xpath(`(//div[contains(.,'${data}')])[5]`, {
       timeout: 1000,
     }).then(($imput) => {
       if ($imput.length) {
         cy.wrap($imput).click();
-        cy.log(`✅ Tipo de cobro seleccionado correctamente: ${cobro}`);
+        cy.log(`✅ Tipo de cobro seleccionado correctamente: ${data}`);
       }
     });
     return this;
   }
 
-  selectBncOrigen(data) {}
+  selectBncOrigen(data) {
+    // Validar que el campo reciba un valor
+    if (!data || data.trim() === "") {
+      validationReporter.addError(`❌Campo "Banco de Origen" vacío |`);
+      cy.log(
+        `❌ El campo "Banco de Origen" es requerido y no puede estar vacío`
+      );
+      return this;
+    }
 
-  selectBncDestino(data) {}
+    cy.xpath(
+      "//div[@class='col-md-4 col-xs-12'][contains(.,'Banco de Origen:|arrow_drop_down')]"
+    ).click("bottom");
+    // Validar Seleccion dentro de la lista
+    cy.xpath(`//div[@class='q-item-label'][contains(.,'${data}')]`, {
+      timeout: 1000,
+    }).then(($imput) => {
+      if ($imput.length) {
+        cy.wrap($imput).click();
+        cy.log(`✅ Banco de Origen seleccionado correctamente: ${data}`);
+      }
+    });
+    return this;
+  }
 
-  inputCuenta(data) {}
+  selectBncDestino(data) {
+    // Validar que el campo reciba un valor
+    if (!data || data.trim() === "") {
+      validationReporter.addError(`❌Campo "Banco de Destino" vacío |`);
+      cy.log(
+        `❌ El campo "Banco de Destino" es requerido y no puede estar vacío`
+      );
+      return this;
+    }
 
-  selectTipoCuenta(data) {}
+    cy.xpath(
+      "//div[@class='col-md-4 col-xs-12'][contains(.,'Banco de Destino:|arrow_drop_down')]"
+    ).click("bottom");
+    // Validar Seleccion dentro de la lista
+    cy.xpath(`//div[@class='q-item-label'][contains(.,'${data}')]`, {
+      timeout: 1000,
+    }).then(($imput) => {
+      if ($imput.length) {
+        cy.wrap($imput).click();
+        cy.log(`✅ Banco de Destino seleccionado correctamente: ${data}`);
+      }
+    });
+    return this;
+  }
+
+  inputCuenta(data) {
+    // Validar que el campo reciba un valor
+    if (!data || data.trim() === "") {
+      validationReporter.addError(`❌Campo "Cuenta bancaria" vacío |`);
+      cy.log(
+        `❌ El campo "Cuenta bancaria" es requerido y no puede estar vacío`
+      );
+      return this;
+    }
+    cy.xpath(
+      "//div[@class='col-md-4 col-xs-12'][contains(.,'Cuenta bancaria:|')]"
+    ).click("bottom");
+    cy.focused().type(data);
+    cy.focused().then(($input) => {
+      const valorIngresado = $input.val();
+      // Solo digitos
+      if (!/^\d{1,20}$/.test(valorIngresado)) {
+        validationReporter.addError(`⚠️Cuenta bancaria con formato Invalido |`);
+        cy.log(`⚠️ La Cuenta bancaria solo puede contener Digitos`);
+      } else {
+        cy.log(`✅ Cuenta bancaria con formato válido: ${valorIngresado}.`);
+      }
+    });
+    return this;
+  }
+
+  selectTipoCuenta(data) {
+    // Validar que el campo reciba un valor
+    if (!data || data.trim() === "") {
+      validationReporter.addError(`❌Campo "Tipo de cuenta" vacío |`);
+      cy.log(
+        `❌ El campo "Tipo de cuenta" es requerido y no puede estar vacío`
+      );
+      return this;
+    }
+    cy.xpath(
+      "//div[@class='col-md-4 col-xs-12'][contains(.,'Tipo de cuenta:|arrow_drop_down')]"
+    ).click("bottom");
+    // Validar Seleccion dentro de la lista
+    cy.xpath(`//div[@class='q-item-label'][contains(.,'${data}')]`, {
+      timeout: 1000,
+    }).then(($imput) => {
+      if ($imput.length) {
+        cy.wrap($imput).click();
+        cy.log(`✅ Tipo de cuenta seleccionada correctamente: ${data}`);
+      }
+    });
+    return this;
+  }
 
   ////// HELPERS ////////
   validarEdadMinima(fechaNacimiento, edadMinima = 16) {

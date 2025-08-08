@@ -94,14 +94,14 @@
         "telefonoConvencional": "074040855",
         "telefonoMovil": "qwe0998765432",
         "direccion": "Av. 10 de Agosto",
-        "referenciaDireccion": "Edificio Yanuncay"
+        "referenciaDireccion": "Edificio Torres de Yanuncay"
       }
     },
     "financieros": {
       "cantidadCuentas": "1",
       "cuenta_1": {
         "tipoCobro": "Transferencia",
-        "bancoOrigen": "PRODUBANCO",
+        "bancoOrigen": "BANCO PRODUBANCO",
         "cuentaBancaria": "229220374011",
         "tipoCuenta": "Ahorro",
         "bancoDestino": "BANCO DE LOJA"
