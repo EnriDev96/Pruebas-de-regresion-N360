@@ -7,7 +7,8 @@ class FichaPersonalPage {
     cy.xpath("//div[contains(text(),'Ficha personal')]").click();
     cy.wait(1000);
   }
-  crearFichaPersonal(datos) {
+
+  crearFichaPersonalBasica(datos) {
     cy.xpath("//a[@tabindex='0'][contains(.,'addEmpleado')]").click();
 
     //Datos Basicos
@@ -17,7 +18,6 @@ class FichaPersonalPage {
     this.ingresarNumeroDeCedula(datos.cedula);
     this.ingresarNombre(datos.nombres);
     this.ingresarApellido(datos.apellidos);
-    this.ingresarCorreoIntitucional(datos.emailInstitucional);
     this.ingresarCorreoPersonal(datos.emailPersonal);
     this.seleccionarSexo(datos.sexo);
     this.seleccionarFechaDeNacimiento(datos.fechaNacimiento);
@@ -32,6 +32,44 @@ class FichaPersonalPage {
     //Datos Financieros
     cy.xpath("(//div[contains(.,'Datos financieros')])[9]").click();
     this.seleccionarTipoCobro(datos.tipoCobro);
+
+    // //Guardar FichaPersonal
+    // cy.xpath("(//div[contains(.,'Guardar')])[39]").click();
+    // cy.log(`✅ Ficha Personal creada Correctamente ✅`);
+    // cy.wait(1000);
+  }
+
+  crearFichaPersonalCompleta(datos) {
+    cy.xpath("//a[@tabindex='0'][contains(.,'addEmpleado')]").click();
+
+    //Datos Basicos
+    cy.xpath("(//div[contains(.,'Datos Básicos')])[11]").click();
+    cy.wait(1000);
+    this.seleccionarTipoDeDocumento(datos.basicos.tipoDocumento);
+    this.ingresarNumeroDeCedula(datos.basicos.cedula);
+    this.ingresarNombre(datos.basicos.nombres);
+    this.ingresarApellido(datos.basicos.apellidos);
+    this.ingresarCorreoIntitucional(datos.basicos.emailInstitucional);
+    this.ingresarCorreoPersonal(datos.basicos.emailPersonal);
+    this.ingresarCodigoIESS(datos.basicos.codigoIESS);
+    this.seleccionarSexo(datos.basicos.sexo);
+    this.seleccionarEstadoCivil(datos.basicos.estadoCivil);
+    this.seleccionarFechaDeNacimiento(datos.basicos.fechaNacimiento);
+    this.seleccionarEmpleadoSustituto(datos.basicos.sustitutoPCD);
+    this.seleccionarDiscapacidad(datos.basicos.discapacidad);
+    this.seleccionarEstudios(datos.basicos.estudios);
+    this.ingresarProfecion(datos.basicos.profesion);
+    this.ingresarPorcentajeAnticipo(datos.basicos.porcentajeAnticipoQuincena);
+    this.seleccionarFoto(datos.basicos.foto);
+
+    // //Datos de Ubicacion
+    // cy.xpath("(//div[contains(.,'Datos de ubicación')])[11]").click();
+    // this.seleccinoarRegion(datos.ubicacion.ubi_1.region);
+    // this.seleccionarRecidencia(datos.ubicacion.ubi_1.tipoRecidencia);
+
+    // //Datos Financieros
+    // cy.xpath("(//div[contains(.,'Datos financieros')])[9]").click();
+    // this.seleccionarTipoCobro(datos.financieros.cuenta_1.tipoCobro);
 
     // //Guardar FichaPersonal
     // cy.xpath("(//div[contains(.,'Guardar')])[39]").click();
@@ -187,14 +225,6 @@ class FichaPersonalPage {
     cy.xpath(
       "//div[@class='text-grey q-mb-xs'][contains(.,'Correo institucional - Acceso:')]"
     ).click();
-    // Validar que el campo reciba un valor
-    if (!correoInsitucional || correoInsitucional.trim() === "") {
-      validationReporter.addError(`❌Campo "Correo institucional" vacio|`);
-      cy.log(
-        `❌ El campo "Correo institucional" es requerido y no puede estar vacío`
-      );
-      return this;
-    }
 
     cy.xpath("(//input[@type='email'])[1]").type(correoInsitucional);
     cy.xpath("(//input[@type='email'])[1]").then(($input) => {
@@ -247,6 +277,13 @@ class FichaPersonalPage {
     });
   }
 
+  ingresarCodigoIESS(data) {
+    cy.xpath(
+      "//div[@class='col-md-4 col-xs-12'][contains(.,'Código Empleado IESS:|')]"
+    ).click();
+    cy.focused().type(data);
+  }
+
   seleccionarSexo(sexo) {
     cy.xpath(
       "//div[@class='col-md-4 col-xs-12'][contains(.,'Sexo:|arrow_drop_downEl sexo es requerido.')]"
@@ -264,6 +301,23 @@ class FichaPersonalPage {
       if ($imput.length) {
         cy.wrap($imput).click();
         cy.log(`✅ Sexo seleccionado correctamente: ${sexo}`);
+      }
+    });
+    return this;
+  }
+
+  seleccionarEstadoCivil(data) {
+    cy.xpath(
+      "//div[@class='col-md-4 col-xs-12'][contains(.,'Estado civil:|arrow_drop_down')]"
+    ).click();
+
+    // Validar Seleccion dentro de la lista
+    cy.xpath(`//div[@class='q-item-label'][contains(.,'${data}')]`, {
+      timeout: 1000,
+    }).then(($imput) => {
+      if ($imput.length) {
+        cy.wrap($imput).click();
+        cy.log(`✅ Estado civil seleccionado correctamente: ${data}`);
       }
     });
     return this;
@@ -371,6 +425,49 @@ class FichaPersonalPage {
     return this;
   }
 
+  seleccionarEstudios(data) {
+    cy.xpath(
+      "//div[@class='col-md-4 col-xs-12'][contains(.,'Nivel de estudios:|arrow_drop_down')]"
+    ).click("bottom");
+
+    // Validar Seleccion dentro de la lista
+    cy.xpath(`//div[@class='q-item-label'][contains(.,'${data}')]`, {
+      timeout: 1000,
+    }).then(($imput) => {
+      if ($imput.length) {
+        cy.wrap($imput).click();
+        cy.log(`✅ Nivel de estudios seleccionado correctamente: ${data}`);
+      }
+    });
+    return this;
+  }
+
+  ingresarProfecion(data) {
+    cy.xpath(
+      "//div[@class='col-md-4 col-xs-12'][contains(.,'Profesión:|')]"
+    ).click("bottom");
+    cy.focused().type(data);
+  }
+
+  ingresarPorcentajeAnticipo(data) {
+    cy.xpath(
+      "//div[@class='col-md-4 col-xs-12'][contains(.,'Porcentaje anticipo de quincena:|%')]"
+    ).click("bottom");
+    cy.focused().type(data);
+  }
+
+  seleccionarFoto(data) {
+    cy.get("#picture-input > input[type=file]").selectFile(data, {
+      force: true,
+    });
+  }
+
+  ////////////////////////////////////////////////////////////////////////////////////////
+  //                             DATOS DE UBICACIÓN                                     //
+  ////////////////////////////////////////////////////////////////////////////////////////
+
+  gotoPersonalizaciones() {}
+
   ////////////////////////////////////////////////////////////////////////////////////////
   //                             DATOS DE UBICACIÓN                                     //
   ////////////////////////////////////////////////////////////////////////////////////////
@@ -426,6 +523,20 @@ class FichaPersonalPage {
     return this;
   }
 
+  seleccionarPais(data) {}
+
+  seleccionarProvincia(data) {}
+
+  seleccinoarCiudad(data) {}
+
+  ingresarTelfFijo(data) {}
+
+  ingresarTelfMovil(data) {}
+
+  ingresarDireccion(data) {}
+
+  ingresarReferenciaDir(data) {}
+
   ////////////////////////////////////////////////////////////////////////////////////////
   //                             DATOS FINANCIEROS                                      //
   ////////////////////////////////////////////////////////////////////////////////////////
@@ -450,6 +561,14 @@ class FichaPersonalPage {
     });
     return this;
   }
+
+  selectBncOrigen(data) {}
+
+  selectBncDestino(data) {}
+
+  inputCuenta(data) {}
+
+  selectTipoCuenta(data) {}
 
   ////// HELPERS ////////
   validarEdadMinima(fechaNacimiento, edadMinima = 16) {

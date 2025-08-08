@@ -1,3 +1,4 @@
+import { validationReporter } from "../../../support/utils/validationReporter";
 import FichaPersonalPage from "../../../support/page-objects/fichaPersonalPage/FichaPersonalPage";
 
 describe("Ficha Personal - Crear y Eliminar Ficha Personal del Empleado", () => {
@@ -7,13 +8,18 @@ describe("Ficha Personal - Crear y Eliminar Ficha Personal del Empleado", () => 
     cy.loginNomina360();
   });
 
+  afterEach(() => {
+    // Reporta y falla si hay errores
+    validationReporter.reportAndAssertAll();
+    validationReporter.clearErrors();
+  });
+
   it.only("1. Crear Ficha Personal de un Empleado", () => {
     cy.fixture("fichaPersonal").then((data) => {
       fichaPersonal.goToFichaPersonal();
-      fichaPersonal.crearFichaPersonal(data.empleadoValidoCompleto);
+      fichaPersonal.crearFichaPersonalCompleta(data.empleadoValidoCompleto);
     });
   });
-
   it("2. Eliminar Ficha Personal de un Empleado", () => {
     cy.fixture("fichaPersonal").then((data) => {
       fichaPersonal.goToFichaPersonal();
