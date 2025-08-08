@@ -85,20 +85,19 @@ class FichaPersonalPage {
     cy.xpath(
       "//div[@class='q-tab-label'][contains(.,'Datos familiares')]"
     ).click();
+    const cantidad = Number(datos.familiares.cantidadFamiliares);
+    for (let i = 1; i <= cantidad; i++) {
+      const cuenta = datos.financieros[`.cuenta_${i}`];
+      cy.xpath(
+        "//button[@tabindex='0'][contains(.,'person_addAgregar familiar')]"
+      ).click();
+      this.agregarFamiliar(cuenta);
+    }
 
     // //Guardar FichaPersonal
     // cy.xpath("(//div[contains(.,'Guardar')])[39]").click();
     // cy.log(`✅ Ficha Personal creada Correctamente ✅`);
     // cy.wait(1000);
-  }
-
-  ingresarValidarCédula(numeroCedula) {
-    cy.xpath(
-      "(//div[@class='col q-input-target ellipsis justify-start'])[31]"
-    ).click();
-    cy.xpath("//div[contains(text(),'Cédula')]").click();
-    cy.xpath("(//input[@type='text'])[4]").type(numeroCedula);
-    cy.xpath("(//div[contains(.,'verificar cedula')])[14]").click();
   }
 
   buscarFichaPorCedula(dataEmpleado) {
@@ -745,6 +744,21 @@ class FichaPersonalPage {
       }
     });
     return this;
+  }
+
+  ////////////////////////////////////////////////////////////////////////////////////////
+  //                                 DATOS FAMILIARES                                   //
+  ////////////////////////////////////////////////////////////////////////////////////////
+  agregarFamiliar(data) {
+    this.selectTipoDocumentoFml(data);
+  }
+
+  selectTipoDocumentoFml(data) {
+    cy.xpath(
+      "//div[@class='col-md-3 col-xs-12'][contains(.,'Tipo de documento:|Cédulaarrow_drop_down')]"
+    ).click();
+    cy.log(data);
+    cy.xpath(`//div[@class='q-item-label'][contains(.,'${data}')]`).click();
   }
 
   ////// HELPERS ////////
