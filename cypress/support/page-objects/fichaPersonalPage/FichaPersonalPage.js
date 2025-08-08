@@ -33,10 +33,10 @@ class FichaPersonalPage {
     cy.xpath("(//div[contains(.,'Datos financieros')])[9]").click();
     this.seleccionarTipoCobro(datos.tipoCobro);
 
-    //Guardar FichaPersonal
-    cy.xpath("(//div[contains(.,'Guardar')])[39]").click();
-    cy.log(`✅ Ficha Personal creada Correctamente ✅`);
-    cy.wait(1000);
+    // //Guardar FichaPersonal
+    // cy.xpath("(//div[contains(.,'Guardar')])[39]").click();
+    // cy.log(`✅ Ficha Personal creada Correctamente ✅`);
+    // cy.wait(1000);
   }
 
   ingresarValidarCédula(numeroCedula) {

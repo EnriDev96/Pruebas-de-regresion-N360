@@ -10,7 +10,7 @@ describe("Ficha Personal - Crear y Eliminar Ficha Personal del Empleado", () => 
   it.only("1. Crear Ficha Personal de un Empleado", () => {
     cy.fixture("fichaPersonal").then((data) => {
       fichaPersonal.goToFichaPersonal();
-      fichaPersonal.crearFichaPersonal(data.empleadoUno);
+      fichaPersonal.crearFichaPersonal(data.empleadoValidoCompleto);
     });
   });
 

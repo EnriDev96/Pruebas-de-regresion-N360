@@ -5,24 +5,14 @@
     "cedula": "1104730229",
     "nombres": "Bryan Enrique",
     "apellidos": "Orellana Cueva",
-    "emailInstitucional": "insitucional@email.com",
     "emailPersonal": "personal@email.com",
-    "codigoIESS": "123456",
     "sexo": "Masculino",
-    "estadoCivil": "Soltero",
     "fechaNacimiento": "1996-08-15",
     "anioNacimiento": "1996",
     "mesNacimiento": "Agosto",
     "diaNacimiento": "2",
     "sustitutoPCD": "No",
     "discapacidad": "No",
-    "estudios": "Superior",
-    "profesion": "Programador",
-    "nacionalidad": "Ecuatoriana",
-    "tipoCobroQuincena": "Por Porcentaje",
-    "porcentajeAnticipoQuincena": "30",
-    "extrangero": "No",
-    "foto": "cypress/fixtures/images/Avatar Perfil Hombre 1.jpg",
     "__DatosdeUbicacion__": "__Comentario__",
     "region": "Sierra",
     "tipoRecidencia": "Residencial",
@@ -35,24 +25,11 @@
     "cedula": "dghfd331",
     "nombres": "Bryan Enrique2",
     "apellidos": "Orellana2 Cueva",
-    "emailInstitucional": "",
     "emailPersonal": "personal@email",
-    "codigoIESS": "QWE456",
     "sexo": "Masculino",
-    "estadoCivil": "Soltero",
     "fechaNacimiento": "1996-08-15",
-    "anioNacimiento": "1996",
-    "mesNacimiento": "Agosto",
-    "diaNacimiento": "2",
     "sustitutoPCD": "No",
     "discapacidad": "",
-    "estudios": "Superior",
-    "profesion": "Programador",
-    "nacionalidad": "Ecuatoriana",
-    "tipoCobroQuincena": "Por Porcentaje",
-    "porcentajeAnticipoQuincena": "30",
-    "extrangero": "No",
-    "foto": "cypress/fixtures/images/Avatar Perfil Hombre 1.jpg",
     "__DatosdeUbicacion__": "__Comentario__",
     "region": "Sierra",
     "tipoRecidencia": "Residencial",
@@ -60,21 +37,141 @@
     "tipoCobro": "Efectivo"
   },
   "empleadoDos": {
+    "__DatosBasicos__": "__Comentario__",
     "tipoDocumento": "Cédula",
     "cedula": "1104730229",
-    "nombres": "Enrique Eduardo",
-    "apellidos": "Orellana Sarmiento",
-    "emailInstitucional": "insitucional@email.com",
+    "nombres": "Bryan Enrique",
+    "apellidos": "Orellana Cueva",
     "emailPersonal": "personal@email.com",
-    "codigoIESS": "654321",
     "sexo": "Masculino",
-    "estadoCivil": "Soltero",
-    "anioNacimiento": "1965",
-    "mesNacimiento": "Enero",
-    "diaNacimiento": "15",
-    "foto": "cypress/fixtures/images/Avatar Perfil Hombre 3.jpg",
-    "region": "Costa",
-    "tipoRecidencia": "Laboral",
+    "fechaNacimiento": "1996-08-15",
+    "anioNacimiento": "1996",
+    "mesNacimiento": "Agosto",
+    "diaNacimiento": "2",
+    "sustitutoPCD": "No",
+    "discapacidad": "No",
+    "__DatosdeUbicacion__": "__Comentario__",
+    "region": "Sierra",
+    "tipoRecidencia": "Residencial",
+    "__DatosFinancieros__": "__Comentario__",
     "tipoCobro": "Efectivo"
+  },
+
+  "empleadoValidoCompleto": {
+    "basicos": {
+      "tipoDocumento": "Cédula",
+      "cedula": "1104730229",
+      "nombres": "Bryan Enrique",
+      "apellidos": "Orellana Cueva",
+      "emailInstitucional": "correo_institucional@email.com",
+      "emailPersonal": "correo_personal@email.com",
+      "codigoIESS": "30229",
+      "sexo": "Masculino",
+      "estadoCivil": "Soltero",
+      "fechaNacimiento": "1996-08-15",
+      "sustitutoPCD": "No",
+      "discapacidad": "No",
+      "estudios": "Superior",
+      "profesion": "Programador",
+      "nacionalidad": "Ecuatoriana",
+      "tipoCobroQuincena": "Por Porcentaje",
+      "porcentajeAnticipoQuincena": "30",
+      "foto": "cypress/fixtures/images/Avatar Perfil Hombre 1.jpg",
+      "extranjero": "No",
+      "enfermedadCatastrofica": "No",
+      "enviarRolPorEmail": "Si",
+      "correoReceptor": "Personal",
+      "utilizarCodigoIESSenBach": "No"
+    },
+    "ubicacion": {
+      "cantidadUbicaciones": "1",
+      "ubi_1": {
+        "region": "Sierra",
+        "tipoRecidencia": "Residencial",
+        "pais": "Ecuador",
+        "provincia": "AZUAY",
+        "ciudad": "CUENCA",
+        "telefonoConvencional": "074040855",
+        "telefonoMovil": "0998765432",
+        "direccion": "Av. 10 de Agosto",
+        "referenciaDireccion": "Edificio Yanuncay"
+      }
+    },
+    "financieros": {
+      "cantidadCuentas": "1",
+      "cuenta_1": {
+        "tipoCobro": "Transferencia",
+        "bancoOrigen": "PRODUBANCO",
+        "cuentaBancaria": "229220374011",
+        "tipoCuenta": "Ahorro",
+        "bancoDestino": "BANCO DE LOJA"
+      }
+    },
+    "familiares": {
+      "cantidadFamiliares": "2",
+      "fml_1": {
+        "tipoDocumento": "Cédula",
+        "cedula": "0102312758",
+        "nombres": "Estefania Padilla",
+        "sexo": "Femenino",
+        "fechaNacimiento": "2003-01-11",
+        "discapacidad": "Si",
+        "porcentajeDiscapacidad": "15",
+        "parentesco": "CONYUGE",
+        "fechaCasados": "2021-03-07",
+        "pensionAlimenticia": "0",
+        "aplicaCalculoIR": "Si",
+        "enfermedadCatastrofica": "No"
+      },
+      "fml_2": {
+        "tipoDocumento": "Cédula",
+        "cedula": "0102312758",
+        "nombres": "Pablo Orellana",
+        "sexo": "Masculino",
+        "fechaNacimiento": "2022-08-10",
+        "discapacidad": "No",
+        "porcentajeDiscapacidad": "0",
+        "parentesco": "Hijo",
+        "continuaEstudiando": "Si",
+        "pensionAlimenticia": "0",
+        "aplicaCalculoIR": "Si",
+        "enfermedadCatastrofica": "No"
+      }
+    },
+    "documentosPersonales": {
+      "cantidadDocumentos": "1",
+      "doc_1": {
+        "documento": "Cédula",
+        "archivo": "cypress/fixtures/images/Test Comprobante 2 Documento .jpg"
+      }
+    },
+    "referencias": {
+      "cantidadReferenciasPersonales": "1",
+      "cantidadReferenciasProfecionales": "1",
+      "personales": {
+        "ref_1": {
+          "nombres": "Elver Jorge",
+          "apellidos": "Galarga Dominguez",
+          "telefonoOficina": "072234567",
+          "telefonoPersonal": "0998765432",
+          "extencion": "02",
+          "email": "juan.perez@email.com",
+          "relacion": "Amigo"
+        }
+      },
+      "profecionales": {
+        "ref_1": {
+          "nombres": "Elver Jorge",
+          "apellidos": "Galarga Dominguez",
+          "empresa": "Empresa XYZ",
+          "telefonoOficina": "072234567",
+          "telefonoPersonal": "0998765432",
+          "extencion": "02",
+          "email": "juan.perez@email.com",
+          "relacion": "Jefe Inmediato",
+          "comentarios": "No hay comentarios"
+        }
+      }
+    }
   }
 }
