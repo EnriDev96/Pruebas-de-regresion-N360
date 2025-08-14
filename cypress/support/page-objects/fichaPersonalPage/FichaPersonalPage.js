@@ -33,58 +33,59 @@ class FichaPersonalPage {
     cy.xpath("(//div[contains(.,'Datos financieros')])[9]").click();
     this.seleccionarTipoCobro(datos.tipoCobro);
 
-    // //Guardar FichaPersonal
-    // cy.xpath("(//div[contains(.,'Guardar')])[39]").click();
-    // cy.log(`✅ Ficha Personal creada Correctamente ✅`);
-    // cy.wait(1000);
+    //Guardar FichaPersonal
+    cy.xpath("(//div[contains(.,'Guardar')])[39]").click();
+    cy.log(`✅ Ficha Personal creada Correctamente ✅`);
+    cy.wait(1000);
   }
 
   crearFichaPersonalCompleta(datos) {
     cy.xpath("//a[@tabindex='0'][contains(.,'addEmpleado')]").click();
     cy.wait(1000);
 
-    // //Datos Basicos
-    // cy.xpath("(//div[contains(.,'Datos Básicos')])[11]").click();
-    // this.seleccionarTipoDeDocumento(datos.basicos.tipoDocumento);
-    // this.ingresarNumeroDeCedula(datos.basicos.cedula);
-    // this.ingresarNombre(datos.basicos.nombres);
-    // this.ingresarApellido(datos.basicos.apellidos);
-    // this.ingresarCorreoIntitucional(datos.basicos.emailInstitucional);
-    // this.ingresarCorreoPersonal(datos.basicos.emailPersonal);
-    // this.ingresarCodigoIESS(datos.basicos.codigoIESS);
-    // this.seleccionarSexo(datos.basicos.sexo);
-    // this.seleccionarEstadoCivil(datos.basicos.estadoCivil);
-    // this.seleccionarFechaDeNacimiento(datos.basicos.fechaNacimiento);
-    // this.seleccionarEmpleadoSustituto(datos.basicos.sustitutoPCD);
-    // this.seleccionarDiscapacidad(datos.basicos.discapacidad);
-    // this.seleccionarEstudios(datos.basicos.estudios);
-    // this.ingresarProfecion(datos.basicos.profesion);
-    // this.ingresarPorcentajeAnticipo(datos.basicos.porcentajeAnticipoQuincena);
-    // this.seleccionarFoto(datos.basicos.foto);
+    //Datos Basicos
+    cy.xpath("(//div[contains(.,'Datos Básicos')])[11]").click();
+    this.seleccionarTipoDeDocumento(datos.basicos.tipoDocumento);
+    this.ingresarNumeroDeCedula(datos.basicos.cedula);
+    this.ingresarNombre(datos.basicos.nombres);
+    this.ingresarApellido(datos.basicos.apellidos);
+    this.ingresarCorreoIntitucional(datos.basicos.emailInstitucional);
+    this.ingresarCorreoPersonal(datos.basicos.emailPersonal);
+    this.ingresarCodigoIESS(datos.basicos.codigoIESS);
+    this.seleccionarSexo(datos.basicos.sexo);
+    this.seleccionarEstadoCivil(datos.basicos.estadoCivil);
+    this.seleccionarFechaDeNacimiento(datos.basicos.fechaNacimiento);
+    this.seleccionarEmpleadoSustituto(datos.basicos.sustitutoPCD);
+    this.seleccionarDiscapacidad(datos.basicos.discapacidad);
+    this.seleccionarEstudios(datos.basicos.estudios);
+    this.ingresarProfecion(datos.basicos.profesion);
+    this.ingresarPorcentajeAnticipo(datos.basicos.porcentajeAnticipoQuincena);
+    this.seleccionarFoto(datos.basicos.foto);
 
-    // //Datos de Ubicacion
-    // cy.xpath("(//div[contains(.,'Datos de ubicación')])[11]").click();
-    // this.seleccinoarRegion(datos.ubicacion.ubi_1.region);
-    // this.seleccionarRecidencia(datos.ubicacion.ubi_1.tipoRecidencia);
-    // this.seleccionarProvincia(datos.ubicacion.ubi_1.provincia);
-    // this.seleccinoarCiudad(datos.ubicacion.ubi_1.ciudad);
-    // this.ingresarTelfFijo(datos.ubicacion.ubi_1.telefonoConvencional);
-    // this.ingresarTelfMovil(datos.ubicacion.ubi_1.telefonoMovil);
-    // this.ingresarDireccion(datos.ubicacion.ubi_1.direccion);
-    // this.ingresarReferenciaDir(datos.ubicacion.ubi_1.referenciaDireccion);
+    //Datos de Ubicacion
+    cy.xpath("(//div[contains(.,'Datos de ubicación')])[11]").click();
+    this.seleccinoarRegion(datos.ubicacion.ubi_1.region);
+    this.seleccionarRecidencia(datos.ubicacion.ubi_1.tipoRecidencia);
+    this.seleccionarProvincia(datos.ubicacion.ubi_1.provincia);
+    this.seleccinoarCiudad(datos.ubicacion.ubi_1.ciudad);
+    this.ingresarTelfFijo(datos.ubicacion.ubi_1.telefonoConvencional);
+    this.ingresarTelfMovil(datos.ubicacion.ubi_1.telefonoMovil);
+    this.ingresarDireccion(datos.ubicacion.ubi_1.direccion);
+    this.ingresarReferenciaDir(datos.ubicacion.ubi_1.referenciaDireccion);
 
-    // //Datos Financieros
-    // cy.xpath("(//div[contains(.,'Datos financieros')])[9]").click();
-    // this.seleccionarTipoCobro(datos.financieros.cuenta_1.tipoCobro);
-    // this.selectBncOrigen(datos.financieros.cuenta_1.bancoOrigen);
-    // this.selectBncDestino(datos.financieros.cuenta_1.bancoDestino);
-    // this.inputCuenta(datos.financieros.cuenta_1.cuentaBancaria);
-    // this.selectTipoCuenta(datos.financieros.cuenta_1.tipoCuenta);
+    //Datos Financieros
+    cy.xpath("(//div[contains(.,'Datos financieros')])[9]").click();
+    this.seleccionarTipoCobro(datos.financieros.cuenta_1.tipoCobro);
+    this.selectBncOrigen(datos.financieros.cuenta_1.bancoOrigen);
+    this.selectBncDestino(datos.financieros.cuenta_1.bancoDestino);
+    this.inputCuenta(datos.financieros.cuenta_1.cuentaBancaria);
+    this.selectTipoCuenta(datos.financieros.cuenta_1.tipoCuenta);
 
     //Datos Familiares
     cy.xpath(
       "//div[@class='q-tab-label'][contains(.,'Datos familiares')]"
     ).click();
+
     const cantidad = Number(datos.familiares.cantidadFamiliares);
     for (let i = 1; i <= cantidad; i++) {
       const cuenta = datos.financieros[`.cuenta_${i}`];

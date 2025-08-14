@@ -35,7 +35,7 @@ describe("Configuracion Inicial", () => {
     cy.wait(3000);
     cy.fixture("fichaPersonal").then((data) => {
       fichaPersonal.goToFichaPersonal();
-      fichaPersonal.crearFichaPersonal(data.empleadoUno);
+      fichaPersonal.crearFichaPersonalBasica(data.empleadoUno);
     });
 
     cy.log("✅✅ 2. Crear Contrato ✅✅");
