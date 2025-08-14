@@ -1,4 +1,6 @@
 const { defineConfig } = require("cypress");
+const grep = require("@cypress/grep");
+require("dotenv").config();
 const fs = require("fs");
 const path = require("path");
 
