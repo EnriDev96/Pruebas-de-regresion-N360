@@ -1,5 +1,5 @@
 Cypress.Commands.add("loginNomina360", (userType = "adminDemo") => {
-  cy.fixture("users").then((users) => {
+  cy.fixture("datafixtures/loginFixtures/users").then((users) => {
     const user = users[userType];
     cy.visit("http://localhost:8080/#/login");
     cy.xpath("//input[contains(@type,'email')]").type(user.email);

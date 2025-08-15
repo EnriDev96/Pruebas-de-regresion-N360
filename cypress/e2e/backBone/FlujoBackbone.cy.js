@@ -7,7 +7,7 @@ import AnticiposPage from "../../support/page-objects/actions/anticiposPages/ant
 import PermisosPage from "../../support/page-objects/actions/permisosPages/permisosPage";
 import PreparacionRolPage from "../../support/page-objects/actions/rol_de_pagoPages/preparacionRolPages/preparacionRolPage";
 import GeneracionRolPage from "../../support/page-objects/actions/rol_de_pagoPages/generacionRolPages/generacionRolPage";
-import generacionAsientoContable from "../../support/page-objects/actions/asientoContablePages/asientoContablePage";
+import GeneracionAsientoContable from "../../support/page-objects/actions/asientoContablePages/AsientoContablePage";
 
 describe("Configuracion Inicial", () => {
   const fichaPersonal = new FichaPersonalPage();
@@ -18,7 +18,7 @@ describe("Configuracion Inicial", () => {
   const permisos = new PermisosPage();
   const prepRol = new PreparacionRolPage();
   const genRol = new GeneracionRolPage();
-  const asiento = new generacionAsientoContable();
+  const asiento = new GeneracionAsientoContable();
 
   beforeEach(() => {
     cy.loginNomina360("adminEcuagesa");

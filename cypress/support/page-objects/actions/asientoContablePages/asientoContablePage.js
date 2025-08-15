@@ -1,7 +1,7 @@
 require("cypress-xpath");
 require("cypress-plugin-tab");
 
-class generacionAsientoContable {
+class GeneracionAsientoContable {
   goToAsientoContable() {
     cy.wait(1000);
     cy.xpath("//a[@tabindex='0'][contains(.,'dashboardDashboard')]").click({
@@ -43,4 +43,4 @@ class generacionAsientoContable {
   }
 }
 
-export default generacionAsientoContable;
+export default GeneracionAsientoContable;

@@ -28,7 +28,7 @@ class prestamosPage {
     ).type("Prestamo QA");
     cy.xpath("//div[@class='q-if-label'][contains(.,'Fecha')]").click();
     cy.xpath(
-      "//div[@class='row items-center content-center justify-center cursor-pointer'][contains(.,'15')]"
+      "//div[@class='row items-center content-center justify-center cursor-pointer text-primary q-datetime-day-active'][contains(.,'14')]"
     ).click();
     cy.get(
       ".gutter-md > :nth-child(3) > .q-field > .row.col > .q-field-content > .q-if > .q-if-inner > .row > .col"
