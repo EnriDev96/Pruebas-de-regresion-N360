@@ -1,0 +1,36 @@
+{
+  "empleadoInvalido": {
+    "__DatosBasicos__": "__Comentario__",
+    "tipoDocumento": "Cédula",
+    "cedula": "dghfd331",
+    "nombres": "Bryan Enrique2",
+    "apellidos": "Orellana2 Cueva",
+    "emailPersonal": "personal@email",
+    "sexo": "Masculino",
+    "fechaNacimiento": "1996-08-15",
+    "sustitutoPCD": "No",
+    "discapacidad": "",
+    "__DatosdeUbicacion__": "__Comentario__",
+    "region": "Sierra",
+    "tipoRecidencia": "Residencial",
+    "__DatosFinancieros__": "__Comentario__",
+    "tipoCobro": "Efectivo"
+  },
+  "empleadoEmpty": {
+    "__DatosBasicos__": "__Comentario__",
+    "tipoDocumento": "Cédula",
+    "cedula": " ",
+    "nombres": " ",
+    "apellidos": " ",
+    "emailPersonal": " ",
+    "sexo": " ",
+    "fechaNacimiento": " ",
+    "sustitutoPCD": " ",
+    "discapacidad": "",
+    "__DatosdeUbicacion__": "__Comentario__",
+    "region": " ",
+    "tipoRecidencia": " ",
+    "__DatosFinancieros__": "__Comentario__",
+    "tipoCobro": " "
+  }
+}
