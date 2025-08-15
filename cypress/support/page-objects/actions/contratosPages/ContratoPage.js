@@ -1,6 +1,6 @@
 require("cypress-xpath");
 require("cypress-plugin-tab");
-import { validationReporter } from "../../../support/utils/validationReporter";
+import { validationReporter } from "../../../utils/validationReporter";
 class ContratoPage {
   goToContratos() {
     cy.xpath("//div[normalize-space()='Contratos']").click();

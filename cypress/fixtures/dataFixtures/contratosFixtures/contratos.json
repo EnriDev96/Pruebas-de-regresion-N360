@@ -42,7 +42,7 @@
     "codigoIESS": "0001",
     "moduloGestionTurnos": "Si"
   },
-  "contratoDemo": {
+  "contratoDemoBasico": {
     "fechaIngreso": "2025-07-26",
     "mesIngreso": "Julio",
     "diaIngreso": "26",

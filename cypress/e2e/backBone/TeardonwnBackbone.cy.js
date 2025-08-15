@@ -1,9 +1,9 @@
-import FichaPersonalPage from "../../support/page-objects/fichaPersonalPage/FichaPersonalPage";
-import ContratoPage from "../../support/page-objects/contratosPages/ContratoPage";
-import VacacioPage from "../../support/page-objects/vacacionesPages/vacacionesPage";
-import PrestamosPage from "../../support/page-objects/PrestamosPages/PrestamosPage";
-import AnticiposPage from "../../support/page-objects/anticiposPages/anticiposPage";
-import PermisoPage from "../../support/page-objects/permisosPages/permisosPage";
+import FichaPersonalPage from "../../support/page-objects/actions/fichaPersonalPage/FichaPersonalPage";
+import ContratoPage from "../../support/page-objects/actions/contratosPages/ContratoPage";
+import VacacioPage from "../../support/page-objects/actions/vacacionesPages/vacacionesPage";
+import PrestamosPage from "../../support/page-objects/actions/prestamosPages/PrestamosPage";
+import AnticiposPage from "../../support/page-objects/actions/anticiposPages/anticiposPage";
+import PermisoPage from "../../support/page-objects/actions/permisosPages/permisosPage";
 
 describe("Limpieza de Datos", () => {
   const fichaPersonal = new FichaPersonalPage();

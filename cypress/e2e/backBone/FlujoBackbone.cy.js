@@ -1,13 +1,13 @@
 import { validationReporter } from "../../support/utils/validationReporter";
-import FichaPersonalPage from "../../support/page-objects/fichaPersonalPage/FichaPersonalPage";
-import ContratoPage from "../../support/page-objects/contratosPages/ContratoPage";
-import VacacionesPage from "../../support/page-objects/vacacionesPages/vacacionesPage";
-import PrestamosPage from "../../support/page-objects/prestamosPages/PrestamosPage";
-import AnticiposPage from "../../support/page-objects/anticiposPages/anticiposPage";
-import PermisosPage from "../../support/page-objects/permisosPages/permisosPage";
-import PreparacionRolPage from "../../support/page-objects/rol_de_pagoPages/preparacionRolPages/preparacionRolPage";
-import GeneracionRolPage from "../../support/page-objects/rol_de_pagoPages/generacionRolPages/generacionRolPage";
-import generacionAsientoContable from "../../support/page-objects/asientoContablePages/asientoContablePage";
+import FichaPersonalPage from "../../support/page-objects/actions/fichaPersonalPage/FichaPersonalPage";
+import ContratoPage from "../../support/page-objects/actions/contratosPages/ContratoPage";
+import VacacionesPage from "../../support/page-objects/actions/vacacionesPages/vacacionesPage";
+import PrestamosPage from "../../support/page-objects/actions/prestamosPages/PrestamosPage";
+import AnticiposPage from "../../support/page-objects/actions/anticiposPages/anticiposPage";
+import PermisosPage from "../../support/page-objects/actions/permisosPages/permisosPage";
+import PreparacionRolPage from "../../support/page-objects/actions/rol_de_pagoPages/preparacionRolPages/preparacionRolPage";
+import GeneracionRolPage from "../../support/page-objects/actions/rol_de_pagoPages/generacionRolPages/generacionRolPage";
+import generacionAsientoContable from "../../support/page-objects/actions/asientoContablePages/asientoContablePage";
 
 describe("Configuracion Inicial", () => {
   const fichaPersonal = new FichaPersonalPage();
