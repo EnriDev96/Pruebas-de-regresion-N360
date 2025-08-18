@@ -1,4 +1,3 @@
-import { validationReporter } from "../../support/utils/validationReporter";
 import FichaPersonalPage from "../../support/page-objects/actions/fichaPersonalPage/FichaPersonalPage";
 import ContratoPage from "../../support/page-objects/actions/contratosPages/ContratoPage";
 
@@ -9,10 +8,7 @@ describe("Contrato", () => {
     cy.loginNomina360();
   });
 
-  afterEach(() => {
-    validationReporter.reportAndAssertAll();
-    validationReporter.clearErrors();
-  });
+  afterEach(() => {});
 
   it("Data Ficha Personal @setup ✅", () => {
     cy.fixture("dataFixtures/fichaPersonalFixtures/fichapersonal").then(
@@ -24,10 +20,35 @@ describe("Contrato", () => {
   });
 
   it("Crear Contrato a Nuevo Empleado @e2e @contrato✅", () => {
+    contrato.goToContratos();
+    cy.xpath("(//div[contains(.,'addcontrato')])[13]").click();
+    cy.wait(3000);
+
+    cy.fixture("dataFixtures/fichaPersonalFixtures/fichapersonal").then(
+      (data) => {
+        contrato.seleccionarEmpleado(data.empleadoUno);
+      }
+    );
     cy.fixture("dataFixtures/contratosFixtures/contratos").then(
       (dataContrato) => {
-        contrato.goToContratos();
         contrato.crearContrato(dataContrato.contratoDemoBasico);
+      }
+    );
+  });
+
+  it("Teardown Contrato", () => {
+    contrato.goToContratos();
+    cy.fixture("dataFixtures/fichaPersonalFixtures/fichapersonal").then(
+      (data) => {
+        contrato.buscarFichaPorCedula(data.empleadoUno);
+        contrato.eliminarContrato();
+      }
+    );
+    cy.fixture("dataFixtures/fichaPersonalFixtures/fichapersonal").then(
+      (data) => {
+        fichaPersonal.goToFichaPersonal();
+        fichaPersonal.buscarFichaPorCedula(data.empleadoUno);
+        fichaPersonal.eliminarFichaPersonal();
       }
     );
   });

@@ -8,9 +8,8 @@ class ContratoPage {
     cy.wait(1000);
   }
   crearContrato(data) {
-    cy.xpath("(//div[contains(.,'addcontrato')])[13]").click();
-    cy.wait(3000);
-    this.seleccionarEmpleado();
+    //cy.xpath("(//div[contains(.,'addcontrato')])[13]").click();
+    //cy.wait(3000);
     this.seleccionarFechaIngreso(data.fechaIngreso);
     this.seleccionarTipoContrato(data.tipoContrato);
     this.sleccionarCodigoEstablecimiento(data.codigoEstablecimiento);
@@ -47,21 +46,26 @@ class ContratoPage {
     cy.scrollTo("bottom", { easing: "linear", duration: 1000 });
   }
 
-  eliminarContrato() {
+  buscarFichaPorCedula(data) {
     cy.xpath("(//i[@aria-hidden='true'][contains(.,'search')])[1]").click();
-    cy.xpath("(//input[contains(@placeholder,'Buscar')])[1]").type(
-      "1104730229"
-    );
-    cy.xpath("(//div[contains(.,'Orellana Cueva Bryan Enrique')])[17]").click();
-    cy.xpath("(//div[contains(.,'Eliminar contrato')])[13]").click();
-    cy.get(".modal-buttons > :nth-child(2)").click();
+    cy.xpath("(//input[contains(@placeholder,'Buscar')])[1]").type(data.cedula);
+    cy.xpath(
+      `//div[@class='q-item-sublabel ellipsis'][contains(.,'${data.cedula}')]`
+    ).click();
+  }
+
+  eliminarContrato() {
+    cy.xpath("//button[@tabindex='0'][contains(.,'deleteContrato')]").click();
+    cy.xpath("//button[@tabindex='0'][contains(.,'Si')]").click();
     cy.scrollTo("top", { easing: "linear", duration: 1000 });
   }
 
-  seleccionarEmpleado() {
-    cy.xpath("(//input[contains(@type,'text')])[4]").type("1104730229");
+  seleccionarEmpleado(data) {
+    cy.xpath(`(//input[contains(@type,'text')])[4]`).type(
+      `${data.cedula}{enter}`
+    );
     cy.xpath(
-      "//div[@class='q-item-sublabel'][contains(.,'1104730229')]"
+      `//div[@class='q-item-sublabel'][contains(.,'${data.cedula}')]`
     ).click();
   }
 

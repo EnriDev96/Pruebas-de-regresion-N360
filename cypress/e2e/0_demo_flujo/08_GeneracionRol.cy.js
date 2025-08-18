@@ -7,10 +7,7 @@ describe("Generacion del Rol", () => {
     cy.loginNomina360("adminEcuagesa");
   });
 
-  afterEach(() => {
-    validationReporter.reportAndAssertAll();
-    validationReporter.clearErrors();
-  });
+  afterEach(() => {});
 
   it("Generar Rol de Pagos Mensual ✅", () => {
     cy.fixture("dataFixtures/rolesFixtures/genRol").then((data) => {

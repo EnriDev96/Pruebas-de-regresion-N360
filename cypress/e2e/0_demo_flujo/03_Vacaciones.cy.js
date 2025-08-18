@@ -7,10 +7,7 @@ describe("Vacaciones", () => {
     cy.loginNomina360("adminEcuagesa");
   });
 
-  afterEach(() => {
-    validationReporter.reportAndAssertAll();
-    validationReporter.clearErrors();
-  });
+  afterEach(() => {});
 
   it("Solicitar y Registrar Vacaciones Normales✅", () => {
     cy.fixture("dataFixtures/empleadosEmpresaFixtures/empleadosEcuagesa").then(

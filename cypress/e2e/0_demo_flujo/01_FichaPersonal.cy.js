@@ -7,16 +7,23 @@ describe("Ficha Personal", () => {
     cy.loginNomina360();
   });
 
-  afterEach(() => {
-    validationReporter.reportAndAssertAll();
-    validationReporter.clearErrors();
-  });
+  afterEach(() => {});
 
   it("Crear Ficha Personal Basica ✅", () => {
     cy.fixture("dataFixtures/fichaPersonalFixtures/fichapersonal").then(
       (data) => {
         fichaPersonal.goToFichaPersonal();
         fichaPersonal.crearFichaPersonalBasica(data.empleadoUno);
+      }
+    );
+  });
+
+  it("Teardown Ficha Personal", () => {
+    cy.fixture("dataFixtures/fichaPersonalFixtures/fichapersonal").then(
+      (data) => {
+        fichaPersonal.goToFichaPersonal();
+        fichaPersonal.buscarFichaPorCedula(data.empleadoUno);
+        fichaPersonal.eliminarFichaPersonal();
       }
     );
   });

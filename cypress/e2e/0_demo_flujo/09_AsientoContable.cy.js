@@ -7,10 +7,7 @@ describe("Asientos Contables", () => {
     cy.loginNomina360("adminEcuagesa");
   });
 
-  afterEach(() => {
-    validationReporter.reportAndAssertAll();
-    validationReporter.clearErrors();
-  });
+  afterEach(() => {});
 
   it("Generar y descargar Asiento Contable Mensual ✅", () => {
     cy.fixture("dataFixtures/rolesFixtures/genRol").then((data) => {

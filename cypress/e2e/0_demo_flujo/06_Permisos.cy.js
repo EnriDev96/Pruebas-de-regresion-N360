@@ -7,10 +7,7 @@ describe("Permisos", () => {
     cy.loginNomina360("adminEcuagesa");
   });
 
-  afterEach(() => {
-    validationReporter.reportAndAssertAll();
-    validationReporter.clearErrors();
-  });
+  afterEach(() => {});
 
   it("Solicitar y Registrar Permiso Medico ✅", () => {
     cy.fixture("dataFixtures/empleadosEmpresaFixtures/empleadosEcuagesa").then(

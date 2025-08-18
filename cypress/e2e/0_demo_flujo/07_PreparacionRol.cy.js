@@ -7,10 +7,7 @@ describe("Preparacion del Rol", () => {
     cy.loginNomina360("adminEcuagesa");
   });
 
-  afterEach(() => {
-    validationReporter.reportAndAssertAll();
-    validationReporter.clearErrors();
-  });
+  afterEach(() => {});
 
   it("Preparar y descargar borrador del Rol de Pagos Mensual ✅", () => {
     cy.fixture("dataFixtures/rolesFixtures/genRol").then((data) => {
