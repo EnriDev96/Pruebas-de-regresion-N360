@@ -101,7 +101,7 @@ class vacacionesPage {
     ];
     const mesNombre = meses[parseInt(mes, 10)];
     cy.xpath("(//span[@tabindex='-1'])[3]").click();
-    cy.xpath(`(//div[contains(.,'${anio}')])[71]`).click();
+    cy.xpath(`(//div[contains(.,'${anio}')])[66]`).click();
     cy.xpath(`(//div[contains(.,'${mesNombre}')])[20]`).click();
     cy.xpath(
       `//div[@class='row items-center content-center justify-center cursor-pointer'][contains(.,'${parseInt(

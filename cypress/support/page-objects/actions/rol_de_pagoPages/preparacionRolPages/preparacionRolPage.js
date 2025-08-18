@@ -7,6 +7,7 @@ class preparacionRolPage {
     cy.xpath("//a[@tabindex='0'][contains(.,'settingsConfiguración')]").click({
       force: true,
     });
+    cy.wait(500);
     cy.xpath("//button[@tabindex='0'][contains(.,'Roles de pago')]").click();
     cy.xpath("//a[@tabindex='0'][contains(.,'Preparación de roles')]").click();
     cy.wait(1000);

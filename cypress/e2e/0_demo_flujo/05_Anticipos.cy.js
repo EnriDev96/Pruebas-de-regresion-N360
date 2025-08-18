@@ -13,9 +13,30 @@ describe("Anticipos", () => {
     cy.fixture("dataFixtures/empleadosEmpresaFixtures/empleadosEcuagesa").then(
       (data) => {
         anticipo.goToAnticipos();
-        anticipo.solicitarAnticipo(data.Bayas_Israel);
+        cy.xpath("(//div[contains(.,'addRegistrar')])[14]").click();
+        cy.wait(500);
+        anticipo.seleccionarEmpleado(data.Bayas_Israel);
+      }
+    );
+    cy.fixture("dataFixtures/anticiposFixtures/anticipoFixture").then(
+      (dataAnticipo) => {
+        anticipo.solicitarAnticipo(dataAnticipo.anticipoNormal);
         anticipo.goToAnticipos();
-        anticipo.registrarAnticipo();
+        anticipo.registrarAnticipo(dataAnticipo.anticipoNormal);
+      }
+    );
+  });
+
+  it("Teardown Anticipos", () => {
+    cy.fixture("dataFixtures/empleadosEmpresaFixtures/empleadosEcuagesa").then(
+      (data) => {
+        anticipo.goToAnticipos();
+        anticipo.seleccionarEmpleado(data.Bayas_Israel);
+      }
+    );
+    cy.fixture("dataFixtures/anticiposFixtures/anticipoFixture").then(
+      (dataAnticipo) => {
+        anticipo.eliminarAnticipoRegistrado(dataAnticipo.anticipoNormal);
       }
     );
   });
