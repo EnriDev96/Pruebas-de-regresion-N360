@@ -21,23 +21,23 @@ class prestamosPage {
     cy.scrollTo("top");
     cy.wait(500);
   }
-  solicitarPrestamo(dataEmpleado) {
-    this.seleccionarEmpleado(dataEmpleado);
-    cy.get(
-      ".gutter-md > :nth-child(1) > .q-if > .q-if-inner > .row > .col"
-    ).type("Prestamo QA");
+  solicitarPrestamo(data) {
+    cy.xpath("//div[@tabindex='-1'][contains(.,'|MotivoMotivo')]").type(
+      data.motivo
+    );
     cy.xpath("//div[@class='q-if-label'][contains(.,'Fecha')]").click();
+    this.seleccionarFecha(data.fecha);
+
+    cy.xpath("//div[@class='q-if-label'][contains(.,'Monto')]").type(
+      data.monto
+    );
     cy.xpath(
-      "//div[@class='row items-center content-center justify-center cursor-pointer text-primary q-datetime-day-active'][contains(.,'14')]"
+      "//div[@class='row no-wrap relative-position'][contains(.,'Cuotas')]"
     ).click();
-    cy.get(
-      ".gutter-md > :nth-child(3) > .q-field > .row.col > .q-field-content > .q-if > .q-if-inner > .row > .col"
-    ).type("120");
-    cy.get(":nth-child(4) > .q-if > .q-if-inner > .row").click();
     cy.xpath("(//div[@class='q-item-label'][contains(.,'1')])[1]").click();
-    cy.get(
-      ":nth-child(1) > :nth-child(5) > .q-if > .q-if-inner > .row > .col"
-    ).type("0");
+    cy.xpath("//div[@class='q-if-label'][contains(.,'Interés')]").type(
+      data.interes
+    );
     cy.get(
       ".q-field-content > :nth-child(1) > .q-option-inner > .q-radio-unchecked"
     ).click();
@@ -76,23 +76,21 @@ class prestamosPage {
     cy.wait(1000);
   }
 
-  eliminarPrestamoRegistrado(dataEmpleado) {
-    cy.get(".gutter-sm > :nth-child(1) > .q-btn").click();
+  eliminarPrestamoRegistrado(data) {
+    cy.xpath("//div[@class='q-table-control'][contains(.,'|search')]").type(
+      data.fecha
+    );
+    cy.xpath("//button[contains(.,'Pagar')]").click();
+    cy.xpath("//div[@class='q-if-label'][contains(.,'Valor a pagar')]").type(
+      data.monto
+    );
+    cy.xpath("//div[@class='q-if-label'][contains(.,'Observación')]").type(
+      "Prueba E2E QA"
+    );
+    cy.xpath(
+      "//div[@class='text-center full-width'][contains(.,'Generar Pago')]"
+    ).click();
     cy.wait(500);
-    this.seleccionarEmpleado(dataEmpleado);
-
-    cy.get(
-      ":nth-child(1) > :nth-child(3) > .q-if > .q-if-inner > .row > .col"
-    ).type("120");
-    cy.get(".q-btn-group > .text-primary").click();
-    cy.get(
-      ":nth-child(1) > .q-card > .q-card-main > :nth-child(1) > .row.col > .q-field-content > .q-if > .q-if-inner > .row > .col"
-    ).type("120");
-    cy.get(
-      ".q-card-main > :nth-child(2) > .row.col > .q-field-content > .q-if > .q-if-inner > .row > .col"
-    ).type("Prueba QA");
-    cy.get(".q-card-actions > .text-center > .q-btn").click();
-    cy.wait(1000);
     cy.xpath("//button[@tabindex='0'][contains(.,'Eliminar')]").click();
     cy.xpath("//button[@tabindex='0'][contains(.,'Si')]").click();
     cy.wait(1000);
@@ -107,6 +105,35 @@ class prestamosPage {
       ":nth-child(1) > :nth-child(3) > .q-if > .q-if-inner > .row > .col"
     ).type("120");
     cy.wait(2000);
+  }
+
+  seleccionarFecha(data) {
+    const [anio, mes, dia] = data.split("-");
+    const meses = [
+      "",
+      "Enero",
+      "Febrero",
+      "Marzo",
+      "Abril",
+      "Mayo",
+      "Junio",
+      "Julio",
+      "Agosto",
+      "Septiembre",
+      "Octubre",
+      "Noviembre",
+      "Diciembre",
+    ];
+    const mesNombre = meses[parseInt(mes, 10)];
+    cy.xpath("(//span[@tabindex='-1'])[3]").click();
+    cy.xpath(`(//div[contains(.,'${anio}')])[46]`).click();
+    cy.xpath(`(//div[contains(.,'${mesNombre}')])[20]`).click();
+    cy.xpath(
+      `//div[@class='row items-center content-center justify-center cursor-pointer'][contains(.,'${parseInt(
+        dia,
+        10
+      )}')]`
+    ).click();
   }
 }
 

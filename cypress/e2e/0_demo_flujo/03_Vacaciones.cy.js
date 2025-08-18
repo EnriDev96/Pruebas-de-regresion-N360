@@ -9,7 +9,7 @@ describe("Vacaciones", () => {
 
   afterEach(() => {});
 
-  it.only("Solicitar y Registrar Vacaciones Normales✅", () => {
+  it("Solicitar y Registrar Vacaciones Normales✅", () => {
     cy.fixture("dataFixtures/empleadosEmpresaFixtures/empleadosEcuagesa").then(
       (data) => {
         vacaciones.goToVacaciones();
@@ -24,7 +24,7 @@ describe("Vacaciones", () => {
     );
   });
 
-  it.only("Teardown Vacacion Registrada", () => {
+  it("Teardown Vacacion Registrada", () => {
     cy.fixture("dataFixtures/empleadosEmpresaFixtures/empleadosEcuagesa").then(
       (data) => {
         vacaciones.goToVacaciones();

@@ -1,0 +1,10 @@
+{
+  "prestamoNormal": {
+    "motivo": "Calamidad Domestica",
+    "fecha": "2025-08-15",
+    "monto": "120",
+    "cuotas": "2",
+    "interes": "5",
+    "reflejarIngreso": "No"
+  }
+}

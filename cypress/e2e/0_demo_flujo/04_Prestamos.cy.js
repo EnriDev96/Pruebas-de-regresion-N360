@@ -13,9 +13,30 @@ describe("Prestamos", () => {
     cy.fixture("dataFixtures/empleadosEmpresaFixtures/empleadosEcuagesa").then(
       (data) => {
         prestamos.goToPrestamos();
-        prestamos.solicitarPrestamo(data.Bayas_Israel);
+        prestamos.seleccionarEmpleado(data.Bayas_Israel);
+        cy.fixture("dataFixtures/prestamosFixtures/prestamoFixture").then(
+          (dataPrestamo) => {
+            prestamos.solicitarPrestamo(dataPrestamo.prestamoNormal);
+          }
+        );
         prestamos.goToPrestamos();
         prestamos.resgistrarPrestamoSolicitado(data.Bayas_Israel);
+      }
+    );
+  });
+
+  it("Teardown Prestamo", () => {
+    cy.fixture("dataFixtures/empleadosEmpresaFixtures/empleadosEcuagesa").then(
+      (data) => {
+        prestamos.goToPrestamos();
+        cy.get(".gutter-sm > :nth-child(1) > .q-btn").click();
+        cy.wait(500);
+        prestamos.seleccionarEmpleado(data.Bayas_Israel);
+        cy.fixture("dataFixtures/prestamosFixtures/prestamoFixture").then(
+          (dataPrestamo) => {
+            prestamos.eliminarPrestamoRegistrado(dataPrestamo.prestamoNormal);
+          }
+        );
       }
     );
   });
