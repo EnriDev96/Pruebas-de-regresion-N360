@@ -1,0 +1,11 @@
+{
+  "vacacionesNormales": {
+    "__NormalesDisponibles__": "",
+    "periodo": "2024-2025",
+    "fechaInicio": "2025-08-14",
+    "diasDisponibles": "5",
+    "__AdicionalesDisponibles__": "",
+    "metodo": "",
+    "adicionalesDisponibles": ""
+  }
+}

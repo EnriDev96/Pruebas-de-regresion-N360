@@ -21,17 +21,17 @@ class vacacionesPage {
     cy.wait(500);
   }
 
-  solicitarVacacionNormal() {
+  solicitarVacacionNormal(data) {
     cy.xpath("(//div[contains(.,'Generar')])[179]").click();
     cy.xpath("(//div[contains(.,'Normal')])[18]").click();
     cy.xpath("(//div[contains(.,'Periodo')])[61]").click();
-    cy.xpath("(//div[contains(.,'2024-2025')])[30]").click();
+    cy.xpath(`(//div[contains(.,'${data.periodo}')])[30]`).click();
     cy.xpath("(//div[contains(.,'Fecha de inicio')])[16]").click();
-    cy.xpath(
-      "//div[@class='row items-center content-center justify-center cursor-pointer'][contains(.,'14')]"
-    ).click();
+    this.seleccionarFecha(data.fechaInicio);
     cy.xpath("(//div[contains(.,'Días normales disponibles')])[16]").click();
-    cy.xpath("//div[@class='q-item-label'and text()='5']").click();
+    cy.xpath(
+      `//div[@class='q-item-label'and text()='${data.diasDisponibles}']`
+    ).click();
     cy.xpath("(//div[contains(.,'Generar')])[195]").click();
     cy.wait(1000);
   }
@@ -61,11 +61,54 @@ class vacacionesPage {
     cy.wait(1000);
   }
 
-  eliminarVacacionRegistrada() {
+  eliminarVacacionRegistrada(data) {
     cy.xpath("//button[@tabindex='0'][contains(.,'Historico')]").click();
-    cy.xpath("(//i[@aria-hidden='true'][contains(.,'delete')])[2]").click();
+    // Verificar si la fila con la fecha existe
+    cy.get("body").then(($body) => {
+      if ($body.find(`tr:contains("${data.fechaInicio}")`).length === 0) {
+        cy.xpath("//button[@tabindex='0'][contains(.,'chevron_right')]")
+          .should("exist")
+          .click();
+      }
+    });
+    // Buscar y hacer clic en el botón delete de la fila específica
+    cy.get("tr")
+      .contains(data.fechaInicio)
+      .parent("tr")
+      .find("button.text-negative")
+      .click();
+    //Confirmar la eliminacion del registro
     cy.xpath("//button[@tabindex='0'][contains(.,'Si')]").click();
     cy.wait(1000);
+  }
+
+  seleccionarFecha(data) {
+    const [anio, mes, dia] = data.split("-");
+    const meses = [
+      "",
+      "Enero",
+      "Febrero",
+      "Marzo",
+      "Abril",
+      "Mayo",
+      "Junio",
+      "Julio",
+      "Agosto",
+      "Septiembre",
+      "Octubre",
+      "Noviembre",
+      "Diciembre",
+    ];
+    const mesNombre = meses[parseInt(mes, 10)];
+    cy.xpath("(//span[@tabindex='-1'])[3]").click();
+    cy.xpath(`(//div[contains(.,'${anio}')])[71]`).click();
+    cy.xpath(`(//div[contains(.,'${mesNombre}')])[20]`).click();
+    cy.xpath(
+      `//div[@class='row items-center content-center justify-center cursor-pointer'][contains(.,'${parseInt(
+        dia,
+        10
+      )}')]`
+    ).click();
   }
 }
 
