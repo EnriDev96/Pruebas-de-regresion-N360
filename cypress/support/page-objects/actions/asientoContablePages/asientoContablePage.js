@@ -36,10 +36,16 @@ class GeneracionAsientoContable {
     //Generar Asiento
     cy.xpath("(//div[contains(.,'Generar')])[178]").click();
   }
-  descargarAsientoContable(dataRol) {
+  buscarAsientoContable(dataRol) {
     cy.xpath("//input[contains(@placeholder,'Buscar')]").type(dataRol.nombre);
-    cy.wait(1000);
+    cy.wait(500);
+  }
+  descargarAsientoContable() {
     cy.xpath("(//i[@class='q-icon fas fa-file-excel'])[1]").click();
+  }
+  eliminarAsientoContable() {
+    cy.xpath("//button[@tabindex='0'][contains(.,'delete')]").click();
+    cy.xpath("//button[@tabindex='0'][contains(.,'Si')]").click();
   }
 }
 

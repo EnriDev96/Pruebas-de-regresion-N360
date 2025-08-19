@@ -7,7 +7,7 @@ import AnticiposPage from "../../support/page-objects/actions/anticiposPages/ant
 import PermisosPage from "../../support/page-objects/actions/permisosPages/permisosPage";
 import PreparacionRolPage from "../../support/page-objects/actions/rol_de_pagoPages/preparacionRolPages/preparacionRolPage";
 import GeneracionRolPage from "../../support/page-objects/actions/rol_de_pagoPages/generacionRolPages/generacionRolPage";
-import GeneracionAsientoContable from "../../support/page-objects/actions/asientoContablePages/AsientoContablePage";
+import GeneracionAsientoContable from "../../support/page-objects/actions/asientoContablePages/asientoContablePage";
 
 describe("Configuracion Inicial", () => {
   const fichaPersonal = new FichaPersonalPage();
