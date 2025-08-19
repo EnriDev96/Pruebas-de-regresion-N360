@@ -44,10 +44,19 @@ class generacionRolPage {
     cy.xpath("(//div[contains(.,'Aprobar')])[12]").click();
     cy.wait(1000);
   }
-  descargarRolGeneral(dataRol) {
+  descargarRolGeneral() {
     cy.xpath("(//div[contains(.,'Reportes')])[20]").click();
     cy.xpath("(//div[contains(.,'Reporte general')])[4]").click();
     cy.xpath("(//div[contains(.,'Generar Reporte General')])[22]").click();
+  }
+
+  revertirRol() {
+    cy.xpath("(//button[@tabindex='0'][contains(.,'Revertir')])[1]").click();
+  }
+  eliminarRol() {
+    cy.xpath("//button[@tabindex='0'][contains(.,'Eliminar')]").click();
+    cy.xpath("(//button[@tabindex='0'][contains(.,'Si')])[2]").click();
+    cy.wait(1000);
   }
 
   tiempoGeneraciónDocumento(xpath) {

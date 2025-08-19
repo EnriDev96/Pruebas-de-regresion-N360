@@ -39,7 +39,7 @@ class permisosPage {
       "//div[@class='q-if-label'][contains(.,'Fecha del permiso')]"
     ).click();
     //❌Pendiente de Corregir❌
-    // Por algun motivo no permite escoger la fecha deseada sin antes ecocger la fecha actual
+    // Por algun motivo no permite guardar el permiso sin antes ecocger la fecha actual
     cy.xpath(
       "//div[@class='row items-center content-center justify-center cursor-pointer text-primary q-datetime-day-today']"
     ).click();

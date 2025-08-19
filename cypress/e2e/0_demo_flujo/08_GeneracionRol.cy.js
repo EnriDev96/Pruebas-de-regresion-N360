@@ -16,11 +16,17 @@ describe("Generacion del Rol", () => {
       cy.wait(15000);
     });
   });
-  it("Descargar reporte del Rol de Pagos Mensual ✅", () => {
+  it("Aprobar Rol de Pagos Mensual", () => {
     cy.fixture("dataFixtures/rolesFixtures/genRol").then((data) => {
       genRol.goToGeneracionDelRol();
       genRol.buscarRol(data.rolMensualJulio);
       genRol.aprobarRol();
+    });
+  });
+  it("Descargar reporte del Rol de Pagos Mensual", () => {
+    cy.fixture("dataFixtures/rolesFixtures/genRol").then((data) => {
+      genRol.goToGeneracionDelRol();
+      genRol.buscarRol(data.rolMensualJulio);
       genRol.descargarRolGeneral();
       cy.wait(5000);
     });
@@ -30,16 +36,40 @@ describe("Generacion del Rol", () => {
     cy.fixture("dataFixtures/rolesFixtures/genRol").then((data) => {
       genRol.goToGeneracionDelRol();
       genRol.generarTipoRol(data.rolQincenalAgosto);
-      cy.wait(15000);
+      cy.wait(5000);
     });
   });
-  it("Descargar reporte del Rol de Pagos Quincenal ✅", () => {
+  it("Aprobar reporte del Rol de Pagos Quincenal", () => {
     cy.fixture("dataFixtures/rolesFixtures/genRol").then((data) => {
       genRol.goToGeneracionDelRol();
       genRol.buscarRol(data.rolQincenalAgosto);
       genRol.aprobarRol();
+    });
+  });
+  it("Descargar reporte del Rol de Pagos Quincenal", () => {
+    cy.fixture("dataFixtures/rolesFixtures/genRol").then((data) => {
+      genRol.goToGeneracionDelRol();
+      genRol.buscarRol(data.rolQincenalAgosto);
       genRol.descargarRolGeneral();
       cy.wait(5000);
+    });
+  });
+
+  it("Teardown Rol de Pagos Quincenal", () => {
+    cy.fixture("dataFixtures/rolesFixtures/genRol").then((data) => {
+      genRol.goToGeneracionDelRol();
+      genRol.buscarRol(data.rolQincenalAgosto);
+      genRol.revertirRol();
+      genRol.eliminarRol();
+    });
+  });
+
+  it("Teardown Rol de Pagos Mensual", () => {
+    cy.fixture("dataFixtures/rolesFixtures/genRol").then((data) => {
+      genRol.goToGeneracionDelRol();
+      genRol.buscarRol(data.rolMensualJulio);
+      genRol.revertirRol();
+      genRol.eliminarRol();
     });
   });
 });
