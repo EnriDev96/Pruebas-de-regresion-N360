@@ -13,9 +13,30 @@ describe("Permisos", () => {
     cy.fixture("dataFixtures/empleadosEmpresaFixtures/empleadosEcuagesa").then(
       (data) => {
         permisos.goToPermisos();
-        permisos.solicitarPermisoMedico(data.Bayas_Israel);
-        permisos.goToPermisos();
+        permisos.seleccionarEmpleado(data.Bayas_Israel);
+        cy.fixture("dataFixtures/permisosFixtures/permisoFixture").then(
+          (dataPermiso) => {
+            permisos.solicitarPermisoMedico(dataPermiso.permisoLicenciaMedica);
+          }
+        );
         permisos.registrarPermiso(data.Bayas_Israel);
+      }
+    );
+  });
+  it("Teardown Permiso Medico", () => {
+    permisos.goToPermisos();
+    cy.xpath(
+      "//div[@class='col-xs-4 col-md-3'][contains(.,'visibilityPermiso')]"
+    ).click();
+    cy.wait(500);
+    cy.fixture("dataFixtures/empleadosEmpresaFixtures/empleadosEcuagesa").then(
+      (data) => {
+        permisos.seleccionarEmpleado(data.Bayas_Israel);
+      }
+    );
+    cy.fixture("dataFixtures/permisosFixtures/permisoFixture").then(
+      (dataPermiso) => {
+        permisos.eliminarPermisos(dataPermiso.permisoLicenciaMedica);
       }
     );
   });
@@ -24,9 +45,31 @@ describe("Permisos", () => {
     cy.fixture("dataFixtures/empleadosEmpresaFixtures/empleadosEcuagesa").then(
       (data) => {
         permisos.goToPermisos();
-        permisos.solicitarPermisoMaterno(data.Cevallos_Monica);
-        permisos.goToPermisos();
+        permisos.seleccionarEmpleado(data.Cevallos_Monica);
+        cy.fixture("dataFixtures/permisosFixtures/permisoFixture").then(
+          (dataPermiso) => {
+            permisos.solicitarPermisoMaterno(dataPermiso.permisoMaternidad);
+          }
+        );
         permisos.registrarPermiso(data.Cevallos_Monica);
+      }
+    );
+  });
+
+  it("Teardown Permiso de Maternidad", () => {
+    permisos.goToPermisos();
+    cy.xpath(
+      "//div[@class='col-xs-4 col-md-3'][contains(.,'visibilityPermiso')]"
+    ).click();
+    cy.wait(500);
+    cy.fixture("dataFixtures/empleadosEmpresaFixtures/empleadosEcuagesa").then(
+      (data) => {
+        permisos.seleccionarEmpleado(data.Cevallos_Monica);
+      }
+    );
+    cy.fixture("dataFixtures/permisosFixtures/permisoFixture").then(
+      (dataPermiso) => {
+        permisos.eliminarPermisos(dataPermiso.permisoMaternidad);
       }
     );
   });

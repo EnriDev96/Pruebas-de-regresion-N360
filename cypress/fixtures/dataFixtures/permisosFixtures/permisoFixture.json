@@ -1,0 +1,35 @@
+{
+  "permisoLicenciaMedica": {
+    "tipo": "Permisos - Licencias Médicas y Otros",
+    "motivo": "Subsidio Iess",
+    "fechaInicio": "2025-07-21",
+    "fechaFinal": "2025-07-23",
+    "comprobante": "cypress/fixtures/images/Test Comprobante Imagen .jpg"
+  },
+
+  "permisoMaternidad": {
+    "tipo": "Permiso de Maternidad",
+    "motivo": "__No aplica__",
+    "fechaInicio": "2025-07-14",
+    "fechaFinal": "__No aplica__",
+    "comprobante": "cypress/fixtures/images/Test Comprobante Imagen .jpg"
+  },
+
+  "permisoPaternidad": {
+    "tipo": "Permiso de Paternidad",
+    "motivo": "Normal",
+    "fechaInicio": "2025-08-14",
+    "fechaFinal": "__No aplica__",
+    "comprobante": "cypress/fixtures/images/Test Comprobante Imagen .jpg"
+  },
+
+  "permisoOtros": {
+    "tipo": "Otros permisos",
+    "motivo": "Cita Medica",
+    "tipoPlazo": "Días",
+    "plazo": "2",
+    "fechaInicio": "2025-08-25",
+    "fechaFinal": "__No aplica__",
+    "comprobante": "cypress/fixtures/images/Test Comprobante Imagen .jpg"
+  }
+}

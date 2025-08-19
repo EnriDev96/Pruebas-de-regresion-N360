@@ -27,15 +27,13 @@ class permisosPage {
     cy.wait(500);
   }
 
-  solicitarPermisoMaterno(dataEmpleado) {
-    //Buscar al Empleado
-    this.seleccionarEmpleado(dataEmpleado);
+  solicitarPermisoMaterno(data) {
     //Ingresar Informacion
     cy.xpath(
       "//div[@class='q-if-label'][contains(.,'Tipo de Solicitud')]"
     ).click();
     cy.xpath(
-      "//div[@class='q-item-label'][contains(.,'Permiso de Maternidad')]"
+      `//div[@class='q-item-label'][contains(.,'${data.tipo}')]`
     ).click();
     cy.xpath(
       "//div[@class='q-if-label'][contains(.,'Fecha del permiso')]"
@@ -49,19 +47,13 @@ class permisosPage {
       ":nth-child(1) > :nth-child(1) > :nth-child(2) > .row.col > .q-field-content > .q-if > .q-icon"
     ).click();
     //❌Fin del Warning❌
-    cy.xpath("(//span[@tabindex='-1'])[3]").click();
-    cy.xpath(`(//div[contains(.,'2025')])[55]`).click();
-    cy.xpath(`(//div[contains(.,'Julio')])[6]`).click();
-    cy.xpath(
-      `//div[@class='row items-center content-center justify-center cursor-pointer'][contains(.,'19')]`
-    ).click();
-    cy.get(".q-uploader-input").selectFile(
-      "cypress/fixtures/images/Test Comprobante Imagen .jpg"
-    );
+    this.seleccionarFecha(data.fechaInicio);
+    cy.get(".q-uploader-input").selectFile(data.comprobante);
     cy.scrollTo("top", { easing: "linear", duration: 1000 });
-    //Guardar Informacion
-    cy.get(".gutter-sm > :nth-child(1) > .q-btn").click();
-    cy.wait(1000);
+    cy.xpath(
+      "//div[@class='col-xs-4 col-md-3'][contains(.,'saveGuardar')]"
+    ).click();
+    cy.wait(500);
   }
 
   solicitarPermisoPaterno(dataEmpleado) {
@@ -105,62 +97,45 @@ class permisosPage {
     cy.wait(1000);
   }
 
-  solicitarPermisoMedico(dataEmpleado) {
-    //Buscar al Empleado
-    this.seleccionarEmpleado(dataEmpleado);
-    //Ingresar Informacion
+  solicitarPermisoMedico(data) {
     cy.xpath(
       "//div[@class='q-if-label'][contains(.,'Tipo de Solicitud')]"
     ).click();
     cy.xpath(
-      "//div[@class='q-item-label'][contains(.,'Permisos - Licencias Médicas y Otros')]"
+      `//div[@class='q-item-label'][contains(.,'${data.tipo}')]`
     ).click();
-    //Ingresar Fecha de Inicio
     cy.xpath(
       "//div[@class='q-if-label'][contains(.,'Fecha del permiso')]"
     ).click();
-    cy.xpath("(//span[@tabindex='-1'])[3]").click();
-    cy.xpath(`(//div[contains(.,'2025')])[33]`).click();
-    cy.xpath(`(//div[contains(.,'Julio')])[6]`).click();
-    cy.xpath(
-      `//div[@class='row items-center content-center justify-center cursor-pointer'][contains(.,'23')]`
-    ).click();
-    //Ingresar Fecha de Finalizacion
+    this.seleccionarFecha(data.fechaInicio);
     cy.xpath(
       "//div[@class='q-if-label'][contains(.,'Fecha de finalización')]"
     ).click();
-    cy.xpath("(//span[@tabindex='-1'])[3]").click();
-    cy.xpath(`(//div[contains(.,'2025')])[48]`).click();
-    cy.xpath(`(//div[contains(.,'Julio')])[6]`).click();
-    cy.xpath(
-      `//div[@class='row items-center content-center justify-center cursor-pointer'][contains(.,'25')]`
-    ).click();
-    //Ingresar Motivo de Solicitud
+    this.seleccionarFecha(data.fechaFinal);
     cy.xpath(
       "//div[@tabindex='0'][contains(.,'|MotivoMotivoarrow_drop_down')]"
     ).click();
     cy.xpath(
-      "//div[@class='q-item-label'][contains(.,'Subsidio Iess')]"
+      `//div[@class='q-item-label'][contains(.,'${data.motivo}')]`
     ).click();
-    //Seleccionar Comprobante
-    cy.get(".q-uploader-input").selectFile(
-      "cypress/fixtures/images/Test Comprobante Imagen .jpg"
-    );
+    cy.get(".q-uploader-input").selectFile(data.comprobante);
     cy.scrollTo("top", { easing: "linear", duration: 1000 });
-    //Guardar Informacion
-    cy.get(".gutter-sm > :nth-child(1) > .q-btn").click();
-    cy.wait(1000);
+    cy.xpath(
+      "//div[@class='col-xs-4 col-md-3'][contains(.,'saveGuardar')]"
+    ).click();
+    cy.wait(500);
   }
 
   registrarPermiso(dataEmpleado) {
-    cy.get(".gutter-sm > :nth-child(2) > .q-btn").click();
-    cy.get(
-      ".q-table-top > :nth-child(3) > .q-if > .q-if-inner > .row > .col"
-    ).type(dataEmpleado.apellido);
-    cy.wait(1000);
-    cy.xpath("(//div[contains(.,'registrar')])[19]").click();
-    cy.get(".modal-buttons > :nth-child(2)").click();
-    cy.wait(1000);
+    cy.xpath(
+      "//div[@class='col-xs-4 col-md-3'][contains(.,'addPor Registrar')]"
+    ).click();
+    cy.wait(500);
+    cy.get(".q-table-top > :nth-child(3) > .q-if").type(dataEmpleado.apellido);
+    cy.wait(500);
+    cy.xpath("//button[@tabindex='0'][contains(.,'registrar')]").click();
+    cy.xpath("//button[@tabindex='0'][contains(.,'Si')]").click();
+    cy.wait(500);
   }
 
   visualizarPermisos(dataEmpleado, tipoSolicitud) {
@@ -192,22 +167,49 @@ class permisosPage {
     cy.wait(2000);
   }
 
-  eliminarPermisos(dataEmpleado) {
-    cy.xpath(
-      "//div[@class='col-xs-4 col-md-3'][contains(.,'visibilityPermiso')]"
-    ).click();
-    cy.wait(1000);
-    this.seleccionarEmpleado(dataEmpleado);
-    cy.get(
-      ".q-table-top > :nth-child(3) > .q-if > .q-if-inner > .row > .col"
-    ).type("Maternidad");
-    cy.wait(1000);
+  eliminarPermisos(data) {
+    cy.get(":nth-child(1) > :nth-child(3) > .q-if").type(data.fechaInicio);
+    cy.wait(500);
     cy.xpath("(//div[contains(.,'Eliminar')])[16]").scrollIntoView({
       easing: "linear",
-      duration: 2000,
+      duration: 1000,
     });
     cy.xpath("(//div[contains(.,'Eliminar')])[16]").click();
     cy.xpath("//button[@tabindex='0'][contains(.,'Si')]").click();
+  }
+
+  seleccionarFecha(data) {
+    const [anio, mes, dia] = data.split("-");
+    const meses = [
+      "",
+      "Enero",
+      "Febrero",
+      "Marzo",
+      "Abril",
+      "Mayo",
+      "Junio",
+      "Julio",
+      "Agosto",
+      "Septiembre",
+      "Octubre",
+      "Noviembre",
+      "Diciembre",
+    ];
+    const mesNombre = meses[parseInt(mes, 10)];
+    cy.xpath("(//span[@tabindex='-1'])[3]").click();
+    //cy.xpath(`(//div[contains(.,'${anio}')])[33]`).click();
+    cy.xpath(
+      `//div[@class='q-btn-inner row col items-center q-popup--skip justify-center'][contains(.,'${anio}')]`
+    ).click();
+    cy.xpath(
+      `//div[@class='q-btn-inner row col items-center q-popup--skip justify-center'][contains(.,'${mesNombre}')]`
+    ).click();
+    cy.xpath(
+      `//div[@class='row items-center content-center justify-center cursor-pointer'][contains(.,'${parseInt(
+        dia,
+        10
+      )}')]`
+    ).click();
   }
 }
 
