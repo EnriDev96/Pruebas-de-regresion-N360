@@ -35,7 +35,20 @@ class FichaPersonalPage {
 
     //Guardar FichaPersonal
     cy.xpath("(//div[contains(.,'Guardar')])[39]").click();
-    cy.log(`✅ Ficha Personal creada Correctamente ✅`);
+    cy.wait(500);
+    cy.get(".q-alert-content > div", { timeout: 5000 }).then(($els) => {
+      const match = $els
+        .toArray()
+        .some((el) => el.innerText.trim().includes("Guardado correctamente"));
+      if (match) {
+        cy.log("✅ Ficha Personal creada Correctamente ✅");
+      } else {
+        cy.log("❌ Error: No se creó Ficha Personal ❌");
+        validationReporter.addError(
+          '❌ No apareció el toast "Guardado correctamente" |'
+        );
+      }
+    });
     cy.wait(1000);
   }
 
@@ -102,7 +115,9 @@ class FichaPersonalPage {
   }
 
   buscarFichaPorCedula(dataEmpleado) {
-    cy.xpath("(//div[contains(.,'Sin contratos')])[16]").click();
+    cy.xpath(
+      "//div[@class='q-btn-inner row col items-center q-popup--skip justify-center no-wrap text-no-wrap'][contains(.,'Sin contratos')]"
+    ).click();
     cy.wait(500);
     cy.xpath("//i[@aria-hidden='true'][contains(.,'search')]").click();
     cy.xpath("//input[contains(@placeholder,'Buscar')]").type(

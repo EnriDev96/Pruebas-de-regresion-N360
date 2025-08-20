@@ -10,7 +10,7 @@ describe("Contrato", () => {
 
   afterEach(() => {});
 
-  it("Data Ficha Personal @setup ✅", () => {
+  it("Setup Data @setup", () => {
     cy.fixture("dataFixtures/fichaPersonalFixtures/fichapersonal").then(
       (data) => {
         fichaPersonal.goToFichaPersonal();

@@ -1,6 +1,6 @@
 import { validationReporter } from "../../support/utils/validationReporter";
 import PermisosPage from "../../support/page-objects/actions/permisosPages/permisosPage";
-describe("Permisos", () => {
+describe("Permiso Medico", () => {
   const permisos = new PermisosPage();
 
   beforeEach(() => {
@@ -37,9 +37,20 @@ describe("Permisos", () => {
     cy.fixture("dataFixtures/permisosFixtures/permisoFixture").then(
       (dataPermiso) => {
         permisos.eliminarPermisos(dataPermiso.permisoLicenciaMedica);
+        cy.wait(1000);
       }
     );
   });
+});
+
+describe("Permiso de Maternidad", () => {
+  const permisos = new PermisosPage();
+
+  beforeEach(() => {
+    cy.loginNomina360("adminEcuagesa");
+  });
+
+  afterEach(() => {});
 
   it("Solicitar y Registrar Permiso de Maternidad ✅", () => {
     cy.fixture("dataFixtures/empleadosEmpresaFixtures/empleadosEcuagesa").then(
@@ -70,6 +81,7 @@ describe("Permisos", () => {
     cy.fixture("dataFixtures/permisosFixtures/permisoFixture").then(
       (dataPermiso) => {
         permisos.eliminarPermisos(dataPermiso.permisoMaternidad);
+        cy.wait(1000);
       }
     );
   });

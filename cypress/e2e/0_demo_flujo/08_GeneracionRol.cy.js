@@ -1,6 +1,6 @@
 import { validationReporter } from "../../support/utils/validationReporter";
 import GeneracionRolPage from "../../support/page-objects/actions/rol_de_pagoPages/generacionRolPages/generacionRolPage";
-describe("Generacion del Rol", () => {
+describe("Generacion del Rol Mensual", () => {
   const genRol = new GeneracionRolPage();
 
   beforeEach(() => {
@@ -31,6 +31,16 @@ describe("Generacion del Rol", () => {
       cy.wait(5000);
     });
   });
+});
+
+describe("Generacion del Rol Quincenal", () => {
+  const genRol = new GeneracionRolPage();
+
+  beforeEach(() => {
+    cy.loginNomina360("adminEcuagesa");
+  });
+
+  afterEach(() => {});
 
   it("Generar Rol de Pagos Quincenal ✅", () => {
     cy.fixture("dataFixtures/rolesFixtures/genRol").then((data) => {
@@ -54,6 +64,16 @@ describe("Generacion del Rol", () => {
       cy.wait(5000);
     });
   });
+});
+
+describe("Teardown Roles", () => {
+  const genRol = new GeneracionRolPage();
+
+  beforeEach(() => {
+    cy.loginNomina360("adminEcuagesa");
+  });
+
+  afterEach(() => {});
 
   it("Teardown Rol de Pagos Quincenal", () => {
     cy.fixture("dataFixtures/rolesFixtures/genRol").then((data) => {
@@ -63,7 +83,6 @@ describe("Generacion del Rol", () => {
       genRol.eliminarRol();
     });
   });
-
   it("Teardown Rol de Pagos Mensual", () => {
     cy.fixture("dataFixtures/rolesFixtures/genRol").then((data) => {
       genRol.goToGeneracionDelRol();

@@ -35,4 +35,4 @@ class helpers {
   }
 }
 
-export default helpers;
+export const helper = new helpers();

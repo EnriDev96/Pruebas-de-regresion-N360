@@ -1,7 +1,7 @@
 import FichaPersonalValidation from "../../support/page-objects/validaciones/fichaPersonalValidation/FichaPersonalValidation";
 import { validationReporter } from "../../support/utils/validationReporter";
 
-describe("Validaciones de Campos de Formularios", () => {
+describe("Validaciones de Formulario", () => {
   const fpValidation = new FichaPersonalValidation();
 
   beforeEach(() => {
@@ -13,16 +13,16 @@ describe("Validaciones de Campos de Formularios", () => {
     validationReporter.clearErrors();
   });
 
-  it.only("1 Validar Campos Obligatorios Ficha Personal", () => {
+  it("Campos Obligatorios", () => {
     cy.fixture("validationFixtures/fichaPersonal").then((data) => {
       fpValidation.goToFichaPersonal();
       fpValidation.validarCamposFichaPersonal(data.empleadoEmpty);
     });
   });
-  it("2 Validar Formato de Campos Ficha Personal", () => {
-    cy.fixture("fichaPersonal").then((data) => {
+  it.only("Formato de Campos", () => {
+    cy.fixture("validationFixtures/fichaPersonal").then((data) => {
       fpValidation.goToFichaPersonal();
-      fpValidation.crearFichaPersonal(data.empleadoInvalido);
+      fpValidation.validarCamposFichaPersonal(data.empleadoInvalido);
     });
   });
 });
