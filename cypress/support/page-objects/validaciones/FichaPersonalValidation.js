@@ -1,8 +1,8 @@
 require("cypress-xpath");
 require("cypress-plugin-tab");
-import { validationReporter } from "../../../utils/validationReporter";
-import { validacion } from "../../../utils/validacionCampos";
-import { helper } from "../../../utils/helpers";
+import { validationReporter } from "../../utils/validationReporter";
+import { validacion } from "../../utils/validacionCampos";
+import { helper } from "../../utils/helpers";
 class FichaPersonalValidation {
   goToFichaPersonal() {
     cy.xpath("//div[normalize-space()='Contratos']").click();
@@ -175,7 +175,7 @@ class FichaPersonalValidation {
     validacion.correctaSeleccion(
       `//div[@class='q-item-label'][contains(.,'${sustituto}')]`,
       "Estado civil",
-      data
+      sustituto
     );
   }
 

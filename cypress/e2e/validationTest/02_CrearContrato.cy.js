@@ -1,4 +1,4 @@
-import FichaPersonalValidation from "../../support/page-objects/validaciones/fichaPersonalValidation/FichaPersonalValidation";
+import FichaPersonalValidation from "../../support/page-objects/validaciones/FichaPersonalValidation";
 import { validationReporter } from "../../support/utils/validationReporter";
 
 describe("Validaciones de Formulario", () => {
