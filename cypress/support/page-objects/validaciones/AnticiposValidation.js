@@ -26,9 +26,9 @@ class anticiposValidation {
   validarAnticipo(data) {
     this.seleccionarMotivo(data.motivo);
     this.seleccionarFecha(data.fecha);
-    this.seleccionarBeneficio(data.beneficio);
+    // this.seleccionarBeneficio(data.beneficio);
     this.ingresarMonto(data.monto);
-    this.seleccionarRol(data.rol);
+    //this.seleccionarRol(data.rol);
     this.marcarAutorizacion(data.autorizacion);
     //Generar Solicitud
     //cy.xpath("(//div[contains(.,'Guardar')])[46]").click();
