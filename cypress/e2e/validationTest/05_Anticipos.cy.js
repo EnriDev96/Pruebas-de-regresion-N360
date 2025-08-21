@@ -29,4 +29,21 @@ describe("Validaciones de Formulario", () => {
       }
     );
   });
+  it("Formato de Campos", () => {
+    cy.fixture("dataFixtures/empleadosEmpresaFixtures/empleadosEcuagesa").then(
+      (data) => {
+        anticipo.goToAnticipos();
+        cy.xpath(
+          "//div[@class='q-btn-inner row col items-center q-popup--skip justify-center'][contains(.,'addAnticipos')]"
+        ).click();
+        cy.wait(500);
+        anticipo.seleccionarEmpleado(data.Bayas_Israel);
+      }
+    );
+    cy.fixture("dataFixtures/anticiposFixtures/validationAnticipos").then(
+      (dataAnticipo) => {
+        anticipo.validarAnticipo(dataAnticipo.anticipoNormalInvalid);
+      }
+    );
+  });
 });

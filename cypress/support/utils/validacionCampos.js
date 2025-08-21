@@ -23,8 +23,13 @@ class validacionCampos {
   }
   formatoSoloLetras(xpath, nombreCampo) {
     cy.xpath(`${xpath}`).then(($input) => {
-      const valorIngresado = $input.val();
-
+      let valorIngresado;
+      if ($input.is("input, textarea")) {
+        valorIngresado = $input.val();
+      } else {
+        valorIngresado = $input.text();
+      }
+      cy.log(valorIngresado);
       if (!/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/.test(valorIngresado)) {
         validationReporter.addError(
           `⚠️ El campo "${nombreCampo}" tiene formato Invalido |`

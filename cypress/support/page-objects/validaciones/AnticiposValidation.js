@@ -31,7 +31,7 @@ class anticiposValidation {
     this.seleccionarRol(data.rol);
     this.marcarAutorizacion(data.autorizacion);
     //Generar Solicitud
-    cy.xpath("(//div[contains(.,'Guardar')])[46]").click();
+    //cy.xpath("(//div[contains(.,'Guardar')])[46]").click();
     cy.wait(1000);
     // cy.get(".q-alert-content > div", { timeout: 5000 }).then(($els) => {
     //   const match = $els
@@ -60,21 +60,19 @@ class anticiposValidation {
     );
   }
   seleccionarFecha(fecha) {
-    cy.xpath(
-      "//div[@class='col-md-4 col-xs-12'][contains(.,'Día del anticipo|arrow_drop_down')]"
-    ).click();
     if (!validacion.campoObligatorio(fecha, "Día del anticipo")) {
       return;
     }
+    cy.xpath(
+      "//div[@class='col-md-4 col-xs-12'][contains(.,'Día del anticipo|arrow_drop_down')]"
+    ).click();
+
     helper.seleccionarFecha(fecha);
   }
   seleccionarBeneficio(beneficio) {
     cy.xpath(
       "//div[@class='col-md-4 col-xs-12'][contains(.,'Beneficio|Rol de pagosarrow_drop_down')]"
     ).click();
-    if (!validacion.campoObligatorio(beneficio, "Beneficio")) {
-      return;
-    }
     validacion.correctaSeleccion(
       `//div[@class='q-item-label'][contains(.,'${beneficio}')]`,
       "Beneficio",
@@ -92,9 +90,6 @@ class anticiposValidation {
     cy.xpath(
       "//div[@class='col-md-4 col-xs-12'][contains(.,'Rol|Fin de mesarrow_drop_down')]"
     ).click();
-    if (!validacion.campoObligatorio(rol, "Rol")) {
-      return;
-    }
     validacion.correctaSeleccion(
       `//div[@class='q-item-label'][contains(.,'${rol}')]`,
       "Rol",

@@ -14,11 +14,13 @@ describe("Vacaciones", () => {
       (data) => {
         vacaciones.goToVacaciones();
         vacaciones.seleccionarEmpleado(data.Bayas_Israel);
-        cy.fixture(
-          "dataFixtures/vacacionesFixtures/vacacionNormalFixture"
-        ).then((dataSolicitud) => {
-          vacaciones.solicitarVacacionNormal(dataSolicitud.vacacionesNormales);
-        });
+        cy.fixture("dataFixtures/vacacionesFixtures/vacacionFixture").then(
+          (dataSolicitud) => {
+            vacaciones.solicitarVacacionNormal(
+              dataSolicitud.vacacionesNormales
+            );
+          }
+        );
         vacaciones.registroVacacionNormal(data.Bayas_Israel);
       }
     );
