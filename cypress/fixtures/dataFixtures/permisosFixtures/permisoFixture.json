@@ -2,7 +2,7 @@
   "permisoLicenciaMedica": {
     "tipo": "Permisos - Licencias Médicas y Otros",
     "motivo": "Subsidio Iess",
-    "fechaInicio": "2025-07-21",
+    "fechaInicio": "2025-07-20",
     "fechaFinal": "2025-07-23",
     "comprobante": "cypress/fixtures/images/Test Comprobante Imagen .jpg"
   },

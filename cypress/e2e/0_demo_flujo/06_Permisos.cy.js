@@ -26,7 +26,7 @@ describe("Permiso Medico", () => {
   it("Teardown Permiso Medico", () => {
     permisos.goToPermisos();
     cy.xpath(
-      "//div[@class='col-xs-4 col-md-3'][contains(.,'visibilityPermiso')]"
+      "//div[@class='col-xs-12 col-sm-6 col-md-4 col-lg-3'][contains(.,'visibilityPermiso')]"
     ).click();
     cy.wait(500);
     cy.fixture("dataFixtures/empleadosEmpresaFixtures/empleadosEcuagesa").then(
@@ -70,7 +70,7 @@ describe("Permiso de Maternidad", () => {
   it("Teardown Permiso de Maternidad", () => {
     permisos.goToPermisos();
     cy.xpath(
-      "//div[@class='col-xs-4 col-md-3'][contains(.,'visibilityPermiso')]"
+      "//div[@class='col-xs-12 col-sm-6 col-md-4 col-lg-3'][contains(.,'visibilityPermiso')]"
     ).click();
     cy.wait(500);
     cy.fixture("dataFixtures/empleadosEmpresaFixtures/empleadosEcuagesa").then(

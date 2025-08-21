@@ -51,7 +51,7 @@ class permisosPage {
     cy.get(".q-uploader-input").selectFile(data.comprobante);
     cy.scrollTo("top", { easing: "linear", duration: 1000 });
     cy.xpath(
-      "//div[@class='col-xs-4 col-md-3'][contains(.,'saveGuardar')]"
+      "//div[@class='col-xs-12 col-sm-6 col-md-4 col-lg-3'][contains(.,'saveGuardar')]"
     ).click();
     cy.wait(500);
   }
@@ -121,14 +121,14 @@ class permisosPage {
     cy.get(".q-uploader-input").selectFile(data.comprobante);
     cy.scrollTo("top", { easing: "linear", duration: 1000 });
     cy.xpath(
-      "//div[@class='col-xs-4 col-md-3'][contains(.,'saveGuardar')]"
+      "//div[@class='col-xs-12 col-sm-6 col-md-4 col-lg-3'][contains(.,'saveGuardar')]"
     ).click();
     cy.wait(500);
   }
 
   registrarPermiso(dataEmpleado) {
     cy.xpath(
-      "//div[@class='col-xs-4 col-md-3'][contains(.,'addPor Registrar')]"
+      "//div[@class='col-xs-12 col-sm-6 col-md-4 col-lg-3'][contains(.,'addPor Registrar')]"
     ).click();
     cy.wait(500);
     cy.get(".q-table-top > :nth-child(3) > .q-if").type(dataEmpleado.apellido);
