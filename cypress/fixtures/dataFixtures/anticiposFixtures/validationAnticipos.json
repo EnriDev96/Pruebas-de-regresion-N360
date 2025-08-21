@@ -1,0 +1,22 @@
+{
+  "anticipoNormalEmpty": {
+    "motivo": "",
+    "fecha": "",
+    "beneficio": "",
+    "monto": "",
+    "rol": "",
+    "anio": "",
+    "mes": "",
+    "autorizacion": ""
+  },
+  "anticipoNormalInvalid": {
+    "motivo": "Calamidad Doméstica - Salud",
+    "fecha": "2025-07-15",
+    "beneficio": "Rol de pagos",
+    "monto": "250",
+    "rol": "Fin de mes",
+    "anio": "2025",
+    "mes": "5",
+    "autorizacion": "Si"
+  }
+}

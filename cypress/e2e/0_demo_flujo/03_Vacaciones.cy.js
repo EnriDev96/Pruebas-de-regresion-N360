@@ -29,13 +29,13 @@ describe("Vacaciones", () => {
       (data) => {
         vacaciones.goToVacaciones();
         vacaciones.seleccionarEmpleado(data.Bayas_Israel);
-        cy.fixture(
-          "dataFixtures/vacacionesFixtures/vacacionNormalFixture"
-        ).then((dataSolicitud) => {
-          vacaciones.eliminarVacacionRegistrada(
-            dataSolicitud.vacacionesNormales
-          );
-        });
+        cy.fixture("dataFixtures/vacacionesFixtures/vacacionFixture").then(
+          (dataSolicitud) => {
+            vacaciones.eliminarVacacionRegistrada(
+              dataSolicitud.vacacionesNormales
+            );
+          }
+        );
       }
     );
   });

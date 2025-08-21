@@ -14,13 +14,17 @@ describe("Validaciones de Formulario", () => {
   });
 
   it("Campos Obligatorios", () => {
-    cy.fixture("validationFixtures/fichaPersonal").then((data) => {
+    cy.fixture(
+      "dataFixtures/fichaPersonalFixtures/validationFichaPersonal"
+    ).then((data) => {
       fichaPersonal.goToFichaPersonal();
       fichaPersonal.validarCamposFichaPersonal(data.empleadoEmpty);
     });
   });
-  it.only("Formato de Campos", () => {
-    cy.fixture("validationFixtures/fichaPersonal").then((data) => {
+  it("Formato de Campos", () => {
+    cy.fixture(
+      "dataFixtures/fichaPersonalFixtures/validationFichaPersonal"
+    ).then((data) => {
       fichaPersonal.goToFichaPersonal();
       fichaPersonal.validarCamposFichaPersonal(data.empleadoInvalido);
     });

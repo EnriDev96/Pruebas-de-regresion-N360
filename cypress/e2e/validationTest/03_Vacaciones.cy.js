@@ -17,13 +17,13 @@ describe("Validaciones de Formulario", () => {
       (data) => {
         vacaciones.goToVacaciones();
         vacaciones.seleccionarEmpleado(data.Bayas_Israel);
-        cy.fixture(
-          "dataFixtures/vacacionesFixtures/vacacionNormalFixture"
-        ).then((dataSolicitud) => {
-          vacaciones.validarVacacionNormal(
-            dataSolicitud.vacacionesNormalesEmpty
-          );
-        });
+        cy.fixture("dataFixtures/vacacionesFixtures/validationVacaciones").then(
+          (dataSolicitud) => {
+            vacaciones.validarVacacionNormal(
+              dataSolicitud.vacacionesNormalesEmpty
+            );
+          }
+        );
       }
     );
   });

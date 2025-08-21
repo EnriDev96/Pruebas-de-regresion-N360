@@ -117,6 +117,22 @@ class validacionCampos {
       return true;
     }
   }
+  valorMonetario(xpath, nombreCampo) {
+    cy.xpath(`${xpath}`).then(($input) => {
+      const valorIngresado = $input.val();
+      if (!/^\d+(\.\d{1,2})?$/.test(valorIngresado)) {
+        validationReporter.addError(
+          `⚠️ El campo "${nombreCampo}" tiene formato Invalido |`
+        );
+        cy.log(
+          `⚠️ El campo "${nombreCampo}" solo puede contener números y punto decimal (ej: 123.45)`
+        );
+      } else {
+        cy.log(`✅ Validación OK: campo "${nombreCampo}": "${valorIngresado}"`);
+      }
+    });
+    return this;
+  }
 }
 
 export const validacion = new validacionCampos();
