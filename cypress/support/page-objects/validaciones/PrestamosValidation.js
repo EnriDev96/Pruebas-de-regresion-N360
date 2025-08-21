@@ -42,7 +42,7 @@ class prestamosValidation {
     ).type(motivo, { forece: true });
     validacion.formatoSoloLetras(
       "//div[@tabindex='-1'][contains(.,'|MotivoMotivo')]//input[@type='text']",
-      "Nombres"
+      "Motivo"
     );
   }
   seleccionarFecha(fecha) {
