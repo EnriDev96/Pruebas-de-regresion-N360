@@ -2,15 +2,6 @@ require("cypress-xpath");
 require("cypress-plugin-tab");
 import { validationReporter } from "./validationReporter";
 class validacionCampos {
-  ingresarNombre(nombres) {
-    cy.xpath(
-      "//div[@class='text-grey q-mb-xs'][contains(.,'Nombres:')]"
-    ).click();
-    this.campoObligatorio(nombres, "Nombres");
-    cy.xpath("(//input[@type='text'])[5]").clear().type(nombres);
-    this.formatoSoloLetras("(//input[@type='text'])[5]", "Nombres");
-  }
-
   campoObligatorio(imputCampo, nombreCampo) {
     if (!imputCampo || imputCampo.trim() === "") {
       validationReporter.addError(`❌Campo "${nombreCampo}" es obligatorio |`);
@@ -125,6 +116,23 @@ class validacionCampos {
   valorMonetario(xpath, nombreCampo) {
     cy.xpath(`${xpath}`).then(($input) => {
       const valorIngresado = $input.val();
+      if (!/^\d+(\.\d{1,2})?$/.test(valorIngresado)) {
+        validationReporter.addError(
+          `⚠️ El campo "${nombreCampo}" tiene formato Invalido |`
+        );
+        cy.log(
+          `⚠️ El campo "${nombreCampo}" solo puede contener números y punto decimal (ej: 123.45)`
+        );
+      } else {
+        cy.log(`✅ Validación OK: campo "${nombreCampo}": "${valorIngresado}"`);
+      }
+    });
+    return this;
+  }
+  valorMonetarioCy(cypressElement, nombreCampo) {
+    cypressElement.then(($input) => {
+      const valorIngresado = $input.val();
+      cy.log(valorIngresado);
       if (!/^\d+(\.\d{1,2})?$/.test(valorIngresado)) {
         validationReporter.addError(
           `⚠️ El campo "${nombreCampo}" tiene formato Invalido |`

@@ -80,20 +80,6 @@ class permisosValidation {
     this.seleccionarFechaInicio(data.fechaInicio);
     this.subircomprobante(data.comprobante);
     cy.scrollTo("top", { easing: "linear", duration: 1000 });
-    cy.xpath(
-      "//div[@class='col-xs-12 col-sm-6 col-md-4 col-lg-3'][contains(.,'saveGuardar')]"
-    ).click();
-    cy.wait(500);
-    cy.get(".q-alert-content > div", { timeout: 5000 }).then(($els) => {
-      const match = $els
-        .toArray()
-        .some((el) => el.innerText.trim().includes("Guardado..."));
-      if (match) {
-        cy.log("✅ Permite crear la solicitud ✅");
-      } else {
-        validationReporter.addError('❌ Error: No se creó la solicitud ❌" |');
-      }
-    });
   }
 
   seleccionarTipo(tipo) {

@@ -1,4 +1,3 @@
-import { validationReporter } from "../../support/utils/validationReporter";
 import PreparacionRolPage from "../../support/page-objects/actions/rol_de_pagoPages/preparacionRolPages/preparacionRolPage";
 describe("Preparacion del Rol", () => {
   const prepRol = new PreparacionRolPage();
@@ -6,8 +5,6 @@ describe("Preparacion del Rol", () => {
   beforeEach(() => {
     cy.loginNomina360("adminEcuagesa");
   });
-
-  afterEach(() => {});
 
   it("Preparar y descargar borrador del Rol de Pagos Mensual ✅", () => {
     cy.fixture("dataFixtures/rolesFixtures/genRol").then((data) => {

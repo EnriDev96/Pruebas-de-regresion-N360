@@ -28,7 +28,7 @@ class ValidationReporter {
       cy.log(`🚨 ${errorMessage}`); // Loguea los errores en el Cypress Test Runner
       //throw new Error(errorMessage); // Falla el test con todos los errores
     } else {
-      cy.log("✅ Todas las validaciones pasaron correctamente.");
+      cy.log("Las validaciones pasaron correctamente.");
     }
   }
 }
