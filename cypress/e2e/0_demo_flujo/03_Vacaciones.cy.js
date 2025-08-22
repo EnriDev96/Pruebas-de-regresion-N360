@@ -9,27 +9,45 @@ describe("Vacaciones", () => {
 
   afterEach(() => {});
 
-  it("Solicitar y Registrar Vacaciones Normales", () => {
+  it.only("Solicitar y Registrar Vacaciones Normales", () => {
+    //Set-up Data
+    //Flujo
+    vacaciones.goToVacaciones();
     cy.fixture("dataFixtures/empleadosEmpresaFixtures/empleadosEcuagesa").then(
       (data) => {
-        vacaciones.goToVacaciones();
         vacaciones.seleccionarEmpleado(data.Bayas_Israel);
+      }
+    );
+    cy.fixture("dataFixtures/vacacionesFixtures/vacacionFixture").then(
+      (dataSolicitud) => {
+        vacaciones.solicitarVacacionNormal(dataSolicitud.vacacionesNormales);
+      }
+    );
+    cy.fixture("dataFixtures/empleadosEmpresaFixtures/empleadosEcuagesa").then(
+      (data) => {
         cy.fixture("dataFixtures/vacacionesFixtures/vacacionFixture").then(
           (dataSolicitud) => {
-            vacaciones.solicitarVacacionNormal(
+            vacaciones.registroVacacionNormal(
+              data.Bayas_Israel,
               dataSolicitud.vacacionesNormales
             );
           }
         );
-        vacaciones.registroVacacionNormal(data.Bayas_Israel);
+      }
+    );
 
+    //Comprobacion al Rol
+
+    //Teardown Data
+    cy.fixture("dataFixtures/empleadosEmpresaFixtures/empleadosEcuagesa").then(
+      (data) => {
         vacaciones.goToVacaciones();
         vacaciones.seleccionarEmpleado(data.Bayas_Israel);
-        cy.fixture("dataFixtures/vacacionesFixtures/vacacionFixture").then(
-          (dataSolicitud) => {
-            vacaciones.verificarHistorico(dataSolicitud.vacacionesNormales);
-          }
-        );
+      }
+    );
+    cy.fixture("dataFixtures/vacacionesFixtures/vacacionFixture").then(
+      (dataSolicitud) => {
+        vacaciones.eliminarVacacionRegistrada(dataSolicitud.vacacionesNormales);
       }
     );
   });

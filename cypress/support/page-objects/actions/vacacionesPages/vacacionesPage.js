@@ -5,7 +5,10 @@ import { validacion } from "../../../utils/validacionCampos";
 import { helper } from "../../../utils/helpers";
 class vacacionesPage {
   goToVacaciones() {
-    cy.xpath("//a[@tabindex='0'][contains(.,'dashboardDashboard')]").click();
+    cy.xpath("//a[@tabindex='0'][contains(.,'settingsConfiguración')]").click({
+      force: true,
+    });
+    cy.wait(500);
     cy.xpath("//button[contains(.,'supervised_user_circleEmpleados')]").click();
     cy.xpath("//a[@tabindex='0'][contains(.,'Vacaciones')]").click();
     cy.wait(1000);
@@ -49,7 +52,7 @@ class vacacionesPage {
     });
   }
 
-  registroVacacionNormal(dataEmpleado) {
+  registroVacacionNormal(dataEmpleado, dataSolicitud) {
     cy.get(".gutter-sm > :nth-child(1) > .q-btn").click();
     cy.wait(1000);
     cy.get(
@@ -58,6 +61,10 @@ class vacacionesPage {
     cy.get(".text-principal > .q-btn-inner > div").click();
     cy.get(".modal-buttons > :nth-child(2)").click();
     cy.wait(1000);
+    //Regresar a Vacaciones y verificar el registro
+    cy.xpath("//a[@tabindex='0'][contains(.,'Vacaciones')]").click();
+    this.seleccionarEmpleado(dataEmpleado);
+    this.verificarHistorico(dataSolicitud);
   }
 
   rechazoVacacionNormal(dataEmpleado) {
