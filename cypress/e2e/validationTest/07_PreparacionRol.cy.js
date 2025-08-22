@@ -1,6 +1,6 @@
 import { validationReporter } from "../../support/utils/validationReporter";
 import PreparacionRolPage from "../../support/page-objects/validaciones/PreparacionRolValidation";
-describe("Preparacion del Rol", () => {
+describe("Validaciones de Formulario", () => {
   const prepRol = new PreparacionRolPage();
 
   beforeEach(() => {
@@ -12,7 +12,7 @@ describe("Preparacion del Rol", () => {
     validationReporter.clearErrors();
   });
 
-  it("Preparar y descargar borrador del Rol de Pagos Mensual ✅", () => {
+  it("Formato de Campos", () => {
     cy.fixture("dataFixtures/rolesFixtures/genRol").then((data) => {
       prepRol.goToPreparacionDelRol();
       prepRol.seleccionarTipoRol(data.rolMensualJulio);

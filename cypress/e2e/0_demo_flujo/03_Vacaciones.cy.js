@@ -9,7 +9,7 @@ describe("Vacaciones", () => {
 
   afterEach(() => {});
 
-  it("Solicitar y Registrar Vacaciones Normales✅", () => {
+  it("Solicitar y Registrar Vacaciones Normales", () => {
     cy.fixture("dataFixtures/empleadosEmpresaFixtures/empleadosEcuagesa").then(
       (data) => {
         vacaciones.goToVacaciones();
@@ -22,6 +22,14 @@ describe("Vacaciones", () => {
           }
         );
         vacaciones.registroVacacionNormal(data.Bayas_Israel);
+
+        vacaciones.goToVacaciones();
+        vacaciones.seleccionarEmpleado(data.Bayas_Israel);
+        cy.fixture("dataFixtures/vacacionesFixtures/vacacionFixture").then(
+          (dataSolicitud) => {
+            vacaciones.verificarHistorico(dataSolicitud.vacacionesNormales);
+          }
+        );
       }
     );
   });

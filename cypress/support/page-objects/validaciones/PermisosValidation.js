@@ -106,6 +106,10 @@ class permisosValidation {
     cy.xpath(
       `//div[@tabindex='-1'][contains(.,'|PlazoPlazo')]//input[@type='number']`
     ).type(plazo, { force: true });
+    validacion.valorMonetario(
+      "//div[@tabindex='-1'][contains(.,'|PlazoPlazo')]//input[@type='number']",
+      "Plazo"
+    );
   }
   seleccionarFechaInicio(fechaInicio) {
     cy.xpath(
