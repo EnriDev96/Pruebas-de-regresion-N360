@@ -1,5 +1,7 @@
 require("cypress-xpath");
 require("cypress-plugin-tab");
+import { validationReporter } from "../../../utils/validationReporter";
+import { helper } from "../../../utils/helpers";
 class prestamosPage {
   goToPrestamos() {
     cy.xpath("//a[@tabindex='0'][contains(.,'dashboardDashboard')]").click();
@@ -26,7 +28,7 @@ class prestamosPage {
       data.motivo
     );
     cy.xpath("//div[@class='q-if-label'][contains(.,'Fecha')]").click();
-    this.seleccionarFecha(data.fecha);
+    helper.seleccionarFecha(data.fecha);
 
     cy.xpath("//div[@class='q-if-label'][contains(.,'Monto')]").type(
       data.monto
@@ -96,44 +98,88 @@ class prestamosPage {
     cy.wait(1000);
   }
 
-  visualizarPrestamo(dataEmpleado) {
+  verificarPrestamo(dataPrestamo, dataEmpleado) {
     cy.xpath("//a[@tabindex='0'][contains(.,'visibilitypréstamos')]").click();
     cy.wait(500);
     this.seleccionarEmpleado(dataEmpleado);
-
+    //Ingresar en el buscador la fecha de la solicitud registrada
     cy.get(
       ":nth-child(1) > :nth-child(3) > .q-if > .q-if-inner > .row > .col"
-    ).type("120");
-    cy.wait(2000);
+    ).type(dataPrestamo.fecha);
+    //Buscar en la tabla la fila con la fecha de la solicitud y obtener el valor del monto
+    cy.get("tbody tr")
+      .contains(dataPrestamo.fecha)
+      .parent("tr")
+      .find("td")
+      .eq(1)
+      .invoke("text")
+      .then((texto) => {
+        const montoTexto = texto.trim();
+        const montoNumero = parseFloat(montoTexto.replace(/[^0-9.-]/g, ""));
+        cy.wrap(montoNumero).as("montoObtenido");
+      });
+    //Verficar el valor del monto Registrado es igual al valor del monto Solicitado
+    cy.get("@montoObtenido").then((monto) => {
+      if (monto == dataPrestamo.monto) {
+        cy.log(`Se registro correctamente la Solicitud: ${monto}✅`);
+      } else {
+        validationReporter.addError(
+          '❌ No se Registro correctamente la Solicitud" |'
+        );
+        cy.log(
+          `❌ ERROR: Valor solicitado: ${dataPrestamo.monto}, Valor registrado: ${monto} ❌`
+        );
+      }
+    });
   }
 
-  seleccionarFecha(data) {
-    const [anio, mes, dia] = data.split("-");
-    const meses = [
-      "",
-      "Enero",
-      "Febrero",
-      "Marzo",
-      "Abril",
-      "Mayo",
-      "Junio",
-      "Julio",
-      "Agosto",
-      "Septiembre",
-      "Octubre",
-      "Noviembre",
-      "Diciembre",
-    ];
-    const mesNombre = meses[parseInt(mes, 10)];
-    cy.xpath("(//span[@tabindex='-1'])[3]").click();
-    cy.xpath(`(//div[contains(.,'${anio}')])[46]`).click();
-    cy.xpath(`(//div[contains(.,'${mesNombre}')])[20]`).click();
+  verificarPrestamoRolMensual(dataRol, dataEmpleado, dataPrestamo) {
+    //Buscar y ver el rol mensual
+    cy.xpath("(//input[contains(@placeholder,'Buscar')])[2]").type(dataRol.mes);
+    cy.wait(500);
+    cy.get("tbody tr")
+      .contains(dataRol.fecha)
+      .parent("tr")
+      .find("a.q-btn.text-principal")
+      .contains("Ver Rol")
+      .click();
+    //Buscar el empleado
+    cy.xpath("(//i[@aria-hidden='true'][contains(.,'search')])[2]").click();
+    cy.xpath("//input[contains(@placeholder,'Buscar empleado')]").type(
+      dataEmpleado.cedula
+    );
     cy.xpath(
-      `//div[@class='row items-center content-center justify-center cursor-pointer'][contains(.,'${parseInt(
-        dia,
-        10
-      )}')]`
+      `//div[@class='q-item-sublabel ellipsis'][contains(.,'${dataEmpleado.cedula}')]`
     ).click();
+    //Buscar valores generados
+    cy.contains("td", "Préstamo Empresa")
+      .scrollIntoView()
+      .then(($td) => {
+        const $nextTd = $td.next("td");
+        cy.wrap($nextTd)
+          .find("li")
+          .invoke("text")
+          .then((texto) => {
+            const montoTexto = texto.trim();
+            const montoNumero = parseFloat(montoTexto.replace(/[^0-9.-]/g, ""));
+            cy.wrap(montoNumero).as("montoPrestamoEmpresa");
+          });
+      });
+    //Verificar el Valor del Prestamo Empresa es igual al valor del Prestamos registrado
+    cy.get("@montoPrestamoEmpresa").then((monto) => {
+      if (monto == dataPrestamo.monto) {
+        cy.log(
+          `El prestamo se muestra correctamente en el Rol: Préstamo Empresa = $${monto}✅`
+        );
+      } else {
+        validationReporter.addError(
+          '❌ El prestamo NO se muestra correctamente en el Rol" |'
+        );
+        cy.log(
+          `❌ ERROR: Valor del prestamo: ${dataPrestamo.monto}, Valor en el Rol: ${monto} ❌`
+        );
+      }
+    });
   }
 }
 

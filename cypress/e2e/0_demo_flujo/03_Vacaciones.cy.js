@@ -1,4 +1,3 @@
-import { validationReporter } from "../../support/utils/validationReporter";
 import VacacionesPage from "../../support/page-objects/actions/vacacionesPages/vacacionesPage";
 describe("Vacaciones", () => {
   const vacaciones = new VacacionesPage();
