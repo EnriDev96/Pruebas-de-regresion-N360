@@ -36,7 +36,9 @@ class prestamosPage {
     cy.xpath(
       "//div[@class='row no-wrap relative-position'][contains(.,'Cuotas')]"
     ).click();
-    cy.xpath("(//div[@class='q-item-label'][contains(.,'1')])[1]").click();
+    cy.xpath(
+      `(//div[@class='q-item-label'][contains(.,'${data.cuotas}')])[1]`
+    ).click();
     cy.xpath("//div[@class='q-if-label'][contains(.,'Interés')]").type(
       data.interes
     );
@@ -99,7 +101,7 @@ class prestamosPage {
   }
 
   verificarPrestamo(dataPrestamo, dataEmpleado) {
-    cy.xpath("//a[@tabindex='0'][contains(.,'visibilitypréstamos')]").click();
+    cy.xpath("//a[@tabindex='0'][contains(.,'Préstamos')]").click();
     cy.wait(500);
     this.seleccionarEmpleado(dataEmpleado);
     //Ingresar en el buscador la fecha de la solicitud registrada
@@ -144,7 +146,8 @@ class prestamosPage {
       .contains("Ver Rol")
       .click();
     //Buscar el empleado
-    cy.xpath("(//i[@aria-hidden='true'][contains(.,'search')])[2]").click();
+    cy.get(".column > .q-toolbar > .q-btn").click();
+    cy.wait(500);
     cy.xpath("//input[contains(@placeholder,'Buscar empleado')]").type(
       dataEmpleado.cedula
     );
@@ -167,7 +170,7 @@ class prestamosPage {
       });
     //Verificar el Valor del Prestamo Empresa es igual al valor del Prestamos registrado
     cy.get("@montoPrestamoEmpresa").then((monto) => {
-      if (monto == dataPrestamo.monto) {
+      if (monto == dataPrestamo.totalCuota1) {
         cy.log(
           `El prestamo se muestra correctamente en el Rol: Préstamo Empresa = $${monto}✅`
         );
@@ -176,7 +179,7 @@ class prestamosPage {
           '❌ El prestamo NO se muestra correctamente en el Rol" |'
         );
         cy.log(
-          `❌ ERROR: Valor del prestamo: ${dataPrestamo.monto}, Valor en el Rol: ${monto} ❌`
+          `❌ ERROR: Valor del prestamo: ${dataPrestamo.totalCuota1}, Valor en el Rol: ${monto} ❌`
         );
       }
     });

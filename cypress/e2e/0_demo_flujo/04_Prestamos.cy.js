@@ -33,12 +33,12 @@ describe("Prestamos", () => {
     );
   });
 
-  it.only("Verificar Prestamo generado en Rol Mensual", () => {
+  it("Verificar Prestamo generado en Rol Mensual", () => {
     //Setup Data
     cy.fixture("dataFixtures/rolesFixtures/genRol").then((data) => {
       genRol.goToGeneracionDelRol();
-      // genRol.generarTipoRol(data.rolMensualJulio);
-      // cy.wait(15000);
+      genRol.generarTipoRol(data.rolMensualJulio);
+      cy.wait(15000);
     });
     //Flujo
     cy.fixture("dataFixtures/rolesFixtures/genRol").then((dataRol) => {
@@ -58,6 +58,11 @@ describe("Prestamos", () => {
     });
 
     //Teardown Data
+    cy.fixture("dataFixtures/rolesFixtures/genRol").then((data) => {
+      genRol.goToGeneracionDelRol();
+      genRol.buscarRol(data.rolMensualJulio);
+      genRol.eliminarRol();
+    });
   });
 
   it("Teardown Prestamo", () => {
