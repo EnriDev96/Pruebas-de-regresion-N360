@@ -11,5 +11,12 @@
     "nombre": "MONICA CRISTINA",
     "apellido": "CEVALLOS PALLO",
     "nombreCompleto": "CEVALLOS PALLO MONICA CRISTINA"
+  },
+
+  "Bonilla_Cynthia": {
+    "cedula": "1721494761",
+    "nombre": "CYNTHIA DAYANA",
+    "apellido": "BONILLA CARVAJAL",
+    "nombreCompleto": "BONILLA CARVAJAL CYNTHIA DAYANA"
   }
 }

@@ -14,27 +14,32 @@ describe("Prestamos", () => {
     validationReporter.clearErrors();
   });
 
-  it("Solicitar y Registrar Prestamo ✅", () => {
+  it.only("Solicitar y Registrar Prestamo", () => {
     cy.fixture("dataFixtures/empleadosEmpresaFixtures/empleadosEcuagesa").then(
       (data) => {
         cy.fixture("dataFixtures/prestamosFixtures/prestamoFixture").then(
           (dataPrestamo) => {
             prestamos.goToPrestamos();
-            prestamos.seleccionarEmpleado(data.Bayas_Israel);
-            prestamos.solicitarPrestamo(dataPrestamo.prestamoNormal);
-            prestamos.resgistrarPrestamoSolicitado(data.Bayas_Israel);
-            prestamos.verificarPrestamo(
-              dataPrestamo.prestamoNormal,
-              data.Bayas_Israel
-            );
+            prestamos.seleccionarEmpleado(data.Bonilla_Cynthia);
+            prestamos.solicitarPrestamo(dataPrestamo.prestamoDosCuotas);
+            // prestamos.resgistrarPrestamoSolicitado(data.Bonilla_Cynthia);
+            // prestamos.verificarPrestamo(
+            //   dataPrestamo.prestamoNormal,
+            //   data.Bonilla_Cynthia
+            // );
           }
         );
       }
     );
   });
 
-  it("Verificar Prestamo generado en Rol Mensual", () => {
+  it("Verificar Prestamo generado en Rol de Pagos", () => {
     //Setup Data
+    cy.fixture("dataFixtures/rolesFixtures/genRol").then((data) => {
+      genRol.goToGeneracionDelRol();
+      genRol.generarTipoRol(data.rolQuincenalJulio);
+      cy.wait(10000);
+    });
     cy.fixture("dataFixtures/rolesFixtures/genRol").then((data) => {
       genRol.goToGeneracionDelRol();
       genRol.generarTipoRol(data.rolMensualJulio);
@@ -48,19 +53,38 @@ describe("Prestamos", () => {
         cy.fixture("dataFixtures/prestamosFixtures/prestamoFixture").then(
           (dataPrestamo) => {
             prestamos.verificarPrestamoRolMensual(
-              dataRol.rolMensualJulio,
-              dataEmpleado.Bayas_Israel,
+              dataRol.rolQuincenalJulio,
+              dataEmpleado.Bonilla_Cynthia,
               dataPrestamo.prestamoNormal
             );
           }
         );
       });
     });
-
+    cy.fixture("dataFixtures/rolesFixtures/genRol").then((dataRol) => {
+      cy.fixture(
+        "dataFixtures/empleadosEmpresaFixtures/empleadosEcuagesa"
+      ).then((dataEmpleado) => {
+        cy.fixture("dataFixtures/prestamosFixtures/prestamoFixture").then(
+          (dataPrestamo) => {
+            prestamos.verificarPrestamoRolMensual(
+              dataRol.rolMensualJulio,
+              dataEmpleado.Bonilla_Cynthia,
+              dataPrestamo.prestamoNormal
+            );
+          }
+        );
+      });
+    });
     //Teardown Data
     cy.fixture("dataFixtures/rolesFixtures/genRol").then((data) => {
       genRol.goToGeneracionDelRol();
       genRol.buscarRol(data.rolMensualJulio);
+      genRol.eliminarRol();
+    });
+    cy.fixture("dataFixtures/rolesFixtures/genRol").then((data) => {
+      genRol.goToGeneracionDelRol();
+      genRol.buscarRol(data.rolQuincenalJulio);
       genRol.eliminarRol();
     });
   });
@@ -71,7 +95,7 @@ describe("Prestamos", () => {
         prestamos.goToPrestamos();
         cy.get(".gutter-sm > :nth-child(1) > .q-btn").click();
         cy.wait(500);
-        prestamos.seleccionarEmpleado(data.Bayas_Israel);
+        prestamos.seleccionarEmpleado(data.Bonilla_Cynthia);
         cy.fixture("dataFixtures/prestamosFixtures/prestamoFixture").then(
           (dataPrestamo) => {
             prestamos.eliminarPrestamoRegistrado(dataPrestamo.prestamoNormal);

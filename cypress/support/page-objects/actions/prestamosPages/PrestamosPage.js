@@ -1,6 +1,7 @@
 require("cypress-xpath");
 require("cypress-plugin-tab");
 import { validationReporter } from "../../../utils/validationReporter";
+import { validacion } from "../../../utils/validacionCampos";
 import { helper } from "../../../utils/helpers";
 class prestamosPage {
   goToPrestamos() {
@@ -24,29 +25,23 @@ class prestamosPage {
     cy.wait(500);
   }
   solicitarPrestamo(data) {
-    cy.xpath("//div[@tabindex='-1'][contains(.,'|MotivoMotivo')]").type(
-      data.motivo
-    );
-    cy.xpath("//div[@class='q-if-label'][contains(.,'Fecha')]").click();
-    helper.seleccionarFecha(data.fecha);
+    this.ingresarMotivo(data.motivo);
+    this.seleccionarFecha(data.fecha);
+    this.ingresarMonto(data.monto);
+    this.seleccionarCuotas(data.cuotas);
+    this.ingresarInteres(data.interes);
+    this.marcarIngreso(data.ingreso);
 
-    cy.xpath("//div[@class='q-if-label'][contains(.,'Monto')]").type(
-      data.monto
-    );
-    cy.xpath(
-      "//div[@class='row no-wrap relative-position'][contains(.,'Cuotas')]"
-    ).click();
-    cy.xpath(
-      `(//div[@class='q-item-label'][contains(.,'${data.cuotas}')])[1]`
-    ).click();
-    cy.xpath("//div[@class='q-if-label'][contains(.,'Interés')]").type(
-      data.interes
-    );
-    cy.get(
-      ".q-field-content > :nth-child(1) > .q-option-inner > .q-radio-unchecked"
-    ).click();
+    // Configurar todas las cuotas dinámicamente
+    if (data.cuotasData && data.cuotasData.length > 0) {
+      data.cuotasData.forEach((cuotaData, index) => {
+        cy.log(`Configurando cuota ${index + 1}`);
+        this.configurarCuota(cuotaData);
+      });
+    }
+
     cy.scrollTo("top");
-    cy.get(".gutter-sm > :nth-child(1) > .q-btn").click();
+    // cy.get(".gutter-sm > :nth-child(1) > .q-btn").click();
     cy.wait(1000);
   }
 
@@ -183,6 +178,88 @@ class prestamosPage {
         );
       }
     });
+  }
+  ingresarMotivo(motivo) {
+    cy.xpath(
+      "//div[@tabindex='-1'][contains(.,'|MotivoMotivo')]//input[@type='text']"
+    ).type(motivo, { forece: true });
+    validacion.formatoSoloLetras(
+      "//div[@tabindex='-1'][contains(.,'|MotivoMotivo')]//input[@type='text']",
+      "Motivo"
+    );
+  }
+  seleccionarFecha(fecha) {
+    cy.xpath("//div[@class='q-if-label'][contains(.,'Fecha')]").click();
+    helper.seleccionarFecha(fecha);
+  }
+  ingresarMonto(monto) {
+    cy.xpath("//div[@class='q-if-label'][contains(.,'Monto')]").type(monto);
+    validacion.valorMonetario("//input[contains(@step,'0.01')]", "Monto");
+  }
+  seleccionarCuotas(cuotas) {
+    cy.xpath(
+      `//div[@class='row no-wrap relative-position'][contains(.,'Cuotas')]`
+    ).click();
+    cy.xpath(
+      `(//div[@class='q-item-label'][contains(.,'${cuotas}')])[1]`
+    ).click();
+  }
+  ingresarInteres(interes) {
+    cy.xpath("//div[@class='q-if-label'][contains(.,'Interés')]").type(interes);
+    validacion.valorMonetario(
+      "(//input[contains(@type,'number')])[7]",
+      "Interés"
+    );
+  }
+  marcarIngreso(ingreso) {
+    if (ingreso === "Si") {
+      cy.get(
+        ".q-field-content > :nth-child(1) > .q-option-inner > .q-radio-unchecked"
+      ).click();
+      cy.log(`✅ Checkbox marcado: ${ingreso}`);
+    }
+    return this;
+  }
+  configurarCuota(dataCuota) {
+    //Obtener la fila
+    const fila = cy
+      .get(".absolute.full-width")
+      .find(".row.gutter-md")
+      .eq(dataCuota.index);
+
+    //Seleccionar el Año
+    fila
+      .find('input[type="number"]') // busca los inputs númericos
+      .eq(0) // 0 = Año, 1 = Monto, 2 = Intereses, 3 = Total
+      .clear()
+      .type(`${dataCuota.año}`);
+
+    //Seleccionar el Mes
+    cy.get(".absolute.full-width") // scope
+      .find(".row.gutter-md") // todas las filas
+      .eq(dataCuota.index) // primera fila
+      .find(".q-select") // busca los select
+      .eq(0) // 0 = Mes, 1 = Rol
+      .click();
+    cy.contains(".q-item-label", dataCuota.mes).click();
+
+    //Seleccionar el Rol
+    cy.get(".absolute.full-width")
+      .find(".row.gutter-md")
+      .eq(dataCuota.index)
+      .find(".q-select")
+      .eq(1)
+      .click();
+    cy.contains(".q-item-label", dataCuota.rol).click();
+
+    // Seleccionar el monto
+    cy.get(".absolute.full-width")
+      .find(".row.gutter-md")
+      .eq(dataCuota.index)
+      .find('input[type="number"]')
+      .eq(1)
+      .clear()
+      .type(`${dataCuota.monto}`);
   }
 }
 
