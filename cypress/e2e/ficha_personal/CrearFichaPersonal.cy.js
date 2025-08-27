@@ -15,16 +15,20 @@ describe("Ficha Personal - Crear y Eliminar Ficha Personal del Empleado", () => 
   });
 
   it.only("1. Crear Ficha Personal de un Empleado", () => {
-    cy.fixture("fichaPersonal").then((data) => {
-      fichaPersonal.goToFichaPersonal();
-      fichaPersonal.crearFichaPersonalCompleta(data.empleadoValidoCompleto);
-    });
+    cy.fixture("dataFixtures/fichaPersonalFixtures/fichapersonal").then(
+      (data) => {
+        fichaPersonal.goToFichaPersonal();
+        fichaPersonal.crearFichaPersonalCompleta(data.empleadoValidoCompleto);
+      }
+    );
   });
   it("2. Eliminar Ficha Personal de un Empleado", () => {
-    cy.fixture("fichaPersonal").then((data) => {
-      fichaPersonal.goToFichaPersonal();
-      fichaPersonal.buscarFichaPorCedula(data.empleadoUno.cedula);
-      fichaPersonal.eliminarFichaPersonal();
-    });
+    cy.fixture("dataFixtures/fichaPersonalFixtures/fichapersonal").then(
+      (data) => {
+        fichaPersonal.goToFichaPersonal();
+        fichaPersonal.buscarFichaPorCedula(data.empleadoUno.cedula);
+        fichaPersonal.eliminarFichaPersonal();
+      }
+    );
   });
 });

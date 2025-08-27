@@ -18,7 +18,7 @@ describe("Ficha Personal", () => {
     );
   });
 
-  it("Teardown Ficha Personal", () => {
+  it.only("Teardown Ficha Personal", () => {
     cy.fixture("dataFixtures/fichaPersonalFixtures/fichapersonal").then(
       (data) => {
         fichaPersonal.goToFichaPersonal();

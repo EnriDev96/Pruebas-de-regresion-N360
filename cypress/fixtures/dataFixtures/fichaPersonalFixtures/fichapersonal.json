@@ -1,6 +1,6 @@
 {
   "empleadoUno": {
-    "__DatosBasicos__": "__Comentario__",
+    "__DatosBasicos__": "",
     "tipoDocumento": "Cédula",
     "cedula": "1104730229",
     "nombres": "Bryan Enrique",
@@ -13,10 +13,10 @@
     "diaNacimiento": "2",
     "sustitutoPCD": "No",
     "discapacidad": "No",
-    "__DatosdeUbicacion__": "__Comentario__",
+    "__DatosdeUbicacion__": "",
     "region": "Sierra",
     "tipoRecidencia": "Residencial",
-    "__DatosFinancieros__": "__Comentario__",
+    "__DatosFinancieros__": "",
     "tipoCobro": "Efectivo"
   },
   "empleadoDos": {
