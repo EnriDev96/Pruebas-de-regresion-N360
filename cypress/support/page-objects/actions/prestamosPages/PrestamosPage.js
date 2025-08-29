@@ -12,6 +12,63 @@ class prestamosPage {
     ).click();
     cy.wait(1000);
   }
+
+  goToPrestamosConfig() {
+    cy.xpath("//a[@tabindex='0'][contains(.,'settingsConfiguración')]").click();
+    cy.xpath(
+      "//div[@class='q-item q-item-division relative-position'][contains(.,'Empresaarrow_drop_down')]"
+    ).click();
+    cy.xpath("//a[contains(.,'Configuración Préstamos y Anticipos')]").click();
+  }
+
+  configurarPrestamo(dataConfig) {
+    this.goToPrestamosConfig();
+    this.ingresarCuotasMin(dataConfig.cuotasMin);
+    this.ingresarCuotasMax(dataConfig.cuotasMax);
+    this.ingresarProrentajeSueldo(dataConfig.porcentajeSueldo);
+    this.ingresarMesesGracias(dataConfig.mesesGracia);
+    cy.xpath("(//div[contains(.,'saveGuardar')])[37]").click();
+    cy.get(".q-alert-content > div", { timeout: 5000 }).then(($els) => {
+      const match = $els
+        .toArray()
+        .some((el) => el.innerText.trim().includes("Guardado"));
+      if (match) {
+        cy.log("✅ Se guardo correctamente la Configuracion ✅");
+      } else {
+        validationReporter.addError(
+          '❌ No se guardo correctamente la Configuracion ❌" |'
+        );
+      }
+    });
+  }
+
+  verificarConfiguracion(dataEmpleado, dataConfig) {
+    const porcentaje = parseFloat(dataConfig.porcentajeSueldo);
+    const sueldo = parseFloat(dataEmpleado.sueldo);
+    const montoMaximo = (sueldo * porcentaje) / 100;
+    const montoMaximoInvalido = montoMaximo + 0.1;
+    this.ingresarMonto(montoMaximoInvalido);
+    cy.xpath(
+      "//div[@class='q-field-error col'][contains(.,'El monto Excede el % establecido')]",
+      { timeout: 5000 }
+    ).then(($els) => {
+      const match = $els
+        .toArray()
+        .some((el) =>
+          el.innerText.trim().includes("El monto Excede el % establecido")
+        );
+
+      if (match) {
+        cy.log("✅ Esta correctamente configurado ✅");
+      } else {
+        cy.log("❌ No detecta correctamente la configuracion ❌");
+        validationReporter.addError(
+          "❌ No detecta correctamente la configuracion ❌"
+        );
+      }
+    });
+  }
+
   seleccionarEmpleado(dataEmpleado) {
     cy.xpath("(//i[@aria-hidden='true'][contains(.,'search')])[1]").click();
     cy.xpath("(//input[contains(@placeholder,'Buscar')])[1]").type(
@@ -179,6 +236,7 @@ class prestamosPage {
       }
     });
   }
+
   ingresarMotivo(motivo) {
     cy.xpath(
       "//div[@tabindex='-1'][contains(.,'|MotivoMotivo')]//input[@type='text']"
@@ -193,6 +251,7 @@ class prestamosPage {
     helper.seleccionarFecha(fecha);
   }
   ingresarMonto(monto) {
+    cy.log(monto);
     cy.xpath("//div[@class='q-if-label'][contains(.,'Monto')]").type(monto);
     validacion.valorMonetario("//input[contains(@step,'0.01')]", "Monto");
   }
@@ -260,6 +319,39 @@ class prestamosPage {
       .eq(1)
       .clear()
       .type(`${dataCuota.monto}`);
+  }
+
+  ingresarCuotasMin(cantidadCuota) {
+    cy.xpath(
+      "//div[contains(@class, 'q-if-label-inner') and normalize-space(text())='Cantidad mínima de cuotas permitidas']/ancestor::div[contains(@class,'q-field')]//input[@type='number']"
+    )
+      .clear()
+      .type(cantidadCuota);
+    validacion.valorMonetario(
+      "//div[contains(@class, 'q-if-label-inner') and normalize-space(text())='Cantidad mínima de cuotas permitidas']/ancestor::div[contains(@class,'q-field')]//input[@type='number']",
+      "Cuota Mínima"
+    );
+  }
+  ingresarCuotasMax(cantidadCuota) {
+    cy.xpath(
+      "//div[contains(@class, 'q-if-label-inner') and normalize-space(text())='Cantidad máxima de cuotas permitidas']/ancestor::div[contains(@class,'q-field')]//input[@type='number']"
+    )
+      .clear()
+      .type(cantidadCuota);
+  }
+  ingresarProrentajeSueldo(porcentaje) {
+    cy.xpath(
+      "//div[contains(@class, 'q-if-label-inner') and normalize-space(text())='Porcentaje de sueldo máximo para préstamos']/ancestor::div[contains(@class,'q-field')]//input[@type='number']"
+    )
+      .clear()
+      .type(porcentaje);
+  }
+  ingresarMesesGracias(meses) {
+    cy.xpath(
+      "//div[contains(@class, 'q-if-label-inner') and normalize-space(text())='Meses de Gracia']/ancestor::div[contains(@class,'q-field')]//input[@type='number']"
+    )
+      .clear()
+      .type(meses);
   }
 }
 

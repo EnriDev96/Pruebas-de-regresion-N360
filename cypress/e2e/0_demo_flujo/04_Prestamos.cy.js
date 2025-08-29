@@ -14,7 +14,35 @@ describe("Prestamos", () => {
     validationReporter.clearErrors();
   });
 
-  it.only("CP-EMP-6021 -> Registrar Prestamo datos Mínimo", () => {
+  it.only("CP-EMP-6011 - Configuración básica, valores válidos", () => {
+    //Caso de Prueba
+    cy.fixture("dataFixtures/configuracionEmpresasFixtures/prestamos").then(
+      (dataConfigPrestamo) => {
+        prestamos.configurarPrestamo(
+          dataConfigPrestamo.configPrestamosModificado
+        );
+      }
+    );
+
+    cy.fixture("dataFixtures/empleadosEmpresaFixtures/empleadosEcuagesa").then(
+      (dataEmpleado) => {
+        prestamos.goToPrestamos();
+        prestamos.seleccionarEmpleado(dataEmpleado.Bayas_Israel);
+        cy.fixture("dataFixtures/configuracionEmpresasFixtures/prestamos").then(
+          (dataConfigPrestamo) => {
+            prestamos.verificarConfiguracion(
+              dataEmpleado.Bayas_Israel,
+              dataConfigPrestamo.configPrestamosModificado
+            );
+          }
+        );
+      }
+    );
+
+    //Teardown
+  });
+
+  it("CP-EMP-6021 -> Registrar Prestamo datos Mínimo", () => {
     //Caso de Prueba
     cy.fixture("dataFixtures/empleadosEmpresaFixtures/empleadosEcuagesa").then(
       (data) => {
@@ -48,7 +76,7 @@ describe("Prestamos", () => {
     );
   });
 
-  it.only("CP-EMP-6024 -> Verificar Prestamo generado en Rol de Pagos", () => {
+  it("CP-EMP-6024 -> Verificar Prestamo generado en Rol de Pagos", () => {
     //Setup Data
     cy.fixture("dataFixtures/empleadosEmpresaFixtures/empleadosEcuagesa").then(
       (data) => {
