@@ -10,9 +10,9 @@
   "prestamoNormalInvalid": {
     "motivo": "Calamidad Domestica",
     "fecha": "2025-08-15",
-    "monto": "120",
+    "monto": "120abc",
     "cuotas": "2",
-    "interes": "5",
+    "interes": "5abc",
     "reflejarIngreso": "No"
   }
 }

@@ -41,7 +41,7 @@ class prestamosPage {
     }
 
     cy.scrollTo("top");
-    // cy.get(".gutter-sm > :nth-child(1) > .q-btn").click();
+    cy.get(".gutter-sm > :nth-child(1) > .q-btn").click();
     cy.wait(1000);
   }
 
