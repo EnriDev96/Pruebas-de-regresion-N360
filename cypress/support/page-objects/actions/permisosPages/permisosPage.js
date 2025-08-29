@@ -51,7 +51,7 @@ class permisosPage {
     cy.get(".q-uploader-input").selectFile(data.comprobante);
     cy.scrollTo("top", { easing: "linear", duration: 1000 });
     cy.xpath(
-      "//div[@class='col-xs-4 col-md-3'][contains(.,'saveGuardar')]"
+      "//div[@class='col-xs-12 col-sm-6 col-md-4 col-lg-3'][contains(.,'saveGuardar')]"
     ).click();
     cy.wait(500);
   }
@@ -121,14 +121,14 @@ class permisosPage {
     cy.get(".q-uploader-input").selectFile(data.comprobante);
     cy.scrollTo("top", { easing: "linear", duration: 1000 });
     cy.xpath(
-      "//div[@class='col-xs-4 col-md-3'][contains(.,'saveGuardar')]"
+      "//div[@class='col-xs-12 col-sm-6 col-md-4 col-lg-3'][contains(.,'saveGuardar')]"
     ).click();
     cy.wait(500);
   }
 
   registrarPermiso(dataEmpleado) {
     cy.xpath(
-      "//div[@class='col-xs-4 col-md-3'][contains(.,'addPor Registrar')]"
+      "//div[@class='col-xs-12 col-sm-6 col-md-4 col-lg-3'][contains(.,'addPor Registrar')]"
     ).click();
     cy.wait(500);
     cy.get(".q-table-top > :nth-child(3) > .q-if").type(dataEmpleado.apellido);
@@ -141,7 +141,7 @@ class permisosPage {
   visualizarPermisos(dataEmpleado, tipoSolicitud) {
     //Buscar al Empleado
     cy.xpath(
-      "//div[@class='col-xs-4 col-md-3'][contains(.,'visibilityPermiso')]"
+      "//div[@class='col-xs-12 col-sm-6 col-md-4 col-lg-3'][contains(.,'visibilityPermiso')]"
     ).click();
     cy.get(
       "#q-app > div > div.q-layout-page-container.q-layout-transition > div > main > div > div.col-3.shadow-1 > div > div > div.q-toolbar.row.no-wrap.items-center.relative-position.q-toolbar-normal.bg-primary.text-white > button"
@@ -176,6 +176,7 @@ class permisosPage {
     });
     cy.xpath("(//div[contains(.,'Eliminar')])[16]").click();
     cy.xpath("//button[@tabindex='0'][contains(.,'Si')]").click();
+    cy.wait(1500);
   }
 
   seleccionarFecha(data) {

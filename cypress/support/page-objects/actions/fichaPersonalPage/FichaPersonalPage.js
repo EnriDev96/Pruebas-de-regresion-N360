@@ -102,7 +102,7 @@ class FichaPersonalPage {
   }
 
   buscarFichaPorCedula(dataEmpleado) {
-    cy.xpath("(//div[contains(.,'Sin contratos')])[16]").click();
+    cy.xpath("//a[@tabindex='0'][contains(.,'Sin contratos')]").click();
     cy.wait(500);
     cy.xpath("//i[@aria-hidden='true'][contains(.,'search')]").click();
     cy.xpath("//input[contains(@placeholder,'Buscar')]").type(

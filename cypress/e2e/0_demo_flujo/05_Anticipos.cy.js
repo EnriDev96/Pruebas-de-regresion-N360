@@ -13,7 +13,7 @@ describe("Anticipos", () => {
     cy.fixture("dataFixtures/empleadosEmpresaFixtures/empleadosEcuagesa").then(
       (data) => {
         anticipo.goToAnticipos();
-        cy.xpath("(//div[contains(.,'addRegistrar')])[14]").click();
+        cy.xpath("//a[@tabindex='0'][contains(.,'addAnticipos')]").click();
         cy.wait(500);
         anticipo.seleccionarEmpleado(data.Bayas_Israel);
       }
