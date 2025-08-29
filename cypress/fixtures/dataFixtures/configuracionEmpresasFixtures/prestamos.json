@@ -14,7 +14,7 @@
   "configPrestamosInvalido": {
     "cuotasMin": "-1",
     "cuotasMax": "-1",
-    "porcentajeSueldo": "0",
+    "porcentajeSueldo": "-0",
     "mesesGracia": "-1"
   }
 }

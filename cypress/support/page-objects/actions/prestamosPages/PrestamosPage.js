@@ -68,6 +68,26 @@ class prestamosPage {
       }
     });
   }
+  verificarConfiguracion(dataConfig) {
+    this.goToPrestamosConfig();
+    this.ingresarCuotasMin(dataConfig.cuotasMin);
+    this.ingresarCuotasMax(dataConfig.cuotasMax);
+    this.ingresarProrentajeSueldo(dataConfig.porcentajeSueldo);
+    this.ingresarMesesGracias(dataConfig.mesesGracia);
+    cy.xpath("(//div[contains(.,'saveGuardar')])[37]").click();
+    cy.get(".q-alert-content > div", { timeout: 5000 }).then(($els) => {
+      const match = $els
+        .toArray()
+        .some((el) => el.innerText.trim().includes("Guardado"));
+      if (!match) {
+        cy.log("✅ No se guardo correctamente la Configuracion ✅");
+      } else {
+        validationReporter.addError(
+          '❌ Error: se guardo la Configuracion con valores no permitidos ❌" |'
+        );
+      }
+    });
+  }
 
   seleccionarEmpleado(dataEmpleado) {
     cy.xpath("(//i[@aria-hidden='true'][contains(.,'search')])[1]").click();
@@ -338,6 +358,10 @@ class prestamosPage {
     )
       .clear()
       .type(cantidadCuota);
+    validacion.valorMonetario(
+      "//div[contains(@class, 'q-if-label-inner') and normalize-space(text())='Cantidad máxima de cuotas permitidas']/ancestor::div[contains(@class,'q-field')]//input[@type='number']",
+      "Cuota Maxima"
+    );
   }
   ingresarProrentajeSueldo(porcentaje) {
     cy.xpath(
@@ -345,6 +369,10 @@ class prestamosPage {
     )
       .clear()
       .type(porcentaje);
+    validacion.valorMonetario(
+      "//div[contains(@class, 'q-if-label-inner') and normalize-space(text())='Porcentaje de sueldo máximo para préstamos']/ancestor::div[contains(@class,'q-field')]//input[@type='number']",
+      "Porcentaje de Sueldo Maxima"
+    );
   }
   ingresarMesesGracias(meses) {
     cy.xpath(
@@ -352,6 +380,10 @@ class prestamosPage {
     )
       .clear()
       .type(meses);
+    validacion.valorMonetario(
+      "//div[contains(@class, 'q-if-label-inner') and normalize-space(text())='Meses de Gracia']/ancestor::div[contains(@class,'q-field')]//input[@type='number']",
+      "Meses de Gracia"
+    );
   }
 }
 

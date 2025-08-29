@@ -14,7 +14,7 @@ describe("Prestamos", () => {
     validationReporter.clearErrors();
   });
 
-  it.only("CP-EMP-6011 - Configuración básica, valores válidos", () => {
+  it("CP-EMP-6011 - Configuración básica, valores válidos", () => {
     //Caso de Prueba
     cy.fixture("dataFixtures/configuracionEmpresasFixtures/prestamos").then(
       (dataConfigPrestamo) => {
@@ -38,7 +38,18 @@ describe("Prestamos", () => {
         );
       }
     );
+    //Teardown
+  });
 
+  it.only("CP-EMP-6013 - configuracion con valores invalidos", () => {
+    //Caso de Prueba
+    cy.fixture("dataFixtures/configuracionEmpresasFixtures/prestamos").then(
+      (dataConfigPrestamo) => {
+        prestamos.verificarConfiguracion(
+          dataConfigPrestamo.configPrestamosInvalido
+        );
+      }
+    );
     //Teardown
   });
 
