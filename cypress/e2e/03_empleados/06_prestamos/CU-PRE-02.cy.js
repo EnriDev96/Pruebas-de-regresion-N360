@@ -1,60 +1,17 @@
-import { validationReporter } from "../../support/utils/validationReporter";
-import PrestamosPage from "../../support/page-objects/actions/prestamosPages/PrestamosPage";
-import GeneracionRolPage from "../../support/page-objects/actions/rol_de_pagoPages/generacionRolPages/generacionRolPage";
-describe("Prestamos", () => {
-  const prestamos = new PrestamosPage();
-  const genRol = new GeneracionRolPage();
+import { validationReporter } from "../../../support/utils/validationReporter";
+import PrestamosPage from "../../../support/page-objects/actions/prestamosPages/PrestamosPage";
+import GeneracionRolPage from "../../../support/page-objects/actions/rol_de_pagoPages/generacionRolPages/generacionRolPage";
 
+describe("CP-PRE-0201 - Creación exitosa de un Prestamo Normal con datos Minimos.", () => {
+  const prestamos = new PrestamosPage();
   beforeEach(() => {
     cy.loginNomina360("adminEcuagesa");
   });
-
   afterEach(() => {
     validationReporter.reportAndAssertAll();
     validationReporter.clearErrors();
   });
-
-  it("CP-EMP-6011 - Configuración básica, valores válidos", () => {
-    //Caso de Prueba
-    cy.fixture("dataFixtures/configuracionEmpresasFixtures/prestamos").then(
-      (dataConfigPrestamo) => {
-        prestamos.configurarPrestamo(
-          dataConfigPrestamo.configPrestamosModificado
-        );
-      }
-    );
-
-    cy.fixture("dataFixtures/empleadosEmpresaFixtures/empleadosEcuagesa").then(
-      (dataEmpleado) => {
-        prestamos.goToPrestamos();
-        prestamos.seleccionarEmpleado(dataEmpleado.Bayas_Israel);
-        cy.fixture("dataFixtures/configuracionEmpresasFixtures/prestamos").then(
-          (dataConfigPrestamo) => {
-            prestamos.verificarConfiguracion(
-              dataEmpleado.Bayas_Israel,
-              dataConfigPrestamo.configPrestamosModificado
-            );
-          }
-        );
-      }
-    );
-    //Teardown
-  });
-
-  it.only("CP-EMP-6013 - configuracion con valores invalidos", () => {
-    //Caso de Prueba
-    cy.fixture("dataFixtures/configuracionEmpresasFixtures/prestamos").then(
-      (dataConfigPrestamo) => {
-        prestamos.verificarConfiguracion(
-          dataConfigPrestamo.configPrestamosInvalido
-        );
-      }
-    );
-    //Teardown
-  });
-
-  it("CP-EMP-6021 -> Registrar Prestamo datos Mínimo", () => {
-    //Caso de Prueba
+  it("Registro de un prestamo normal", () => {
     cy.fixture("dataFixtures/empleadosEmpresaFixtures/empleadosEcuagesa").then(
       (data) => {
         cy.fixture("dataFixtures/prestamosFixtures/prestamoFixture").then(
@@ -71,7 +28,8 @@ describe("Prestamos", () => {
         );
       }
     );
-    //Teardown
+  });
+  it("Teardow Data - Eliminar prestamo registrado", () => {
     cy.fixture("dataFixtures/empleadosEmpresaFixtures/empleadosEcuagesa").then(
       (data) => {
         prestamos.goToPrestamos();
@@ -86,9 +44,19 @@ describe("Prestamos", () => {
       }
     );
   });
+});
 
-  it("CP-EMP-6024 -> Verificar Prestamo generado en Rol de Pagos", () => {
-    //Setup Data
+describe.only("CP-PRE-0204 - Verificar Prestamo generado en Rol de Pagos", () => {
+  const prestamos = new PrestamosPage();
+  const genRol = new GeneracionRolPage();
+  beforeEach(() => {
+    cy.loginNomina360("adminEcuagesa");
+  });
+  afterEach(() => {
+    validationReporter.reportAndAssertAll();
+    validationReporter.clearErrors();
+  });
+  it("Set-up Data - Resgistrar un prestam", () => {
     cy.fixture("dataFixtures/empleadosEmpresaFixtures/empleadosEcuagesa").then(
       (data) => {
         cy.fixture("dataFixtures/prestamosFixtures/prestamoFixture").then(
@@ -105,24 +73,29 @@ describe("Prestamos", () => {
         );
       }
     );
+  });
+  it("Set-up Data - Crear Rol de Quincena", () => {
     cy.fixture("dataFixtures/rolesFixtures/genRol").then((data) => {
       genRol.goToGeneracionDelRol();
       genRol.generarTipoRol(data.rolQuincenalJulio);
       cy.wait(10000);
     });
+  });
+  it("Set-up Data - Crear Rol de Mensual", () => {
     cy.fixture("dataFixtures/rolesFixtures/genRol").then((data) => {
       genRol.goToGeneracionDelRol();
       genRol.generarTipoRol(data.rolMensualJulio);
       cy.wait(15000);
     });
-    //Flujo
+  });
+  it("Verificar Prestamo Registrado en el Rol Quincenal", () => {
     cy.fixture("dataFixtures/rolesFixtures/genRol").then((dataRol) => {
       cy.fixture(
         "dataFixtures/empleadosEmpresaFixtures/empleadosEcuagesa"
       ).then((dataEmpleado) => {
         cy.fixture("dataFixtures/prestamosFixtures/prestamoFixture").then(
           (dataPrestamo) => {
-            prestamos.verificarPrestamoRolMensual(
+            prestamos.verificarPrestamoRol(
               dataRol.rolQuincenalJulio,
               dataEmpleado.Bonilla_Cynthia,
               dataPrestamo.prestamoDosCuotas
@@ -131,6 +104,8 @@ describe("Prestamos", () => {
         );
       });
     });
+  });
+  it("Verificar Prestamo Registrado en el Rol Mensual", () => {
     cy.fixture("dataFixtures/rolesFixtures/genRol").then((dataRol) => {
       cy.fixture(
         "dataFixtures/empleadosEmpresaFixtures/empleadosEcuagesa"
@@ -146,17 +121,22 @@ describe("Prestamos", () => {
         );
       });
     });
-    //Teardown Data
+  });
+  it("Teardow Data - Eliminar Rol Mensual", () => {
     cy.fixture("dataFixtures/rolesFixtures/genRol").then((data) => {
       genRol.goToGeneracionDelRol();
       genRol.buscarRol(data.rolMensualJulio);
       genRol.eliminarRol();
     });
+  });
+  it("Teardow Data - Eliminar Rol Quincenal", () => {
     cy.fixture("dataFixtures/rolesFixtures/genRol").then((data) => {
       genRol.goToGeneracionDelRol();
       genRol.buscarRol(data.rolQuincenalJulio);
       genRol.eliminarRol();
     });
+  });
+  it("Teardow Data - Eliminar prestamo Registrado", () => {
     cy.fixture("dataFixtures/empleadosEmpresaFixtures/empleadosEcuagesa").then(
       (data) => {
         prestamos.goToPrestamos();

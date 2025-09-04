@@ -1,5 +1,5 @@
-import { validationReporter } from "../../support/utils/validationReporter";
-import GeneracionRolPage from "../../support/page-objects/actions/rol_de_pagoPages/generacionRolPages/generacionRolPage";
+import { validationReporter } from "../../../support/utils/validationReporter";
+import GeneracionRolPage from "../../../support/page-objects/actions/rol_de_pagoPages/generacionRolPages/generacionRolPage";
 describe("Generacion del Rol Mensual", () => {
   const genRol = new GeneracionRolPage();
 

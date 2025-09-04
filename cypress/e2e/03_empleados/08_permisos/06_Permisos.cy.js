@@ -1,4 +1,4 @@
-import PermisosPage from "../../support/page-objects/actions/permisosPages/permisosPage";
+import PermisosPage from "../../../support/page-objects/actions/permisosPages/permisosPage";
 describe("Permiso Medico", () => {
   const permisos = new PermisosPage();
 

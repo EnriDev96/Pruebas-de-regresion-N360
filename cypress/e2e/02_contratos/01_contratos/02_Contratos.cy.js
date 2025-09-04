@@ -1,5 +1,5 @@
-import FichaPersonalPage from "../../support/page-objects/actions/fichaPersonalPage/FichaPersonalPage";
-import ContratoPage from "../../support/page-objects/actions/contratosPages/ContratoPage";
+import FichaPersonalPage from "../../../support/page-objects/actions/fichaPersonalPage/FichaPersonalPage";
+import ContratoPage from "../../../support/page-objects/actions/contratosPages/ContratoPage";
 
 describe("Contrato", () => {
   const fichaPersonal = new FichaPersonalPage();

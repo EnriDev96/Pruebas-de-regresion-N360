@@ -1,5 +1,5 @@
-import { validationReporter } from "../../support/utils/validationReporter";
-import FichaPersonalPage from "../../support/page-objects/actions/fichaPersonalPage/FichaPersonalPage";
+import { validationReporter } from "../../../support/utils/validationReporter";
+import FichaPersonalPage from "../../../support/page-objects/actions/fichaPersonalPage/FichaPersonalPage";
 describe("Ficha Personal", () => {
   const fichaPersonal = new FichaPersonalPage();
 
@@ -18,7 +18,7 @@ describe("Ficha Personal", () => {
     );
   });
 
-  it.only("Teardown Ficha Personal", () => {
+  it("Teardown Ficha Personal", () => {
     cy.fixture("dataFixtures/fichaPersonalFixtures/fichapersonal").then(
       (data) => {
         fichaPersonal.goToFichaPersonal();

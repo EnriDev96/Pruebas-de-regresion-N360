@@ -1,5 +1,5 @@
-import { validationReporter } from "../../support/utils/validationReporter";
-import FichaPersonalPage from "../../support/page-objects/actions/fichaPersonalPage/FichaPersonalPage";
+import { validationReporter } from "../../../support/utils/validationReporter";
+import FichaPersonalPage from "../../../support/page-objects/actions/fichaPersonalPage/FichaPersonalPage";
 
 describe("Ficha Personal - Crear y Eliminar Ficha Personal del Empleado", () => {
   const fichaPersonal = new FichaPersonalPage();

@@ -1,5 +1,5 @@
-import { validationReporter } from "../../support/utils/validationReporter";
-import AnticiposPage from "../../support/page-objects/actions/anticiposPages/anticiposPage";
+import { validationReporter } from "../../../support/utils/validationReporter";
+import AnticiposPage from "../../../support/page-objects/actions/anticiposPages/anticiposPage";
 describe("Anticipos", () => {
   const anticipo = new AnticiposPage();
 

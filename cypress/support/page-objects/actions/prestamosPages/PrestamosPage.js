@@ -43,6 +43,7 @@ class prestamosPage {
   }
 
   verificarConfiguracion(dataEmpleado, dataConfig) {
+    cy.log(dataConfig.porcentajeSueldo);
     const porcentaje = parseFloat(dataConfig.porcentajeSueldo);
     const sueldo = parseFloat(dataEmpleado.sueldo);
     const montoMaximo = (sueldo * porcentaje) / 100;
@@ -68,26 +69,6 @@ class prestamosPage {
       }
     });
   }
-  verificarConfiguracion(dataConfig) {
-    this.goToPrestamosConfig();
-    this.ingresarCuotasMin(dataConfig.cuotasMin);
-    this.ingresarCuotasMax(dataConfig.cuotasMax);
-    this.ingresarProrentajeSueldo(dataConfig.porcentajeSueldo);
-    this.ingresarMesesGracias(dataConfig.mesesGracia);
-    cy.xpath("(//div[contains(.,'saveGuardar')])[37]").click();
-    cy.get(".q-alert-content > div", { timeout: 5000 }).then(($els) => {
-      const match = $els
-        .toArray()
-        .some((el) => el.innerText.trim().includes("Guardado"));
-      if (!match) {
-        cy.log("✅ No se guardo correctamente la Configuracion ✅");
-      } else {
-        validationReporter.addError(
-          '❌ Error: se guardo la Configuracion con valores no permitidos ❌" |'
-        );
-      }
-    });
-  }
 
   seleccionarEmpleado(dataEmpleado) {
     cy.xpath("(//i[@aria-hidden='true'][contains(.,'search')])[1]").click();
@@ -101,6 +82,7 @@ class prestamosPage {
     cy.scrollTo("top");
     cy.wait(500);
   }
+
   solicitarPrestamo(data) {
     this.ingresarMotivo(data.motivo);
     this.seleccionarFecha(data.fecha);
@@ -207,7 +189,7 @@ class prestamosPage {
     });
   }
 
-  verificarPrestamoRolMensual(dataRol, dataEmpleado, dataPrestamo) {
+  verificarPrestamoRol(dataRol, dataEmpleado, dataPrestamo) {
     //Buscar y ver el rol mensual
     cy.xpath("(//input[contains(@placeholder,'Buscar')])[2]").type(dataRol.mes);
     cy.wait(500);
@@ -271,7 +253,6 @@ class prestamosPage {
     helper.seleccionarFecha(fecha);
   }
   ingresarMonto(monto) {
-    cy.log(monto);
     cy.xpath("//div[@class='q-if-label'][contains(.,'Monto')]").type(monto);
     validacion.valorMonetario("//input[contains(@step,'0.01')]", "Monto");
   }
@@ -342,6 +323,7 @@ class prestamosPage {
   }
 
   ingresarCuotasMin(cantidadCuota) {
+    cy.log(cantidadCuota);
     cy.xpath(
       "//div[contains(@class, 'q-if-label-inner') and normalize-space(text())='Cantidad mínima de cuotas permitidas']/ancestor::div[contains(@class,'q-field')]//input[@type='number']"
     )

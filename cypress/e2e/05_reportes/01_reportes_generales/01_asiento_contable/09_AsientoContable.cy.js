@@ -1,6 +1,6 @@
-import { validationReporter } from "../../support/utils/validationReporter";
-import GeneracionRolPage from "../../support/page-objects/actions/rol_de_pagoPages/generacionRolPages/generacionRolPage";
-import GeneracionAsientoContable from "../../support/page-objects/actions/asientoContablePages/asientoContablePage";
+import { validationReporter } from "../../../../support/utils/validationReporter";
+import GeneracionRolPage from "../../../../support/page-objects/actions/rol_de_pagoPages/generacionRolPages/generacionRolPage";
+import GeneracionAsientoContable from "../../../../support/page-objects/actions/asientoContablePages/asientoContablePage";
 describe("Asientos Contables", () => {
   const genRol = new GeneracionRolPage();
   const asiento = new GeneracionAsientoContable();

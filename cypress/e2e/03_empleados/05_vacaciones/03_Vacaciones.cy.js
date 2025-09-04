@@ -1,4 +1,4 @@
-import VacacionesPage from "../../support/page-objects/actions/vacacionesPages/vacacionesPage";
+import VacacionesPage from "../../../support/page-objects/actions/vacacionesPages/vacacionesPage";
 describe("Vacaciones", () => {
   const vacaciones = new VacacionesPage();
 
@@ -8,7 +8,7 @@ describe("Vacaciones", () => {
 
   afterEach(() => {});
 
-  it.only("Solicitar y Registrar Vacaciones Normales", () => {
+  it("Solicitar y Registrar Vacaciones Normales", () => {
     //Set-up Data
     //Flujo
     vacaciones.goToVacaciones();

@@ -1,4 +1,4 @@
-import PreparacionRolPage from "../../support/page-objects/actions/rol_de_pagoPages/preparacionRolPages/preparacionRolPage";
+import PreparacionRolPage from "../../../support/page-objects/actions/rol_de_pagoPages/preparacionRolPages/preparacionRolPage";
 describe("Preparacion del Rol", () => {
   const prepRol = new PreparacionRolPage();
 
