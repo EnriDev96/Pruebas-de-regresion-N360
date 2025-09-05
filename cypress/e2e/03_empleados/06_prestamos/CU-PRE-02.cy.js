@@ -1,6 +1,7 @@
 import { validationReporter } from "../../../support/utils/validationReporter";
 import PrestamosPage from "../../../support/page-objects/actions/prestamosPages/PrestamosPage";
 import GeneracionRolPage from "../../../support/page-objects/actions/rol_de_pagoPages/generacionRolPages/generacionRolPage";
+import prestamosValidation from "../../../support/page-objects/validaciones/PrestamosValidation";
 
 describe("CP-PRE-0201 - Creación exitosa de un Prestamo Normal con datos Minimos.", () => {
   const prestamos = new PrestamosPage();
@@ -89,6 +90,7 @@ describe.only("CP-PRE-0204 - Verificar Prestamo generado en Rol de Pagos", () =>
     });
   });
   it("Verificar Prestamo Registrado en el Rol Quincenal", () => {
+    genRol.goToGeneracionDelRol();
     cy.fixture("dataFixtures/rolesFixtures/genRol").then((dataRol) => {
       cy.fixture(
         "dataFixtures/empleadosEmpresaFixtures/empleadosEcuagesa"
@@ -106,13 +108,14 @@ describe.only("CP-PRE-0204 - Verificar Prestamo generado en Rol de Pagos", () =>
     });
   });
   it("Verificar Prestamo Registrado en el Rol Mensual", () => {
+    genRol.goToGeneracionDelRol();
     cy.fixture("dataFixtures/rolesFixtures/genRol").then((dataRol) => {
       cy.fixture(
         "dataFixtures/empleadosEmpresaFixtures/empleadosEcuagesa"
       ).then((dataEmpleado) => {
         cy.fixture("dataFixtures/prestamosFixtures/prestamoFixture").then(
           (dataPrestamo) => {
-            prestamos.verificarPrestamoRolMensual(
+            prestamos.verificarPrestamoRol(
               dataRol.rolMensualJulio,
               dataEmpleado.Bonilla_Cynthia,
               dataPrestamo.prestamoDosCuotas
@@ -150,6 +153,31 @@ describe.only("CP-PRE-0204 - Verificar Prestamo generado en Rol de Pagos", () =>
             );
           }
         );
+      }
+    );
+  });
+});
+
+describe("CP-PRE-0205 - Validacion del Formato de Campos", () => {
+  const prestamos = new prestamosValidation();
+  beforeEach(() => {
+    cy.loginNomina360("adminEcuagesa");
+  });
+  afterEach(() => {
+    validationReporter.reportAndAssertAll();
+    validationReporter.clearErrors();
+  });
+
+  it("Formato de Campos", () => {
+    cy.fixture("dataFixtures/empleadosEmpresaFixtures/empleadosEcuagesa").then(
+      (data) => {
+        prestamos.goToPrestamos();
+        prestamos.seleccionarEmpleado(data.Bayas_Israel);
+      }
+    );
+    cy.fixture("dataFixtures/prestamosFixtures/validationPerstamoFixture").then(
+      (dataPrestamo) => {
+        prestamos.validarPrestamo(dataPrestamo.prestamoNormalInvalid);
       }
     );
   });

@@ -18,7 +18,7 @@ class generacionRolPage {
     cy.xpath(
       `//div[@class='q-item-label'][contains(.,'${dataRol.anio}')]`
     ).click();
-    cy.xpath("(//div[contains(.,'Agosto')])[21]").click();
+    cy.xpath("(//div[contains(.,'Septiembre')])[21]").click();
     cy.xpath(
       `//div[@class='q-item-label'][contains(.,'${dataRol.mes}')]`
     ).click();

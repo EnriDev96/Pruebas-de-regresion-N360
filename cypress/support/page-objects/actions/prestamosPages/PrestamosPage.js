@@ -218,22 +218,27 @@ class prestamosPage {
           .invoke("text")
           .then((texto) => {
             const montoTexto = texto.trim();
-            const montoNumero = parseFloat(montoTexto.replace(/[^0-9.-]/g, ""));
+            let montoNumero = parseFloat(montoTexto.replace(/[^0-9.-]/g, ""));
+            montoNumero = parseFloat(montoNumero.toFixed(2));
             cy.wrap(montoNumero).as("montoPrestamoEmpresa");
           });
       });
+    // Obtener el valor de la cuota que corresponde al rol "Quincena" o "Fin de Mes"
+    const cuota = dataPrestamo.cuotasData.find((c) => c.rol === dataRol.tipo);
+    const totalCuota = parseFloat(cuota.total);
+
     //Verificar el Valor del Prestamo Empresa es igual al valor del Prestamos registrado
     cy.get("@montoPrestamoEmpresa").then((monto) => {
-      if (monto == dataPrestamo.totalCuota1) {
+      if (monto === totalCuota) {
         cy.log(
-          `El prestamo se muestra correctamente en el Rol: Préstamo Empresa = $${monto}✅`
+          `El prestamo se muestra correctamente en el Rol: Préstamo Empresa = ${monto}✅`
         );
       } else {
         validationReporter.addError(
           '❌ El prestamo NO se muestra correctamente en el Rol" |'
         );
         cy.log(
-          `❌ ERROR: Valor del prestamo: ${dataPrestamo.totalCuota1}, Valor en el Rol: ${monto} ❌`
+          `❌ ERROR: Valor del prestamo: ${totalCuota}, Valor en el Rol: ${monto} ❌`
         );
       }
     });
