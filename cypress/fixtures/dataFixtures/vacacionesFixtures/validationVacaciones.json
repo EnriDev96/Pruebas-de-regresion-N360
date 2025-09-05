@@ -1,0 +1,11 @@
+{
+  "vacacionesNormalesEmpty": {
+    "__NormalesDisponibles__": "",
+    "periodo": "",
+    "fechaInicio": "",
+    "diasDisponibles": "",
+    "__AdicionalesDisponibles__": "",
+    "metodo": "",
+    "adicionalesDisponibles": ""
+  }
+}

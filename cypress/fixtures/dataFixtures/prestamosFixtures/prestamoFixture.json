@@ -3,8 +3,37 @@
     "motivo": "Calamidad Domestica",
     "fecha": "2025-08-15",
     "monto": "120",
-    "cuotas": "2",
+    "cuotas": "1",
     "interes": "5",
-    "reflejarIngreso": "No"
+    "reflejarIngreso": "No",
+    "totalCuota1": "120.50"
+  },
+  "prestamoDosCuotas": {
+    "motivo": "Calamidad Domestica",
+    "fecha": "2025-07-11",
+    "monto": "500",
+    "cuotas": "2",
+    "interes": "10",
+    "reflejarIngreso": "No",
+    "cuotasData": [
+      {
+        "index": "0",
+        "año": "2025",
+        "mes": "Julio",
+        "rol": "Quincena",
+        "monto": "250",
+        "intereses": "4.17",
+        "total": "254.17"
+      },
+      {
+        "index": "1",
+        "año": "2025",
+        "mes": "Julio",
+        "rol": "Fin de mes",
+        "monto": "250",
+        "intereses": "2.08",
+        "total": "252.08"
+      }
+    ]
   }
 }

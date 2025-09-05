@@ -3,7 +3,8 @@
     "cedula": "1805167028",
     "nombre": "JHONNY ISRAEL",
     "apellido": "BAYAS VILLAGOMEZ",
-    "nombreCompleto": "BAYAS VILLAGOMEZ JHONNY ISRAEL"
+    "nombreCompleto": "BAYAS VILLAGOMEZ JHONNY ISRAEL",
+    "sueldo": "2501"
   },
 
   "Cevallos_Monica": {
@@ -11,5 +12,12 @@
     "nombre": "MONICA CRISTINA",
     "apellido": "CEVALLOS PALLO",
     "nombreCompleto": "CEVALLOS PALLO MONICA CRISTINA"
+  },
+
+  "Bonilla_Cynthia": {
+    "cedula": "1721494761",
+    "nombre": "CYNTHIA DAYANA",
+    "apellido": "BONILLA CARVAJAL",
+    "nombreCompleto": "BONILLA CARVAJAL CYNTHIA DAYANA"
   }
 }

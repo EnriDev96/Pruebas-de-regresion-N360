@@ -1,0 +1,186 @@
+{
+  "rubrosEcuagesa": {
+    "__Ingresos__": "",
+    "alimentacion": {
+      "nombre": "Alimentación",
+      "valor": "123"
+    },
+    "comision": {
+      "nombre": "Comisión",
+      "valor": "123"
+    },
+    "bonificacionDesempeño": {
+      "nombre": "Bonificación por desempeño",
+      "valor": "123"
+    },
+    "retroactivo": {
+      "nombre": "Retroactivo",
+      "valor": "123"
+    },
+    "devolucionAportable": {
+      "nombre": "Devolución aportable",
+      "valor": "123"
+    },
+    "otrosIngresos": {
+      "nombre": "Otros ingresos",
+      "valor": "123"
+    },
+    "movilizacion": {
+      "nombre": "Movilización",
+      "valor": "123"
+    },
+    "otrosIngresosNoAportables": {
+      "nombre": "Otros ingresos No Aportables",
+      "valor": "123"
+    },
+    "horas25": {
+      "nombre": "Jornada Nocturna 25%",
+      "valor": "123"
+    },
+    "horas50": {
+      "nombre": "Horas Suplementarias 50%",
+      "valor": "123"
+    },
+    "horas100": {
+      "nombre": "Horas Extraordinarias 100%",
+      "valor": "123"
+    },
+    "ajusteIR": {
+      "nombre": "Ajuste IR",
+      "valor": "123"
+    },
+    "__Egresos__": "",
+    "prestamoHipotecario": {
+      "nombre": "Préstamos Hipotecario",
+      "valor": "123"
+    },
+    "prestamoQuirografario": {
+      "nombre": "Préstamos Quirografario",
+      "valor": "123"
+    },
+    "atrasos": {
+      "nombre": "Atrasos",
+      "valor": "123"
+    },
+    "telefonia": {
+      "nombre": "Telefonía",
+      "valor": "123"
+    },
+    "descuentoEquipoTecnico": {
+      "nombre": "Descuento equipo técnico",
+      "valor": "123"
+    },
+    "faltasInjustificadas": {
+      "nombre": "Faltas injustificadas",
+      "valor": "123"
+    },
+    "seguroSalud": {
+      "nombre": "Seguro de Salud",
+      "valor": "123"
+    },
+    "descuentoFR": {
+      "nombre": "Descuento D. F.R.",
+      "valor": "123"
+    },
+    "descuentoHoras": {
+      "nombre": "Descuento horas",
+      "valor": "123"
+    },
+    "otrosDescuentos": {
+      "nombre": "Otros Descuentos",
+      "valor": "123"
+    }
+  },
+  "rubrosEcuagesaInvalid": {
+    "__Ingresos__": "",
+    "alimentacion": {
+      "nombre": "Alimentación",
+      "valor": "ABC15.55abc@$%*"
+    },
+    "comision": {
+      "nombre": "Comisión",
+      "valor": "ABC15.55abc@$%*"
+    },
+    "bonificacionDesempeño": {
+      "nombre": "Bonificación por desempeño",
+      "valor": "ABC15.55abc@$%*"
+    },
+    "retroactivo": {
+      "nombre": "Retroactivo",
+      "valor": "ABC15.55abc@$%*"
+    },
+    "devolucionAportable": {
+      "nombre": "Devolución aportable",
+      "valor": "ABC15.55abc@$%*"
+    },
+    "otrosIngresos": {
+      "nombre": "Otros ingresos",
+      "valor": "ABC15.55abc@$%*"
+    },
+    "movilizacion": {
+      "nombre": "Movilización",
+      "valor": "ABC15.55abc@$%*"
+    },
+    "otrosIngresosNoAportables": {
+      "nombre": "Otros ingresos No Aport",
+      "valor": "ABC15.55abc@$%*"
+    },
+    "horas25": {
+      "nombre": "Jornada Nocturna 25%",
+      "valor": "ABC15.55abc@$%*"
+    },
+    "horas50": {
+      "nombre": "Horas Suplementarias 50%",
+      "valor": "ABC15.55abc@$%*"
+    },
+    "horas100": {
+      "nombre": "Horas Extraordinarias 100%",
+      "valor": "ABC15.55abc@$%*"
+    },
+    "ajusteIR": {
+      "nombre": "Ajuste IR",
+      "valor": "ABC15.55abc@$%*"
+    },
+    "__Egresos__": "",
+    "prestamoHipotecario": {
+      "nombre": "Préstamos Hipotecarios",
+      "valor": "ABC15.55abc@$%*"
+    },
+    "prestamoQuirografario": {
+      "nombre": "Préstamos Quirografarios",
+      "valor": "ABC15.55abc@$%*"
+    },
+    "atrasos": {
+      "nombre": "Atrasos",
+      "valor": "ABC15.55abc@$%*"
+    },
+    "telefonia": {
+      "nombre": "Telefonía",
+      "valor": "ABC15.55abc@$%*"
+    },
+    "descuentoEquipoTecnico": {
+      "nombre": "Descuento equipo técnico",
+      "valor": "ABC15.55abc@$%*"
+    },
+    "faltasInjustificadas": {
+      "nombre": "Faltas injustificadas",
+      "valor": "ABC15.55abc@$%*"
+    },
+    "seguroSalud": {
+      "nombre": "Seguro de Salud",
+      "valor": "ABC15.55abc@$%*"
+    },
+    "descuentoFR": {
+      "nombre": "Descuento D. F.R.",
+      "valor": "ABC15.55abc@$%*"
+    },
+    "descuentoHoras": {
+      "nombre": "Descuento horas",
+      "valor": "ABC15.55abc@$%*"
+    },
+    "otrosDescuentos": {
+      "nombre": "Otros Descuentos",
+      "valor": "ABC15.55abc@$%*"
+    }
+  }
+}

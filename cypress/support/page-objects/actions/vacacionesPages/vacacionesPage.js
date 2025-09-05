@@ -1,8 +1,14 @@
 require("cypress-xpath");
 require("cypress-plugin-tab");
+import { validationReporter } from "../../../utils/validationReporter";
+import { validacion } from "../../../utils/validacionCampos";
+import { helper } from "../../../utils/helpers";
 class vacacionesPage {
   goToVacaciones() {
-    cy.xpath("//a[@tabindex='0'][contains(.,'dashboardDashboard')]").click();
+    cy.xpath("//a[@tabindex='0'][contains(.,'settingsConfiguración')]").click({
+      force: true,
+    });
+    cy.wait(500);
     cy.xpath("//button[contains(.,'supervised_user_circleEmpleados')]").click();
     cy.xpath("//a[@tabindex='0'][contains(.,'Vacaciones')]").click();
     cy.wait(1000);
@@ -24,19 +30,29 @@ class vacacionesPage {
   solicitarVacacionNormal(data) {
     cy.xpath("(//div[contains(.,'Generar')])[179]").click();
     cy.xpath("(//div[contains(.,'Normal')])[18]").click();
-    cy.xpath("(//div[contains(.,'Periodo')])[61]").click();
-    cy.xpath(`(//div[contains(.,'${data.periodo}')])[30]`).click();
-    cy.xpath("(//div[contains(.,'Fecha de inicio')])[16]").click();
-    this.seleccionarFecha(data.fechaInicio);
-    cy.xpath("(//div[contains(.,'Días normales disponibles')])[16]").click();
-    cy.xpath(
-      `//div[@class='q-item-label'and text()='${data.diasDisponibles}']`
-    ).click();
+
+    this.seleccionarPeriodo(data.periodo);
+    this.seleccionarFechaInicio(data.fechaInicio);
+    this.seleccionarDiasNormales(data.diasDisponibles);
+
+    //Generar Solicitud
     cy.xpath("(//div[contains(.,'Generar')])[195]").click();
     cy.wait(1000);
+    cy.get(".q-alert-content > div", { timeout: 5000 }).then(($els) => {
+      const match = $els
+        .toArray()
+        .some((el) => el.innerText.trim().includes("Generado Exitosamente"));
+      if (match) {
+        cy.log("✅ Se generó la Solicitud correctamente ✅");
+      } else {
+        validationReporter.addError(
+          '❌ No se generó la Solicitud correctamente ❌" |'
+        );
+      }
+    });
   }
 
-  registroVacacionNormal(dataEmpleado) {
+  registroVacacionNormal(dataEmpleado, dataSolicitud) {
     cy.get(".gutter-sm > :nth-child(1) > .q-btn").click();
     cy.wait(1000);
     cy.get(
@@ -45,6 +61,10 @@ class vacacionesPage {
     cy.get(".text-principal > .q-btn-inner > div").click();
     cy.get(".modal-buttons > :nth-child(2)").click();
     cy.wait(1000);
+    //Regresar a Vacaciones y verificar el registro
+    cy.xpath("//a[@tabindex='0'][contains(.,'Vacaciones')]").click();
+    this.seleccionarEmpleado(dataEmpleado);
+    this.verificarHistorico(dataSolicitud);
   }
 
   rechazoVacacionNormal(dataEmpleado) {
@@ -82,33 +102,63 @@ class vacacionesPage {
     cy.wait(1000);
   }
 
-  seleccionarFecha(data) {
-    const [anio, mes, dia] = data.split("-");
-    const meses = [
-      "",
-      "Enero",
-      "Febrero",
-      "Marzo",
-      "Abril",
-      "Mayo",
-      "Junio",
-      "Julio",
-      "Agosto",
-      "Septiembre",
-      "Octubre",
-      "Noviembre",
-      "Diciembre",
-    ];
-    const mesNombre = meses[parseInt(mes, 10)];
-    cy.xpath("(//span[@tabindex='-1'])[3]").click();
-    cy.xpath(`(//div[contains(.,'${anio}')])[66]`).click();
-    cy.xpath(`(//div[contains(.,'${mesNombre}')])[20]`).click();
-    cy.xpath(
-      `//div[@class='row items-center content-center justify-center cursor-pointer'][contains(.,'${parseInt(
-        dia,
-        10
-      )}')]`
-    ).click();
+  verificarHistorico(data) {
+    cy.xpath("//button[@tabindex='0'][contains(.,'Historico')]").click();
+    // Verificar si la fila con la fecha existe
+    cy.get("body").then(($body) => {
+      if ($body.find(`tr:contains("${data.fechaInicio}")`).length === 0) {
+        cy.xpath("//button[@tabindex='0'][contains(.,'chevron_right')]")
+          .should("exist")
+          .click();
+      }
+    });
+    // Buscar la fila y encontrar Los Días Tomados Registrados
+    cy.get("tr")
+      .contains(data.fechaInicio)
+      .parents("tr")
+      .within(() => {
+        cy.get("td")
+          .eq(2) // índice 2 = "Días Tomados"
+          .invoke("text")
+          .then((texto) => {
+            const diasTomados = texto.trim();
+            cy.log(
+              `Se registraron correctamente los Días Tomados: ${diasTomados} ✅`
+            );
+          });
+      });
+  }
+
+  seleccionarPeriodo(periodo) {
+    cy.xpath("(//div[contains(.,'Periodo')])[61]").click();
+    if (!validacion.campoObligatorio(periodo, "Periodo")) {
+      return;
+    }
+    validacion.correctaSeleccion(
+      `(//div[contains(.,'${periodo}')])[30]`,
+      "Periodo",
+      periodo
+    );
+  }
+
+  seleccionarFechaInicio(fecha) {
+    cy.xpath("(//div[contains(.,'Fecha de inicio')])[16]").click();
+    if (!validacion.campoObligatorio(fecha, "Fecha de inicio")) {
+      return;
+    }
+    helper.seleccionarFecha(fecha);
+  }
+
+  seleccionarDiasNormales(dias) {
+    cy.xpath("(//div[contains(.,'Días normales disponibles')])[16]").click();
+    if (!validacion.campoObligatorio(dias, "Días normales disponibles")) {
+      return;
+    }
+    validacion.correctaSeleccion(
+      `//div[@class='q-item-label'and text()='${dias}']`,
+      "Días normales disponibles",
+      dias
+    );
   }
 }
 

@@ -1,0 +1,20 @@
+{
+  "configPrestamosOriginal": {
+    "cuotasMin": "1",
+    "cuotasMax": "12",
+    "porcentajeSueldo": "30",
+    "mesesGracia": "0"
+  },
+  "configPrestamosModificado": {
+    "cuotasMin": "5",
+    "cuotasMax": "24",
+    "porcentajeSueldo": "50",
+    "mesesGracia": "2"
+  },
+  "configPrestamosInvalido": {
+    "cuotasMin": "-1",
+    "cuotasMax": "-1",
+    "porcentajeSueldo": "-0",
+    "mesesGracia": "-1"
+  }
+}

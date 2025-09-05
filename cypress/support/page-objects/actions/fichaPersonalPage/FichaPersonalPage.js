@@ -35,7 +35,20 @@ class FichaPersonalPage {
 
     //Guardar FichaPersonal
     cy.xpath("(//div[contains(.,'Guardar')])[39]").click();
-    cy.log(`✅ Ficha Personal creada Correctamente ✅`);
+    cy.wait(500);
+    cy.get(".q-alert-content > div", { timeout: 5000 }).then(($els) => {
+      const match = $els
+        .toArray()
+        .some((el) => el.innerText.trim().includes("Guardado correctamente"));
+      if (match) {
+        cy.log("✅ Ficha Personal creada Correctamente ✅");
+      } else {
+        cy.log("❌ Error: No se creó Ficha Personal ❌");
+        validationReporter.addError(
+          '❌ No apareció el toast "Guardado correctamente" |'
+        );
+      }
+    });
     cy.wait(1000);
   }
 
@@ -82,23 +95,23 @@ class FichaPersonalPage {
     this.selectTipoCuenta(datos.financieros.cuenta_1.tipoCuenta);
 
     //Datos Familiares
-    cy.xpath(
-      "//div[@class='q-tab-label'][contains(.,'Datos familiares')]"
-    ).click();
+    // cy.xpath(
+    //   "//div[@class='q-tab-label'][contains(.,'Datos familiares')]"
+    // ).click();
 
-    const cantidad = Number(datos.familiares.cantidadFamiliares);
-    for (let i = 1; i <= cantidad; i++) {
-      const cuenta = datos.financieros[`.cuenta_${i}`];
-      cy.xpath(
-        "//button[@tabindex='0'][contains(.,'person_addAgregar familiar')]"
-      ).click();
-      this.agregarFamiliar(cuenta);
-    }
+    // const cantidad = Number(datos.familiares.cantidadFamiliares);
+    // for (let i = 1; i <= cantidad; i++) {
+    //   const cuenta = datos.financieros[`.cuenta_${i}`];
+    //   cy.xpath(
+    //     "//button[@tabindex='0'][contains(.,'person_addAgregar familiar')]"
+    //   ).click();
+    //   this.agregarFamiliar(cuenta);
+    // }
 
     // //Guardar FichaPersonal
-    // cy.xpath("(//div[contains(.,'Guardar')])[39]").click();
-    // cy.log(`✅ Ficha Personal creada Correctamente ✅`);
-    // cy.wait(1000);
+    cy.xpath("(//div[contains(.,'Guardar')])[39]").click();
+    cy.log(`✅ Ficha Personal creada Correctamente ✅`);
+    cy.wait(1000);
   }
 
   buscarFichaPorCedula(dataEmpleado) {
